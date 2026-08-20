@@ -23,6 +23,7 @@
     background:var(--bg);
     color:var(--ink);
     font-family:'Inter',sans-serif;
+    overflow-x:hidden;
   }
 
   /* ============ HERO STAGE ============ */
@@ -59,8 +60,6 @@
   }
   .giant span.line1{ margin-bottom:clamp(90px, 30vw, 140px); }
 
-  /* Desktop only: each word gets its own independent position,
-     staggered top-right / bottom-left, instead of a centered stack */
   @media (min-width: 861px){
     .giant{
       left:0;
@@ -92,7 +91,6 @@
     }
   }
 
-  /* The property image/video is the full-bleed background */
   .frame{
     position:absolute;
     inset:0;
@@ -115,8 +113,6 @@
     .frame .frame-mobile{ display:block; }
   }
 
-  /* Cutout layer: sits above the giant text, below the dim overlay/UI.
-     Only shown on desktop, so the letters read as "behind" the house. */
   .cutout{
     position:absolute;
     inset:0;
@@ -223,7 +219,7 @@
   .nav-burger.active span:nth-child(2){ opacity:0; }
   .nav-burger.active span:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
 
-  /* Mobile dropdown menu — same liquid glass treatment as the desktop nav pill */
+  /* Mobile dropdown menu */
   .mobile-menu{
     position:fixed;
     top:78px;
@@ -272,7 +268,7 @@
     .mobile-menu{ display:flex; }
   }
 
-  /* HERO COPY (top-left, overlays giant text area) */
+  /* HERO COPY */
   .hero-copy{
     position:absolute;
     top:110px;
@@ -314,7 +310,7 @@
     max-width:200px;
   }
 
-  /* STAT CARDS floating over image, bottom right */
+  /* STAT CARDS */
   .stats{
     position:absolute;
     bottom:60px;
@@ -365,7 +361,7 @@
     line-height:1.4;
   }
 
-  /* CTA pill bottom center-left */
+  /* CTA pill */
   .stage-cta{
     position:absolute;
     bottom:60px;
@@ -408,9 +404,9 @@
     transform:rotate(45deg);
   }
 
-  /* ============ NEXT SECTION (proof it's a full site, not just hero) ============ */
+  /* ============ SECTION 01: INTRO ============ */
   .intro{
-    padding:140px 4vw;
+    padding:140px 4vw 80px;
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:60px;
@@ -436,6 +432,210 @@
     font-size:15px;
     line-height:1.8;
     max-width:460px;
+  }
+
+  /* ============ SECTION 02: CINEMATIC CAROUSEL SHOWCASE ============ */
+  .showcase-section{
+    padding:40px 4vw 140px;
+    max-width:1300px;
+    margin:0 auto;
+  }
+
+  .showcase-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-bottom:30px;
+  }
+  .showcase-header .title{
+    font-family:'Archivo',sans-serif;
+    font-weight:700;
+    font-size:clamp(22px, 2.6vw, 34px);
+    text-transform:uppercase;
+    letter-spacing:-0.01em;
+    line-height:1.2;
+  }
+  .showcase-header .title span{
+    color:var(--dim2);
+  }
+
+  /* Control buttons & progress bar */
+  .showcase-controls{
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+  .showcase-progress{
+    width:90px;
+    height:2px;
+    background:rgba(244,242,236,0.15);
+    border-radius:2px;
+    overflow:hidden;
+    position:relative;
+  }
+  .showcase-progress-bar{
+    position:absolute;
+    top:0;left:0;
+    height:100%;
+    width:0%;
+    background:var(--ink);
+    transition:width 0.1s linear;
+  }
+  .showcase-nav-btn{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:rgba(244,242,236,0.05);
+    border:1px solid rgba(244,242,236,0.2);
+    color:var(--ink);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:all 0.3s ease;
+  }
+  .showcase-nav-btn:hover{
+    background:var(--ink);
+    color:var(--bg);
+    transform:scale(1.05);
+  }
+
+  /* Main Carousel Stage */
+  .carousel-viewport{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+    border-radius:24px;
+    overflow:hidden;
+    border:1px solid var(--glass-border);
+    box-shadow:
+      inset 0 1.5px 0 rgba(255,255,255,0.4),
+      0 20px 60px rgba(0,0,0,0.5);
+    background:#12171c;
+  }
+
+  /* Slide Items */
+  .carousel-slide{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    transform:scale(1.04);
+  }
+  .carousel-slide.active{
+    opacity:1;
+    visibility:visible;
+    transform:scale(1);
+    z-index:2;
+  }
+
+  .carousel-slide img, .carousel-slide video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .carousel-slide .slide-mobile{ display:none; }
+  .carousel-slide .slide-desktop{ display:block; }
+
+  /* Gradient Vignette over image for cinematic contrast */
+  .carousel-slide::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, rgba(13,16,19,0.2) 0%, rgba(13,16,19,0.05) 50%, rgba(13,16,19,0.7) 100%);
+    pointer-events:none;
+  }
+
+  /* Slide Tag Badge on Top Right */
+  .slide-tag{
+    position:absolute;
+    top:24px;
+    right:24px;
+    z-index:3;
+    background:rgba(13,16,19,0.5);
+    border:1px solid rgba(244,242,236,0.2);
+    backdrop-filter:blur(30px);
+    -webkit-backdrop-filter:blur(30px);
+    color:var(--ink);
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    padding:8px 16px;
+    border-radius:100px;
+  }
+
+  /* Info Strip below the image */
+  .showcase-info{
+    margin-top:24px;
+    display:grid;
+    grid-template-columns:1.2fr 2fr auto;
+    align-items:center;
+    gap:24px;
+    padding:20px 28px;
+    background:rgba(244,242,236,0.03);
+    border:1px solid rgba(244,242,236,0.12);
+    border-radius:20px;
+    backdrop-filter:blur(40px);
+    -webkit-backdrop-filter:blur(40px);
+  }
+
+  .info-title h3{
+    font-family:'Archivo',sans-serif;
+    font-size:18px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+    margin-bottom:4px;
+  }
+  .info-title p{
+    font-size:13px;
+    color:var(--dim2);
+  }
+
+  .info-meta{
+    display:flex;
+    gap:30px;
+  }
+  .meta-item{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .meta-label{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--dim2);
+  }
+  .meta-value{
+    font-family:'Archivo',sans-serif;
+    font-size:14px;
+    font-weight:600;
+    color:var(--ink);
+  }
+
+  .info-action .btn-minimal{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(244,242,236,0.1);
+    color:var(--ink);
+    border:1px solid rgba(244,242,236,0.22);
+    padding:12px 20px;
+    border-radius:100px;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    transition:all 0.3s ease;
+  }
+  .info-action .btn-minimal:hover{
+    background:var(--ink);
+    color:var(--bg);
   }
 
   footer{
@@ -494,21 +694,34 @@
       order:3;
     }
 
-    .intro{ grid-template-columns:1fr; padding:80px 6vw; gap:24px; }
+    .intro{ grid-template-columns:1fr; padding:80px 6vw 40px; gap:24px; }
+
+    /* Showcase Responsive */
+    .showcase-section{ padding:20px 5vw 80px; }
+    .showcase-header{ flex-direction:column; align-items:flex-start; gap:16px; }
+    .carousel-viewport{ aspect-ratio:4/5; border-radius:18px; }
+    .carousel-slide .slide-desktop{ display:none; }
+    .carousel-slide .slide-mobile{ display:block; }
+    .showcase-info{
+      grid-template-columns:1fr;
+      gap:20px;
+      padding:20px;
+    }
+    .info-meta{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
   }
-  /* giant text dims from bold white to faint grey on reveal */
+
+  /* Reveal animations */
   .giant span{ transition:color 1.2s ease, opacity 1.2s ease; }
   .stage.revealed .giant span{ color:rgba(244,242,236,0.5); }
-
-  /* subtle settle-zoom on the background as the hero opens */
   .frame{ transform:scale(1.07); transition:transform 1.8s cubic-bezier(.16,1,.3,1); }
   .stage.revealed .frame{ transform:scale(1); }
   .cutout{ transform:scale(1.07); transition:transform 1.8s cubic-bezier(.16,1,.3,1); }
   .stage.revealed .cutout{ transform:scale(1); }
 
-  /* hero UI (nav, copy, stats, cta) hidden until revealed.
-     .stats itself is NOT animated — only its children (.stat-card) are,
-     so cards don't get a double/nested fade that makes them feel delayed. */
   nav, .hero-copy, .hero-tagline, .stage-cta{
     opacity:0;
     transform:translateY(18px) scale(0.98);
@@ -527,7 +740,8 @@
   .stage.revealed .stat-card:nth-child(1){ transition-delay:0.46s; }
   .stage.revealed .stat-card:nth-child(2){ transition-delay:0.56s; }
   .stage.revealed .stage-cta{ opacity:1; transform:none; transition-delay:0.5s; }
-  /* ============ LOADING SCREEN ============ */
+
+  /* Loader */
   .loader{
     position:fixed;
     inset:0;
@@ -578,6 +792,7 @@
 </head>
 <body>
 
+<!-- LOADING SCREEN -->
 <div class="loader" id="loader">
   <div class="loader-panel left"></div>
   <div class="loader-panel right"></div>
@@ -586,8 +801,8 @@
   </div>
 </div>
 
+<!-- HERO STAGE -->
 <section class="stage" id="stage">
-
   <div class="giant">
     <span class="line1">Arlo</span>
     <span class="line2">Estate</span>
@@ -601,7 +816,7 @@
     <div class="logo">ARLO ESTATE</div>
     <div class="nav-links">
       <a href="#" class="active">Home</a>
-      <a href="#">Projects</a>
+      <a href="#projects">Projects</a>
       <a href="#">Services</a>
       <a href="#">Contact</a>
     </div>
@@ -613,7 +828,7 @@
 
   <div class="mobile-menu" id="mobileMenu">
     <a href="#" class="active">Home</a>
-    <a href="#">Projects</a>
+    <a href="#projects">Projects</a>
     <a href="#">Services</a>
     <a href="#">Contact</a>
   </div>
@@ -632,7 +847,7 @@
   </div>
 
   <div class="stage-cta">
-    <a href="#" class="btn-pill">Explore Projects <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    <a href="#projects" class="btn-pill">Explore Projects <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
   </div>
 
   <div class="stats">
@@ -647,6 +862,7 @@
   </div>
 </section>
 
+<!-- SECTION 01: INTRO MANIFESTO -->
 <section class="intro">
   <div>
     <div class="intro-label">01 — Studio</div>
@@ -657,31 +873,94 @@
   </div>
 </section>
 
+<!-- ============ SECTION 02: CINEMATIC SHOWCASE CAROUSEL ============ -->
+<section class="showcase-section" id="projects">
+  <div class="showcase-header">
+    <div>
+      <div class="intro-label">02 — Selected Works</div>
+      <h2 class="title">Iconic Living <span>Sanctuaries</span></h2>
+    </div>
+    <div class="showcase-controls">
+      <div class="showcase-progress">
+        <div class="showcase-progress-bar" id="carouselProgressBar"></div>
+      </div>
+      <button class="showcase-nav-btn" id="prevSlideBtn" aria-label="Previous property">←</button>
+      <button class="showcase-nav-btn" id="nextSlideBtn" aria-label="Next property">→</button>
+    </div>
+  </div>
+
+  <!-- Carousel Stage -->
+  <div class="carousel-viewport" id="carouselViewport">
+    
+    <!-- SLIDE 1: VILLA NORDIC -->
+    <div class="carousel-slide active" data-index="0">
+      <div class="slide-tag">Completed 2026</div>
+      <img class="slide-mobile" src="slide1-cel.jpg" onerror="this.src='https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80'" alt="Villa Nordic Mobile">
+      <video class="slide-desktop" src="slide1-video.mp4" poster="slide1-pc.jpg" autoplay muted loop playsinline></video>
+    </div>
+
+    <!-- SLIDE 2: THE OBSIDIAN PAVILION -->
+    <div class="carousel-slide" data-index="1">
+      <div class="slide-tag">Completed 2025</div>
+      <img class="slide-mobile" src="slide2-cel.jpg" onerror="this.src='https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1000&q=80'" alt="Obsidian Pavilion Mobile">
+      <video class="slide-desktop" src="slide2-video.mp4" poster="slide2-pc.jpg" autoplay muted loop playsinline></video>
+    </div>
+
+  </div>
+
+  <!-- Info Bar Beneath the Image (Dynamic) -->
+  <div class="showcase-info" id="showcaseInfo">
+    <div class="info-title">
+      <h3 id="infoTitle">01 — Villa Nordic</h3>
+      <p id="infoLoc">Aspen Mountains, Colorado</p>
+    </div>
+
+    <div class="info-meta">
+      <div class="meta-item">
+        <span class="meta-label">Gross Area</span>
+        <span class="meta-value" id="infoArea">520 m²</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Architectural Type</span>
+        <span class="meta-value" id="infoType">Alpine Sanctuary</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Delivery</span>
+        <span class="meta-value" id="infoDelivery">Turnkey (4 Months)</span>
+      </div>
+    </div>
+
+    <div class="info-action">
+      <a href="#" class="btn-minimal">View Project ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
   <span>Arlo Estate © 2026</span>
   <span>Architecture & Interiors</span>
 </footer>
 
+<!-- SCRIPTS -->
 <script>
+  // LOADER SCRIPT
   const stage = document.getElementById('stage');
   const loader = document.getElementById('loader');
   const loaderFill = document.getElementById('loaderFill');
 
-  // start the bar filling almost immediately
   requestAnimationFrame(() => {
     requestAnimationFrame(() => { loaderFill.style.width = '100%'; });
   });
 
-  // once the bar finishes, open the two panels like doors and reveal the hero
   setTimeout(() => {
     loader.classList.add('done');
     stage.classList.add('revealed');
   }, 1500);
 
-  // fully remove the loader from the flow once the panels are off-screen
   setTimeout(() => { loader.style.display = 'none'; }, 2700);
 
-  // mobile hamburger menu
+  // MOBILE HAMBURGER MENU
   const navBurger = document.getElementById('navBurger');
   const mobileMenu = document.getElementById('mobileMenu');
 
@@ -691,7 +970,6 @@
     navBurger.setAttribute('aria-expanded', isOpen);
   });
 
-  // close the menu when a link is tapped or when tapping outside of it
   mobileMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       mobileMenu.classList.remove('open');
@@ -706,6 +984,101 @@
       navBurger.setAttribute('aria-expanded', 'false');
     }
   });
+
+  // ============ CAROUSEL CONTROLLER ============
+  const slideData = [
+    {
+      title: "01 — Villa Nordic",
+      location: "Aspen Mountains, Colorado",
+      area: "520 m²",
+      type: "Alpine Sanctuary",
+      delivery: "Turnkey (4 Months)"
+    },
+    {
+      title: "02 — The Obsidian Pavilion",
+      location: "Kyoto Outskirts, Japan",
+      area: "680 m²",
+      type: "Monolithic Residence",
+      delivery: "Turnkey (6 Months)"
+    }
+  ];
+
+  const slides = document.querySelectorAll('.carousel-slide');
+  const progressBar = document.getElementById('carouselProgressBar');
+  const infoTitle = document.getElementById('infoTitle');
+  const infoLoc = document.getElementById('infoLoc');
+  const infoArea = document.getElementById('infoArea');
+  const infoType = document.getElementById('infoType');
+  const infoDelivery = document.getElementById('infoDelivery');
+  const viewport = document.getElementById('carouselViewport');
+
+  let currentSlide = 0;
+  const slideDuration = 6000; // 6 seconds per slide
+  let progressStart = Date.now();
+  let timerId = null;
+  let isPaused = false;
+
+  function updateSlide(index) {
+    slides.forEach((s, i) => {
+      s.classList.toggle('active', i === index);
+      const vid = s.querySelector('video');
+      if (vid) {
+        if (i === index) { vid.play().catch(() => {}); }
+        else { vid.pause(); }
+      }
+    });
+
+    // Update Meta text smoothly
+    const d = slideData[index];
+    infoTitle.innerText = d.title;
+    infoLoc.innerText = d.location;
+    infoArea.innerText = d.area;
+    infoType.innerText = d.type;
+    infoDelivery.innerText = d.delivery;
+
+    // Reset Progress
+    progressStart = Date.now();
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    updateSlide(currentSlide);
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    updateSlide(currentSlide);
+  }
+
+  document.getElementById('nextSlideBtn').addEventListener('click', () => {
+    nextSlide();
+  });
+
+  document.getElementById('prevSlideBtn').addEventListener('click', () => {
+    prevSlide();
+  });
+
+  // Hover to pause
+  viewport.addEventListener('mouseenter', () => { isPaused = true; });
+  viewport.addEventListener('mouseleave', () => { 
+    isPaused = false; 
+    progressStart = Date.now() - (parseFloat(progressBar.style.width || 0) / 100 * slideDuration);
+  });
+
+  // Progress ticker loop
+  function loop() {
+    if (!isPaused) {
+      const elapsed = Date.now() - progressStart;
+      const pct = Math.min((elapsed / slideDuration) * 100, 100);
+      progressBar.style.width = pct + '%';
+
+      if (elapsed >= slideDuration) {
+        nextSlide();
+      }
+    }
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
 </script>
 </body>
 </html>
