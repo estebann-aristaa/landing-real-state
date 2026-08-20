@@ -5,16 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ARLO ESTATE — Architectural Excellence</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Expanded:wght@700&family=Inter:wght@400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Expanded:wght@700;800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
 
   :root{
     --bg: #0d1013;
     --ink: #f4f2ec;
     --dim: rgba(244,242,236,0.65);
     --dim2: rgba(244,242,236,0.4);
-    --glass: rgba(244,242,236,0.08);
-    --glass-border: rgba(244,242,236,0.28);
-    --glass-highlight: rgba(255,255,255,0.5);
+    --glass: rgba(244,242,236,0.06);
+    --glass-border: rgba(244,242,236,0.22);
+    --glass-highlight: rgba(255,255,255,0.6);
+    --accent-glow: rgba(76, 107, 122, 0.7);
   }
 
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -34,10 +35,9 @@
     z-index:-1;
     pointer-events:none;
     overflow:hidden;
-    background: radial-gradient(circle at 50% 0%, #151c23 0%, #0d1013 75%);
+    background: radial-gradient(circle at 50% 0%, #151c23 0%, #0d1013 80%);
   }
 
-  /* Architectural Blueprint Grid */
   .bg-grid{
     position:absolute;
     inset:0;
@@ -49,47 +49,43 @@
     -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%);
   }
 
-  /* Floating Ambient Aurora Orbs */
   .aurora-orb{
     position:absolute;
     border-radius:50%;
-    filter: blur(130px);
+    filter: blur(140px);
     opacity:0.45;
     mix-blend-mode: screen;
     pointer-events:none;
-    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), background 1.5s ease;
   }
   .aurora-1{
-    top:-10%;
+    top:10%;
     left:15%;
-    width:550px;
-    height:550px;
-    background: radial-gradient(circle, rgba(76, 107, 122, 0.7) 0%, rgba(30, 45, 55, 0) 70%);
+    width:600px;
+    height:600px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, rgba(30, 45, 55, 0) 70%);
     animation: driftOrb1 18s ease-in-out infinite alternate;
   }
   .aurora-2{
-    bottom:10%;
+    bottom:5%;
     right:10%;
     width:650px;
     height:650px;
-    background: radial-gradient(circle, rgba(212, 143, 56, 0.28) 0%, rgba(30, 20, 10, 0) 70%);
+    background: radial-gradient(circle, rgba(212, 143, 56, 0.25) 0%, rgba(30, 20, 10, 0) 70%);
     animation: driftOrb2 22s ease-in-out infinite alternate;
   }
 
-  /* Interactive Cursor Spotlight */
   .cursor-spotlight{
     position:absolute;
     top:0; left:0;
-    width:400px; height:400px;
+    width:450px; height:450px;
     border-radius:50%;
-    background: radial-gradient(circle, rgba(244, 242, 236, 0.06) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(244, 242, 236, 0.05) 0%, transparent 70%);
     transform: translate(-50%, -50%);
     pointer-events:none;
     filter: blur(50px);
-    transition: opacity 0.3s ease;
   }
 
-  /* 35mm Film Grain Texture Overlay */
   .film-grain{
     position:fixed;
     inset:0;
@@ -486,250 +482,327 @@
     transform:rotate(45deg);
   }
 
-  /* ============ SECTION 02: DUAL FRAME RESIDENCES SHOWCASE ============ */
-  .showcase-section{
-    padding:90px 4vw 140px;
-    max-width:1200px;
+  /* ========================================================
+     SECTION 02: THE MONOLITH ARCHITECTURAL STAGE (AWWWARDS TIER)
+     ======================================================== */
+  .monolith-section{
+    padding:140px 4vw 160px;
+    max-width:1300px;
     margin:0 auto;
     position:relative;
     z-index:2;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
   }
 
-  .showcase-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-    margin-bottom:28px;
+  /* Massive Centered Title Block */
+  .monolith-header{
+    text-align:center;
+    max-width:880px;
+    margin-bottom:44px;
   }
-  .showcase-eyebrow{
+  .monolith-eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Space Mono', monospace;
     font-size:11px;
-    letter-spacing:0.14em;
+    letter-spacing:0.18em;
     text-transform:uppercase;
     color:var(--dim2);
-    margin-bottom:8px;
+    margin-bottom:18px;
+    background:rgba(244,242,236,0.04);
+    border:1px solid rgba(244,242,236,0.14);
+    padding:6px 16px;
+    border-radius:100px;
   }
-  .showcase-header .title{
-    font-family:'Archivo',sans-serif;
-    font-weight:700;
-    font-size:clamp(20px, 2.4vw, 30px);
-    text-transform:uppercase;
-    letter-spacing:-0.01em;
-    line-height:1.2;
-  }
-  .showcase-header .title span{
-    color:var(--dim2);
-  }
-
-  .showcase-controls{
-    display:flex;
-    align-items:center;
-    gap:14px;
-  }
-  .showcase-progress{
-    width:80px;
-    height:2px;
-    background:rgba(244,242,236,0.15);
-    border-radius:2px;
-    overflow:hidden;
-    position:relative;
-  }
-  .showcase-progress-bar{
-    position:absolute;
-    top:0;left:0;
-    height:100%;
-    width:0%;
-    background:var(--ink);
-  }
-  .showcase-nav-btn{
-    width:38px;
-    height:38px;
+  .monolith-eyebrow .pulse-dot{
+    width:6px; height:6px;
+    background:#4cd964;
     border-radius:50%;
-    background:rgba(244,242,236,0.05);
-    border:1px solid rgba(244,242,236,0.22);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
+    box-shadow:0 0 10px #4cd964;
+    animation:pulseGlow 2s infinite;
+  }
+  @keyframes pulseGlow{
+    0%,100%{ opacity:1; transform:scale(1); }
+    50%{ opacity:0.4; transform:scale(0.85); }
+  }
+
+  .monolith-title{
+    font-family:'Archivo Expanded', sans-serif;
+    font-weight:800;
+    font-size:clamp(32px, 5.2vw, 68px);
+    text-transform:uppercase;
+    line-height:0.95;
+    letter-spacing:-0.02em;
     color:var(--ink);
+  }
+  .monolith-title .stroke-text{
+    display:block;
+    color:transparent;
+    -webkit-text-stroke: 1.2px rgba(244,242,236,0.45);
+    transition: -webkit-text-stroke 0.4s ease;
+  }
+  .monolith-title:hover .stroke-text{
+    -webkit-text-stroke: 1.2px rgba(244,242,236,0.85);
+  }
+
+  /* HUD Switcher Pill */
+  .hud-switcher{
     display:flex;
     align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    transition:all 0.25s ease;
-  }
-  .showcase-nav-btn:hover{
-    background:var(--ink);
-    color:var(--bg);
-    transform:scale(1.05);
-  }
-
-  /* Dual Card Grid - Compact and Controlled */
-  .dual-stage{
-    display:grid;
-    grid-template-columns: 1.75fr 1fr;
-    gap:20px;
-    transition:all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .dual-stage.reverse{
-    grid-template-columns: 1fr 1.75fr;
-  }
-
-  /* Each House Frame Card */
-  .house-box{
     position:relative;
-    height:460px;
-    border-radius:22px;
+    background:rgba(244,242,236,0.04);
+    border:1px solid rgba(244,242,236,0.2);
+    backdrop-filter:blur(40px) saturate(200%);
+    -webkit-backdrop-filter:blur(40px) saturate(200%);
+    border-radius:100px;
+    padding:5px;
+    margin-bottom:40px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  }
+  .hud-btn{
+    position:relative;
+    z-index:2;
+    background:none;
+    border:none;
+    color:var(--dim2);
+    font-family:'Archivo',sans-serif;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:10px 24px;
+    border-radius:100px;
+    cursor:pointer;
+    transition:color 0.3s ease;
+  }
+  .hud-btn.active{
+    color:#0d1013;
+  }
+  .hud-pill-glider{
+    position:absolute;
+    top:5px; bottom:5px; left:5px;
+    width:calc(50% - 5px);
+    background:var(--ink);
+    border-radius:100px;
+    z-index:1;
+    box-shadow:0 2px 14px rgba(255,255,255,0.25);
+    transition:transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* 3D PERSPECTIVE MONOLITH STAGE CONTAINER */
+  .monolith-stage-wrapper{
+    perspective: 1200px;
+    width:100%;
+    max-width:1120px;
+  }
+
+  .monolith-card{
+    position:relative;
+    width:100%;
+    height:500px;
+    border-radius:28px;
     overflow:hidden;
     border:1px solid var(--glass-border);
     background:#12161a;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-end;
-    padding:24px;
-    cursor:pointer;
-    transition:border-color 0.4s ease, box-shadow 0.4s ease;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,0.3), 0 20px 45px rgba(0,0,0,0.45);
+    box-shadow:
+      inset 0 1.5px 0 rgba(255,255,255,0.4),
+      0 30px 80px rgba(0,0,0,0.65);
+    transition:transform 0.4s cubic-bezier(0.16,1,0.3,1), border-color 0.4s ease;
+    transform-style:preserve-3d;
   }
 
-  .house-media{
+  /* Video / Media Layers inside Card */
+  .monolith-media{
     position:absolute;
     inset:0;
     z-index:0;
-    overflow:hidden;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 1.2s cubic-bezier(0.16,1,0.3,1);
+    transform:scale(1.05);
   }
-  .house-media img, .house-media video{
+  .monolith-media.active{
+    opacity:1;
+    visibility:visible;
+    transform:scale(1);
+  }
+  .monolith-media img, .monolith-media video{
     width:100%;
     height:100%;
     object-fit:cover;
     display:block;
-    transition:transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
   }
-  .house-media .media-mobile{ display:none; }
-  .house-media .media-desktop{ display:block; }
+  .monolith-media .media-mobile{ display:none; }
+  .monolith-media .media-desktop{ display:block; }
 
-  .house-box.inactive .house-media img,
-  .house-box.inactive .house-media video{
-    filter:brightness(0.55) grayscale(20%);
-    transform:scale(1.03);
-  }
-  .house-box.active .house-media img,
-  .house-box.active .house-media video{
-    filter:brightness(0.92);
-    transform:scale(1);
-  }
-
-  .house-box::before{
+  /* Vignette + Glass Depth Gradients */
+  .monolith-card::before{
     content:'';
     position:absolute;
     inset:0;
     z-index:1;
-    background:linear-gradient(180deg, rgba(13,16,19,0.08) 0%, rgba(13,16,19,0.38) 40%, rgba(13,16,19,0.92) 100%);
+    background:
+      linear-gradient(180deg, rgba(13,16,19,0.35) 0%, rgba(13,16,19,0.05) 40%, rgba(13,16,19,0.85) 100%),
+      radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(13,16,19,0.6) 100%);
     pointer-events:none;
   }
 
-  .house-badge{
+  /* Floating Corner Coordinates */
+  .coord-stamp{
     position:absolute;
-    top:18px;
-    left:18px;
-    z-index:2;
-    background:rgba(13,16,19,0.65);
-    border:1px solid rgba(244,242,236,0.2);
-    backdrop-filter:blur(24px);
-    -webkit-backdrop-filter:blur(24px);
-    color:var(--ink);
-    font-size:10px;
-    font-weight:600;
+    top:26px; left:30px;
+    z-index:3;
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    color:var(--dim2);
     letter-spacing:0.1em;
     text-transform:uppercase;
+  }
+
+  .status-stamp{
+    position:absolute;
+    top:24px; right:30px;
+    z-index:3;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(13,16,19,0.5);
+    border:1px solid rgba(244,242,236,0.18);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
     padding:6px 14px;
     border-radius:100px;
-  }
-
-  .house-status-pill{
-    position:absolute;
-    top:18px;
-    right:18px;
-    z-index:2;
-    font-size:10px;
+    font-size:11px;
     font-weight:600;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--dim2);
-    opacity:0;
-    transition:opacity 0.3s ease;
-  }
-  .house-box.inactive .house-status-pill{
-    opacity:1;
-  }
-
-  .house-info{
-    position:relative;
-    z-index:2;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-  }
-
-  .house-name{
-    font-family:'Archivo',sans-serif;
-    font-weight:700;
-    font-size:20px;
-    text-transform:uppercase;
-    letter-spacing:0.02em;
     color:var(--ink);
-  }
-  .house-loc{
-    font-size:12px;
-    color:var(--dim2);
-    margin-top:-6px;
+    letter-spacing:0.04em;
   }
 
-  .house-desc{
-    font-size:13px;
-    color:var(--dim);
-    line-height:1.55;
-    max-width:92%;
+  /* ============ INTERACTIVE ARCHITECTURAL HOTSPOTS ============ */
+  .hotspot{
+    position:absolute;
+    z-index:4;
+    cursor:pointer;
+    transform:translate(-50%, -50%);
+  }
+  .hotspot-pin{
+    width:14px; height:14px;
+    border-radius:50%;
+    background:var(--ink);
+    box-shadow:0 0 0 4px rgba(244,242,236,0.25), 0 0 20px rgba(255,255,255,0.8);
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
+    animation:pinPulse 2.5s infinite;
+  }
+  @keyframes pinPulse{
+    0%,100%{ transform:scale(1); box-shadow:0 0 0 4px rgba(244,242,236,0.25), 0 0 15px rgba(255,255,255,0.6); }
+    50%{ transform:scale(1.18); box-shadow:0 0 0 8px rgba(244,242,236,0.1), 0 0 25px rgba(255,255,255,0.9); }
+  }
+
+  .hotspot-card{
+    position:absolute;
+    bottom:calc(100% + 14px);
+    left:50%;
+    transform:translateX(-50%) translateY(8px);
+    background:rgba(13,16,19,0.78);
+    border:1px solid rgba(244,242,236,0.28);
+    backdrop-filter:blur(30px) saturate(220%);
+    -webkit-backdrop-filter:blur(30px) saturate(220%);
+    padding:8px 16px;
+    border-radius:100px;
+    white-space:nowrap;
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.06em;
+    color:var(--ink);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 0.3s ease, transform 0.3s ease;
+    box-shadow:0 14px 30px rgba(0,0,0,0.5);
+  }
+  .hotspot:hover .hotspot-card{
     opacity:1;
-    max-height:80px;
-    transition:all 0.5s ease;
-    overflow:hidden;
+    transform:translateX(-50%) translateY(0);
+  }
+  .hotspot:hover .hotspot-pin{
+    transform:scale(1.3);
+    background:#ffffff;
   }
 
-  .house-specs{
+  /* Monolith Bottom Architectural Specs HUD */
+  .monolith-bottom-hud{
+    position:absolute;
+    bottom:0; left:0; right:0;
+    z-index:3;
+    padding:26px 34px;
     display:flex;
-    gap:20px;
-    padding-top:10px;
-    border-top:1px solid rgba(244,242,236,0.12);
-    margin-top:4px;
-    transition:all 0.4s ease;
+    justify-content:space-between;
+    align-items:flex-end;
+    background:linear-gradient(180deg, transparent 0%, rgba(13,16,19,0.9) 80%);
   }
-  .spec-unit{
+
+  .monolith-meta h3{
+    font-family:'Archivo', sans-serif;
+    font-weight:700;
+    font-size:clamp(22px, 2.4vw, 32px);
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    margin-bottom:4px;
+  }
+  .monolith-meta p{
+    font-size:13px;
+    color:var(--dim2);
+    max-width:440px;
+    line-height:1.5;
+  }
+
+  .monolith-specs-strip{
+    display:flex;
+    gap:28px;
+    background:rgba(244,242,236,0.05);
+    border:1px solid rgba(244,242,236,0.18);
+    backdrop-filter:blur(30px);
+    -webkit-backdrop-filter:blur(30px);
+    padding:14px 24px;
+    border-radius:18px;
+  }
+  .spec-col{
     display:flex;
     flex-direction:column;
     gap:2px;
   }
-  .spec-u-label{
+  .spec-col-lbl{
     font-size:10px;
     text-transform:uppercase;
-    letter-spacing:0.08em;
+    letter-spacing:0.1em;
     color:var(--dim2);
   }
-  .spec-u-val{
+  .spec-col-val{
     font-family:'Archivo',sans-serif;
-    font-size:13px;
-    font-weight:600;
+    font-size:14px;
+    font-weight:700;
     color:var(--ink);
   }
 
-  .house-box.inactive .house-desc{
-    opacity:0;
-    max-height:0;
-    margin:0;
+  /* Under Stage Interactive Progress Bar */
+  .monolith-timer-track{
+    width:100%;
+    max-width:1120px;
+    height:2px;
+    background:rgba(244,242,236,0.12);
+    border-radius:2px;
+    margin-top:20px;
+    position:relative;
+    overflow:hidden;
   }
-  .house-box.inactive .house-specs{
-    opacity:0;
-    max-height:0;
-    padding:0;
-    margin:0;
-    border-top:none;
+  .monolith-timer-fill{
+    position:absolute;
+    top:0; left:0;
+    height:100%;
+    width:0%;
+    background:var(--ink);
   }
 
   footer{
@@ -790,20 +863,25 @@
       order:3;
     }
 
-    /* Showcase Mobile */
-    .showcase-section{ padding:60px 5vw 80px; }
-    .showcase-header{ flex-direction:column; align-items:flex-start; gap:14px; }
-    
-    .dual-stage, .dual-stage.reverse{
-      grid-template-columns: 1fr;
+    /* Monolith Responsive Mobile */
+    .monolith-section{ padding:80px 5vw 100px; }
+    .monolith-card{ height:440px; border-radius:20px; }
+    .monolith-media .media-desktop{ display:none; }
+    .monolith-media .media-mobile{ display:block; }
+    .coord-stamp, .status-stamp{ display:none; }
+    .monolith-bottom-hud{
+      flex-direction:column;
+      align-items:flex-start;
       gap:16px;
+      padding:20px;
     }
-    .house-box{ height:380px; }
-    .house-media .media-desktop{ display:none; }
-    .house-media .media-mobile{ display:block; }
-    
-    .house-box.inactive .house-desc{ opacity:1; max-height:80px; margin:4px 0 0; }
-    .house-box.inactive .house-specs{ opacity:1; max-height:100px; padding-top:10px; border-top:1px solid rgba(244,242,236,0.12); }
+    .monolith-specs-strip{
+      width:100%;
+      justify-content:space-between;
+      padding:10px 16px;
+      gap:12px;
+    }
+    .hotspot{ display:none; }
   }
 
   /* Reveal animations */
@@ -887,7 +965,7 @@
 <!-- 35MM FILM GRAIN OVERLAY -->
 <div class="film-grain"></div>
 
-<!-- CINEMATIC BACKGROUND WITH AURORAS & BLUEPRINT GRID -->
+<!-- CINEMATIC BACKGROUND SYSTEM -->
 <div class="cinematic-bg">
   <div class="bg-grid"></div>
   <div class="aurora-orb aurora-1" id="aurora1"></div>
@@ -904,7 +982,7 @@
   </div>
 </div>
 
-<!-- HERO STAGE -->
+<!-- ============ HERO STAGE ============ -->
 <section class="stage" id="stage">
   <div class="giant">
     <span class="line1">Arlo</span>
@@ -919,7 +997,7 @@
     <div class="logo">ARLO ESTATE</div>
     <div class="nav-links">
       <a href="#" class="active">Home</a>
-      <a href="#residences">Residences</a>
+      <a href="#monolith">Sanctuaries</a>
       <a href="#">Services</a>
       <a href="#">Contact</a>
     </div>
@@ -931,7 +1009,7 @@
 
   <div class="mobile-menu" id="mobileMenu">
     <a href="#" class="active">Home</a>
-    <a href="#residences">Residences</a>
+    <a href="#monolith">Sanctuaries</a>
     <a href="#">Services</a>
     <a href="#">Contact</a>
   </div>
@@ -946,11 +1024,11 @@
 
   <div class="frame">
     <img class="frame-mobile" src="foto1cel.jpeg" alt="Arlo Estate property">
-    <video class="frame-desktop pingpong-video" src="video1.mp4" poster="foto1pc.jpeg" autoplay muted playsinline></video>
+    <video class="frame-desktop" src="video1.mp4" poster="foto1pc.jpeg" autoplay muted loop playsinline></video>
   </div>
 
   <div class="stage-cta">
-    <a href="#residences" class="btn-pill">Explore Projects <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    <a href="#monolith" class="btn-pill">Explore Sanctuaries <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
   </div>
 
   <div class="stats">
@@ -965,87 +1043,99 @@
   </div>
 </section>
 
-<!-- ============ SECTION 02: DUAL FRAME RESIDENCES SHOWCASE ============ -->
-<section class="showcase-section" id="residences">
-  <div class="showcase-header">
-    <div>
-      <div class="showcase-eyebrow">01 — Selected Works</div>
-      <h2 class="title">Iconic Living <span>Sanctuaries</span></h2>
+<!-- ========================================================
+     SECTION 02: THE MONOLITH ARCHITECTURAL STAGE
+     ======================================================== -->
+<section class="monolith-section" id="monolith">
+  
+  <!-- Massive Centered Header -->
+  <div class="monolith-header">
+    <div class="monolith-eyebrow">
+      <span class="pulse-dot"></span>
+      01 — SELECTED RESIDENCES
     </div>
-    <div class="showcase-controls">
-      <div class="showcase-progress">
-        <div class="showcase-progress-bar" id="carouselProgressBar"></div>
+    <h2 class="monolith-title">
+      Iconic Living
+      <span class="stroke-text">Sanctuaries</span>
+    </h2>
+  </div>
+
+  <!-- Interactive Liquid Glider Switcher -->
+  <div class="hud-switcher">
+    <div class="hud-pill-glider" id="hudGlider"></div>
+    <button class="hud-btn active" id="btnHouse0" onclick="switchHouse(0)">01 / Villa Nordic</button>
+    <button class="hud-btn" id="btnHouse1" onclick="switchHouse(1)">02 / Obsidian Pavilion</button>
+  </div>
+
+  <!-- 3D Perspective Monolith Card -->
+  <div class="monolith-stage-wrapper" id="stageWrapper">
+    <div class="monolith-card" id="monolithCard">
+      
+      <!-- Coordinate Technical Stamp -->
+      <div class="coord-stamp" id="coordStamp">LAT 39.1911° N — ASPEN, CO</div>
+      <div class="status-stamp" id="statusStamp">● Private Commission</div>
+
+      <!-- HOUSE 1 MEDIA (Villa Nordic) -->
+      <div class="monolith-media active" id="media0">
+        <img class="media-mobile" src="slide1-cel.jpg" onerror="this.src='https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80'" alt="Villa Nordic">
+        <video class="media-desktop" id="vid0" src="slide1-video.mp4" poster="slide1-pc.jpg" autoplay muted loop playsinline></video>
+
+        <!-- Interactive Hotspots for House 1 -->
+        <div class="hotspot" style="top: 48%; left: 34%;">
+          <div class="hotspot-pin"></div>
+          <div class="hotspot-card">✦ Blackened Alpine Cedar</div>
+        </div>
+        <div class="hotspot" style="top: 72%; left: 62%;">
+          <div class="hotspot-pin"></div>
+          <div class="hotspot-card">✦ Heated Monolith Reflection Basin</div>
+        </div>
       </div>
-      <button class="showcase-nav-btn" id="prevBoxBtn" aria-label="Toggle house">←</button>
-      <button class="showcase-nav-btn" id="nextBoxBtn" aria-label="Toggle house">→</button>
+
+      <!-- HOUSE 2 MEDIA (Obsidian Pavilion) -->
+      <div class="monolith-media" id="media1">
+        <img class="media-mobile" src="slide2-cel.jpg" onerror="this.src='https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1000&q=80'" alt="Obsidian Pavilion">
+        <video class="media-desktop" id="vid1" src="slide2-video.mp4" poster="slide2-pc.jpg" muted loop playsinline></video>
+
+        <!-- Interactive Hotspots for House 2 -->
+        <div class="hotspot" style="top: 42%; left: 68%;">
+          <div class="hotspot-pin"></div>
+          <div class="hotspot-card">✦ Monolithic Basalt Geometry</div>
+        </div>
+        <div class="hotspot" style="top: 75%; left: 38%;">
+          <div class="hotspot-pin"></div>
+          <div class="hotspot-card">✦ Sunken Japanese Water Pavilion</div>
+        </div>
+      </div>
+
+      <!-- Bottom HUD with specs -->
+      <div class="monolith-bottom-hud">
+        <div class="monolith-meta">
+          <h3 id="houseTitle">Villa Nordic</h3>
+          <p id="houseDesc">Low-slung architectural pavilion carved into mountain rock, emphasizing raw timber and panoramic light.</p>
+        </div>
+
+        <div class="monolith-specs-strip">
+          <div class="spec-col">
+            <span class="spec-col-lbl">Living Space</span>
+            <span class="spec-col-val" id="specArea">520 m²</span>
+          </div>
+          <div class="spec-col">
+            <span class="spec-col-lbl">Suites</span>
+            <span class="spec-col-val" id="specSuites">4 En-Suite</span>
+          </div>
+          <div class="spec-col">
+            <span class="spec-col-lbl">Valuation</span>
+            <span class="spec-col-val" id="specPrice">$2,450,000</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <!-- Dual Stage: 2 Separate Frames -->
-  <div class="dual-stage" id="dualStage">
-    
-    <!-- BOX 1: VILLA NORDIC -->
-    <div class="house-box active" id="box1" onclick="setActiveHouse(0)">
-      <div class="house-media">
-        <img class="media-mobile" src="slide1-cel.jpg" onerror="this.src='https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80'" alt="Villa Nordic">
-        <video class="media-desktop pingpong-video" id="vid1" src="slide1-video.mp4" poster="slide1-pc.jpg" autoplay muted playsinline></video>
-      </div>
-      
-      <div class="house-badge">01 — Project</div>
-      <div class="house-status-pill">Click to expand ↗</div>
-
-      <div class="house-info">
-        <div class="house-name">Villa Nordic</div>
-        <div class="house-loc">Aspen Mountains, Colorado</div>
-        <p class="house-desc">A low-slung sanctuary carved into alpine rock. Characterized by blackened cedar timber, oversized thermal glass, and sunken fire pits framed by morning mist.</p>
-        <div class="house-specs">
-          <div class="spec-unit">
-            <span class="spec-u-label">Living Area</span>
-            <span class="spec-u-val">520 m²</span>
-          </div>
-          <div class="spec-unit">
-            <span class="spec-u-label">Bedrooms</span>
-            <span class="spec-u-val">4 En-Suite</span>
-          </div>
-          <div class="spec-unit">
-            <span class="spec-u-label">Investment</span>
-            <span class="spec-u-val">$2,450,000</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- BOX 2: THE OBSIDIAN PAVILION -->
-    <div class="house-box inactive" id="box2" onclick="setActiveHouse(1)">
-      <div class="house-media">
-        <img class="media-mobile" src="slide2-cel.jpg" onerror="this.src='https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1000&q=80'" alt="Obsidian Pavilion">
-        <video class="media-desktop pingpong-video" id="vid2" src="slide2-video.mp4" poster="slide2-pc.jpg" muted playsinline></video>
-      </div>
-
-      <div class="house-badge">02 — Project</div>
-      <div class="house-status-pill">Click to expand ↗</div>
-
-      <div class="house-info">
-        <div class="house-name">Obsidian Pavilion</div>
-        <div class="house-loc">Kyoto Outskirts, Japan</div>
-        <p class="house-desc">Brutalist concrete geometry floating over reflective water gardens. Built with monolithic basalt, acoustic wood slat ceilings, and private interior courtyards.</p>
-        <div class="house-specs">
-          <div class="spec-unit">
-            <span class="spec-u-label">Living Area</span>
-            <span class="spec-u-val">680 m²</span>
-          </div>
-          <div class="spec-unit">
-            <span class="spec-u-label">Bedrooms</span>
-            <span class="spec-u-val">5 En-Suite</span>
-          </div>
-          <div class="spec-unit">
-            <span class="spec-u-label">Investment</span>
-            <span class="spec-u-val">$3,100,000</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
+  <!-- Auto-transition Progress Bar -->
+  <div class="monolith-timer-track">
+    <div class="monolith-timer-fill" id="monolithProgressBar"></div>
   </div>
 </section>
 
@@ -1098,54 +1188,103 @@
     }
   });
 
-  // ============ DUAL STAGE INTERACTION SCRIPT ============
-  const dualStage = document.getElementById('dualStage');
-  const box1 = document.getElementById('box1');
-  const box2 = document.getElementById('box2');
-  const vid1 = document.getElementById('vid1');
-  const vid2 = document.getElementById('vid2');
-  const progressBar = document.getElementById('carouselProgressBar');
+  // ============ MONOLITH ARCHITECTURAL STAGE CONTROLLER ============
+  const houseData = [
+    {
+      title: "Villa Nordic",
+      desc: "Low-slung architectural pavilion carved into mountain rock, emphasizing raw timber and panoramic light.",
+      coord: "LAT 39.1911° N — ASPEN, CO",
+      status: "● Private Commission",
+      area: "520 m²",
+      suites: "4 En-Suite",
+      price: "$2,450,000",
+      auroraColor: "rgba(76, 107, 122, 0.75)"
+    },
+    {
+      title: "Obsidian Pavilion",
+      desc: "Brutalist concrete geometry floating over reflective water courtyards with acoustic wood slat ceilings.",
+      coord: "LAT 35.0116° N — KYOTO, JP",
+      status: "● Completed 2026",
+      area: "680 m²",
+      suites: "5 En-Suite",
+      price: "$3,100,000",
+      auroraColor: "rgba(35, 120, 95, 0.7)"
+    }
+  ];
 
-  let activeIndex = 0;
-  const switchDuration = 6500;
+  let currentHouse = 0;
+  const switchDuration = 7000;
   let progressStart = Date.now();
   let isPaused = false;
 
-  function setActiveHouse(index) {
-    activeIndex = index;
+  const btn0 = document.getElementById('btnHouse0');
+  const btn1 = document.getElementById('btnHouse1');
+  const glider = document.getElementById('hudGlider');
+  const media0 = document.getElementById('media0');
+  const media1 = document.getElementById('media1');
+  const vid0 = document.getElementById('vid0');
+  const vid1 = document.getElementById('vid1');
 
-    if (activeIndex === 0) {
-      dualStage.classList.remove('reverse');
-      box1.classList.add('active');
-      box1.classList.remove('inactive');
-      box2.classList.add('inactive');
-      box2.classList.remove('active');
+  const houseTitle = document.getElementById('houseTitle');
+  const houseDesc = document.getElementById('houseDesc');
+  const coordStamp = document.getElementById('coordStamp');
+  const statusStamp = document.getElementById('statusStamp');
+  const specArea = document.getElementById('specArea');
+  const specSuites = document.getElementById('specSuites');
+  const specPrice = document.getElementById('specPrice');
+  const progressBar = document.getElementById('monolithProgressBar');
+  const aurora1 = document.getElementById('aurora1');
 
-      if (vid1) vid1.play().catch(() => {});
-      if (vid2) vid2.pause();
+  function switchHouse(idx) {
+    currentHouse = idx;
+    const d = houseData[idx];
+
+    // Glider HUD position & Media visibility
+    if (idx === 0) {
+      glider.style.transform = 'translateX(0%)';
+      btn0.classList.add('active');
+      btn1.classList.remove('active');
+      media0.classList.add('active');
+      media1.classList.remove('active');
+      if (vid0) {
+        vid0.play().catch(() => {});
+      }
+      if (vid1) {
+        vid1.pause();
+      }
     } else {
-      dualStage.classList.add('reverse');
-      box2.classList.add('active');
-      box2.classList.remove('inactive');
-      box1.classList.add('inactive');
-      box1.classList.remove('active');
-
-      if (vid2) vid2.play().catch(() => {});
-      if (vid1) vid1.pause();
+      glider.style.transform = 'translateX(100%)';
+      btn1.classList.add('active');
+      btn0.classList.remove('active');
+      media1.classList.add('active');
+      media0.classList.remove('active');
+      if (vid1) {
+        vid1.play().catch(() => {});
+      }
+      if (vid0) {
+        vid0.pause();
+      }
     }
+
+    // Dynamic background lighting shift
+    aurora1.style.background = `radial-gradient(circle, ${d.auroraColor} 0%, rgba(30, 45, 55, 0) 70%)`;
+
+    // Text content updates smoothly
+    houseTitle.innerText = d.title;
+    houseDesc.innerText = d.desc;
+    coordStamp.innerText = d.coord;
+    statusStamp.innerText = d.status;
+    specArea.innerText = d.area;
+    specSuites.innerText = d.suites;
+    specPrice.innerText = d.price;
 
     progressStart = Date.now();
   }
 
-  function toggleHouse() {
-    setActiveHouse(activeIndex === 0 ? 1 : 0);
-  }
-
-  document.getElementById('nextBoxBtn').addEventListener('click', toggleHouse);
-  document.getElementById('prevBoxBtn').addEventListener('click', toggleHouse);
-
-  dualStage.addEventListener('mouseenter', () => { isPaused = true; });
-  dualStage.addEventListener('mouseleave', () => { 
+  // Progress Loop
+  const monolithCard = document.getElementById('monolithCard');
+  monolithCard.addEventListener('mouseenter', () => { isPaused = true; });
+  monolithCard.addEventListener('mouseleave', () => { 
     isPaused = false; 
     progressStart = Date.now() - (parseFloat(progressBar.style.width || 0) / 100 * switchDuration);
   });
@@ -1157,49 +1296,33 @@
       progressBar.style.width = pct + '%';
 
       if (elapsed >= switchDuration) {
-        toggleHouse();
+        switchHouse(currentHouse === 0 ? 1 : 0);
       }
     }
     requestAnimationFrame(timerLoop);
   }
   requestAnimationFrame(timerLoop);
 
-  // ============ JAVASCRIPT PING-PONG / BOOMERANG VIDEO ENGINE ============
-  function setupPingPong(video) {
-    if (!video) return;
-    let direction = 1; // 1 = forward, -1 = reverse
-    let lastTime = performance.now();
+  // ============ 3D PERSPECTIVE MOUSE TILT EFFECT ============
+  const stageWrapper = document.getElementById('stageWrapper');
 
-    function pingPongStep(now) {
-      const delta = (now - lastTime) / 1000;
-      lastTime = now;
+  stageWrapper.addEventListener('mousemove', (e) => {
+    if (window.innerWidth <= 860) return;
+    const rect = stageWrapper.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
 
-      if (!video.paused && video.duration) {
-        if (direction === 1) {
-          // Playing forward
-          if (video.currentTime >= video.duration - 0.08) {
-            direction = -1;
-            video.pause();
-          }
-        } else {
-          // Reversing backward smoothly
-          video.currentTime = Math.max(0, video.currentTime - (delta * 0.95));
-          if (video.currentTime <= 0.08) {
-            direction = 1;
-            video.play().catch(() => {});
-          }
-        }
-      }
-      requestAnimationFrame(pingPongStep);
-    }
-    video.addEventListener('play', () => { lastTime = performance.now(); });
-    requestAnimationFrame(pingPongStep);
-  }
+    const rotX = -(y / rect.height) * 9;
+    const rotY = (x / rect.width) * 9;
 
-  // Apply Ping-Pong to all videos marked with .pingpong-video
-  document.querySelectorAll('.pingpong-video').forEach(v => setupPingPong(v));
+    monolithCard.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.02, 1.02, 1.02)`;
+  });
 
-  // ============ INTERACTIVE AMBIENT MOUSE SPOTLIGHT & PARALLAX ============
+  stageWrapper.addEventListener('mouseleave', () => {
+    monolithCard.style.transform = `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+  });
+
+  // ============ INTERACTIVE AMBIENT MOUSE SPOTLIGHT ============
   const spotlight = document.getElementById('cursorSpotlight');
   const orb1 = document.getElementById('aurora1');
   const orb2 = document.getElementById('aurora2');
@@ -1213,8 +1336,8 @@
       spotlight.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
     }
     if (orb1 && orb2) {
-      const moveX = (x - centerX) * 0.03;
-      const moveY = (y - centerY) * 0.03;
+      const moveX = (x - centerX) * 0.025;
+      const moveY = (y - centerY) * 0.025;
       orb1.style.transform = `translate(${moveX}px, ${moveY}px)`;
       orb2.style.transform = `translate(${-moveX}px, ${-moveY}px)`;
     }
