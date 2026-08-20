@@ -36,7 +36,6 @@
     overflow:hidden;
   }
 
-  /* Giant text overlaid on top of the full-bleed image */
   .giant{
     position:absolute;
     left:50%;
@@ -219,7 +218,6 @@
   .nav-burger.active span:nth-child(2){ opacity:0; }
   .nav-burger.active span:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
 
-  /* Mobile dropdown menu */
   .mobile-menu{
     position:fixed;
     top:78px;
@@ -404,40 +402,10 @@
     transform:rotate(45deg);
   }
 
-  /* ============ SECTION 01: INTRO ============ */
-  .intro{
-    padding:140px 4vw 80px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:60px;
-    max-width:1300px;
-    margin:0 auto;
-  }
-  .intro-label{
-    font-size:12px;
-    letter-spacing:0.12em;
-    text-transform:uppercase;
-    color:var(--dim2);
-    margin-bottom:24px;
-  }
-  .intro h2{
-    font-family:'Archivo',sans-serif;
-    font-weight:700;
-    text-transform:uppercase;
-    font-size:clamp(28px,3.4vw,44px);
-    line-height:1.15;
-  }
-  .intro p{
-    color:var(--dim);
-    font-size:15px;
-    line-height:1.8;
-    max-width:460px;
-  }
-
-  /* ============ SECTION 02: CINEMATIC CAROUSEL SHOWCASE ============ */
+  /* ============ SECTION 02: DUAL FRAME RESIDENCES SHOWCASE ============ */
   .showcase-section{
-    padding:40px 4vw 140px;
-    max-width:1300px;
+    padding:100px 4vw 120px;
+    max-width:1200px;
     margin:0 auto;
   }
 
@@ -445,12 +413,19 @@
     display:flex;
     justify-content:space-between;
     align-items:flex-end;
-    margin-bottom:30px;
+    margin-bottom:28px;
+  }
+  .showcase-eyebrow{
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--dim2);
+    margin-bottom:8px;
   }
   .showcase-header .title{
     font-family:'Archivo',sans-serif;
     font-weight:700;
-    font-size:clamp(22px, 2.6vw, 34px);
+    font-size:clamp(20px, 2.4vw, 30px);
     text-transform:uppercase;
     letter-spacing:-0.01em;
     line-height:1.2;
@@ -459,16 +434,15 @@
     color:var(--dim2);
   }
 
-  /* Control buttons & progress bar */
   .showcase-controls{
     display:flex;
     align-items:center;
-    gap:16px;
+    gap:14px;
   }
   .showcase-progress{
-    width:90px;
+    width:80px;
     height:2px;
-    background:rgba(244,242,236,0.15);
+    background:rgba(244,242,236,0.12);
     border-radius:2px;
     overflow:hidden;
     position:relative;
@@ -479,11 +453,10 @@
     height:100%;
     width:0%;
     background:var(--ink);
-    transition:width 0.1s linear;
   }
   .showcase-nav-btn{
-    width:42px;
-    height:42px;
+    width:38px;
+    height:38px;
     border-radius:50%;
     background:rgba(244,242,236,0.05);
     border:1px solid rgba(244,242,236,0.2);
@@ -492,7 +465,7 @@
     align-items:center;
     justify-content:center;
     cursor:pointer;
-    transition:all 0.3s ease;
+    transition:all 0.25s ease;
   }
   .showcase-nav-btn:hover{
     background:var(--ink);
@@ -500,142 +473,182 @@
     transform:scale(1.05);
   }
 
-  /* Main Carousel Stage */
-  .carousel-viewport{
+  /* Dual Card Grid - Compact and Controlled */
+  .dual-stage{
+    display:grid;
+    grid-template-columns: 1.75fr 1fr;
+    gap:20px;
+    transition:all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .dual-stage.reverse{
+    grid-template-columns: 1fr 1.75fr;
+  }
+
+  /* Each House Frame Card */
+  .house-box{
     position:relative;
-    width:100%;
-    aspect-ratio:16/9;
-    border-radius:24px;
+    height:460px;
+    border-radius:22px;
     overflow:hidden;
     border:1px solid var(--glass-border);
-    box-shadow:
-      inset 0 1.5px 0 rgba(255,255,255,0.4),
-      0 20px 60px rgba(0,0,0,0.5);
-    background:#12171c;
+    background:#12161a;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:24px;
+    cursor:pointer;
+    transition:border-color 0.4s ease, box-shadow 0.4s ease;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.3), 0 16px 40px rgba(0,0,0,0.4);
   }
 
-  /* Slide Items */
-  .carousel-slide{
+  /* Media container inside each frame */
+  .house-media{
     position:absolute;
     inset:0;
-    opacity:0;
-    visibility:hidden;
-    transition:opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-    transform:scale(1.04);
+    z-index:0;
+    overflow:hidden;
   }
-  .carousel-slide.active{
-    opacity:1;
-    visibility:visible;
-    transform:scale(1);
-    z-index:2;
-  }
-
-  .carousel-slide img, .carousel-slide video{
+  .house-media img, .house-media video{
     width:100%;
     height:100%;
     object-fit:cover;
     display:block;
+    transition:transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
   }
-  .carousel-slide .slide-mobile{ display:none; }
-  .carousel-slide .slide-desktop{ display:block; }
+  .house-media .media-mobile{ display:none; }
+  .house-media .media-desktop{ display:block; }
 
-  /* Gradient Vignette over image for cinematic contrast */
-  .carousel-slide::after{
+  /* Dim inactive box */
+  .house-box.inactive .house-media img,
+  .house-box.inactive .house-media video{
+    filter:brightness(0.55) grayscale(25%);
+    transform:scale(1.02);
+  }
+  .house-box.active .house-media img,
+  .house-box.active .house-media video{
+    filter:brightness(0.9);
+    transform:scale(1);
+  }
+
+  /* Gradient Overlay */
+  .house-box::before{
     content:'';
     position:absolute;
     inset:0;
-    background:linear-gradient(180deg, rgba(13,16,19,0.2) 0%, rgba(13,16,19,0.05) 50%, rgba(13,16,19,0.7) 100%);
+    z-index:1;
+    background:linear-gradient(180deg, rgba(13,16,19,0.1) 0%, rgba(13,16,19,0.4) 40%, rgba(13,16,19,0.92) 100%);
     pointer-events:none;
   }
 
-  /* Slide Tag Badge on Top Right */
-  .slide-tag{
+  /* Badge top left */
+  .house-badge{
     position:absolute;
-    top:24px;
-    right:24px;
-    z-index:3;
-    background:rgba(13,16,19,0.5);
+    top:18px;
+    left:18px;
+    z-index:2;
+    background:rgba(13,16,19,0.6);
     border:1px solid rgba(244,242,236,0.2);
-    backdrop-filter:blur(30px);
-    -webkit-backdrop-filter:blur(30px);
+    backdrop-filter:blur(24px);
+    -webkit-backdrop-filter:blur(24px);
     color:var(--ink);
-    font-size:11px;
+    font-size:10px;
     font-weight:600;
     letter-spacing:0.1em;
     text-transform:uppercase;
-    padding:8px 16px;
+    padding:6px 14px;
     border-radius:100px;
   }
 
-  /* Info Strip below the image */
-  .showcase-info{
-    margin-top:24px;
-    display:grid;
-    grid-template-columns:1.2fr 2fr auto;
-    align-items:center;
-    gap:24px;
-    padding:20px 28px;
-    background:rgba(244,242,236,0.03);
-    border:1px solid rgba(244,242,236,0.12);
-    border-radius:20px;
-    backdrop-filter:blur(40px);
-    -webkit-backdrop-filter:blur(40px);
-  }
-
-  .info-title h3{
-    font-family:'Archivo',sans-serif;
-    font-size:18px;
-    font-weight:700;
+  /* Inactive label pill */
+  .house-status-pill{
+    position:absolute;
+    top:18px;
+    right:18px;
+    z-index:2;
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:0.08em;
     text-transform:uppercase;
-    letter-spacing:0.02em;
-    margin-bottom:4px;
-  }
-  .info-title p{
-    font-size:13px;
     color:var(--dim2);
+    opacity:0;
+    transition:opacity 0.3s ease;
+  }
+  .house-box.inactive .house-status-pill{
+    opacity:1;
   }
 
-  .info-meta{
-    display:flex;
-    gap:30px;
-  }
-  .meta-item{
+  /* House Content Area */
+  .house-info{
+    position:relative;
+    z-index:2;
     display:flex;
     flex-direction:column;
-    gap:4px;
+    gap:10px;
   }
-  .meta-label{
-    font-size:11px;
+
+  .house-name{
+    font-family:'Archivo',sans-serif;
+    font-weight:700;
+    font-size:20px;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+    color:var(--ink);
+  }
+  .house-loc{
+    font-size:12px;
+    color:var(--dim2);
+    margin-top:-6px;
+  }
+
+  .house-desc{
+    font-size:13px;
+    color:var(--dim);
+    line-height:1.55;
+    max-width:92%;
+    opacity:1;
+    max-height:80px;
+    transition:all 0.5s ease;
+    overflow:hidden;
+  }
+
+  .house-specs{
+    display:flex;
+    gap:20px;
+    padding-top:10px;
+    border-top:1px solid rgba(244,242,236,0.12);
+    margin-top:4px;
+    transition:all 0.4s ease;
+  }
+  .spec-unit{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .spec-u-label{
+    font-size:10px;
     text-transform:uppercase;
     letter-spacing:0.08em;
     color:var(--dim2);
   }
-  .meta-value{
+  .spec-u-val{
     font-family:'Archivo',sans-serif;
-    font-size:14px;
+    font-size:13px;
     font-weight:600;
     color:var(--ink);
   }
 
-  .info-action .btn-minimal{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    background:rgba(244,242,236,0.1);
-    color:var(--ink);
-    border:1px solid rgba(244,242,236,0.22);
-    padding:12px 20px;
-    border-radius:100px;
-    text-decoration:none;
-    font-size:12px;
-    font-weight:600;
-    text-transform:uppercase;
-    letter-spacing:0.05em;
-    transition:all 0.3s ease;
+  /* When a box is INACTIVE (shrink content cleanly) */
+  .house-box.inactive .house-desc{
+    opacity:0;
+    max-height:0;
+    margin:0;
   }
-  .info-action .btn-minimal:hover{
-    background:var(--ink);
-    color:var(--bg);
+  .house-box.inactive .house-specs{
+    opacity:0;
+    max-height:0;
+    padding:0;
+    margin:0;
+    border-top:none;
   }
 
   footer{
@@ -694,24 +707,20 @@
       order:3;
     }
 
-    .intro{ grid-template-columns:1fr; padding:80px 6vw 40px; gap:24px; }
-
-    /* Showcase Responsive */
-    .showcase-section{ padding:20px 5vw 80px; }
-    .showcase-header{ flex-direction:column; align-items:flex-start; gap:16px; }
-    .carousel-viewport{ aspect-ratio:4/5; border-radius:18px; }
-    .carousel-slide .slide-desktop{ display:none; }
-    .carousel-slide .slide-mobile{ display:block; }
-    .showcase-info{
-      grid-template-columns:1fr;
-      gap:20px;
-      padding:20px;
-    }
-    .info-meta{
-      display:grid;
-      grid-template-columns:1fr 1fr;
+    /* Showcase Mobile */
+    .showcase-section{ padding:60px 5vw 80px; }
+    .showcase-header{ flex-direction:column; align-items:flex-start; gap:14px; }
+    
+    .dual-stage, .dual-stage.reverse{
+      grid-template-columns: 1fr;
       gap:16px;
     }
+    .house-box{ height:380px; }
+    .house-media .media-desktop{ display:none; }
+    .house-media .media-mobile{ display:block; }
+    
+    .house-box.inactive .house-desc{ opacity:1; max-height:80px; margin:4px 0 0; }
+    .house-box.inactive .house-specs{ opacity:1; max-height:100px; padding-top:10px; border-top:1px solid rgba(244,242,236,0.12); }
   }
 
   /* Reveal animations */
@@ -816,7 +825,7 @@
     <div class="logo">ARLO ESTATE</div>
     <div class="nav-links">
       <a href="#" class="active">Home</a>
-      <a href="#projects">Projects</a>
+      <a href="#residences">Residences</a>
       <a href="#">Services</a>
       <a href="#">Contact</a>
     </div>
@@ -828,7 +837,7 @@
 
   <div class="mobile-menu" id="mobileMenu">
     <a href="#" class="active">Home</a>
-    <a href="#projects">Projects</a>
+    <a href="#residences">Residences</a>
     <a href="#">Services</a>
     <a href="#">Contact</a>
   </div>
@@ -847,7 +856,7 @@
   </div>
 
   <div class="stage-cta">
-    <a href="#projects" class="btn-pill">Explore Projects <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    <a href="#residences" class="btn-pill">Explore Projects <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
   </div>
 
   <div class="stats">
@@ -862,77 +871,87 @@
   </div>
 </section>
 
-<!-- SECTION 01: INTRO MANIFESTO -->
-<section class="intro">
-  <div>
-    <div class="intro-label">01 — Studio</div>
-    <h2>Design that lives<br>beyond the render</h2>
-  </div>
-  <div style="display:flex; align-items:center;">
-    <p>Every project starts with how a space will actually feel — light, material, silence. We work closely with each client to translate that feeling into architecture that lasts.</p>
-  </div>
-</section>
-
-<!-- ============ SECTION 02: CINEMATIC SHOWCASE CAROUSEL ============ -->
-<section class="showcase-section" id="projects">
+<!-- ============ SECTION 02: DUAL FRAME RESIDENCES SHOWCASE ============ -->
+<section class="showcase-section" id="residences">
   <div class="showcase-header">
     <div>
-      <div class="intro-label">02 — Selected Works</div>
+      <div class="showcase-eyebrow">01 — Selected Works</div>
       <h2 class="title">Iconic Living <span>Sanctuaries</span></h2>
     </div>
     <div class="showcase-controls">
       <div class="showcase-progress">
         <div class="showcase-progress-bar" id="carouselProgressBar"></div>
       </div>
-      <button class="showcase-nav-btn" id="prevSlideBtn" aria-label="Previous property">←</button>
-      <button class="showcase-nav-btn" id="nextSlideBtn" aria-label="Next property">→</button>
+      <button class="showcase-nav-btn" id="prevBoxBtn" aria-label="Toggle house">←</button>
+      <button class="showcase-nav-btn" id="nextBoxBtn" aria-label="Toggle house">→</button>
     </div>
   </div>
 
-  <!-- Carousel Stage -->
-  <div class="carousel-viewport" id="carouselViewport">
+  <!-- Dual Stage: 2 Separate Frames -->
+  <div class="dual-stage" id="dualStage">
     
-    <!-- SLIDE 1: VILLA NORDIC -->
-    <div class="carousel-slide active" data-index="0">
-      <div class="slide-tag">Completed 2026</div>
-      <img class="slide-mobile" src="slide1-cel.jpg" onerror="this.src='https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80'" alt="Villa Nordic Mobile">
-      <video class="slide-desktop" src="slide1-video.mp4" poster="slide1-pc.jpg" autoplay muted loop playsinline></video>
-    </div>
-
-    <!-- SLIDE 2: THE OBSIDIAN PAVILION -->
-    <div class="carousel-slide" data-index="1">
-      <div class="slide-tag">Completed 2025</div>
-      <img class="slide-mobile" src="slide2-cel.jpg" onerror="this.src='https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1000&q=80'" alt="Obsidian Pavilion Mobile">
-      <video class="slide-desktop" src="slide2-video.mp4" poster="slide2-pc.jpg" autoplay muted loop playsinline></video>
-    </div>
-
-  </div>
-
-  <!-- Info Bar Beneath the Image (Dynamic) -->
-  <div class="showcase-info" id="showcaseInfo">
-    <div class="info-title">
-      <h3 id="infoTitle">01 — Villa Nordic</h3>
-      <p id="infoLoc">Aspen Mountains, Colorado</p>
-    </div>
-
-    <div class="info-meta">
-      <div class="meta-item">
-        <span class="meta-label">Gross Area</span>
-        <span class="meta-value" id="infoArea">520 m²</span>
+    <!-- BOX 1: VILLA NORDIC -->
+    <div class="house-box active" id="box1" onclick="setActiveHouse(0)">
+      <div class="house-media">
+        <img class="media-mobile" src="slide1-cel.jpg" onerror="this.src='https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80'" alt="Villa Nordic">
+        <video class="media-desktop" id="vid1" src="slide1-video.mp4" poster="slide1-pc.jpg" autoplay muted loop playsinline></video>
       </div>
-      <div class="meta-item">
-        <span class="meta-label">Architectural Type</span>
-        <span class="meta-value" id="infoType">Alpine Sanctuary</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">Delivery</span>
-        <span class="meta-value" id="infoDelivery">Turnkey (4 Months)</span>
+      
+      <div class="house-badge">01 — Project</div>
+      <div class="house-status-pill">Click to expand ↗</div>
+
+      <div class="house-info">
+        <div class="house-name">Villa Nordic</div>
+        <div class="house-loc">Aspen Mountains, Colorado</div>
+        <p class="house-desc">A low-slung sanctuary carved into alpine rock. Characterized by blackened cedar timber, oversized thermal glass, and sunken fire pits framed by morning mist.</p>
+        <div class="house-specs">
+          <div class="spec-unit">
+            <span class="spec-u-label">Living Area</span>
+            <span class="spec-u-val">520 m²</span>
+          </div>
+          <div class="spec-unit">
+            <span class="spec-u-label">Bedrooms</span>
+            <span class="spec-u-val">4 En-Suite</span>
+          </div>
+          <div class="spec-unit">
+            <span class="spec-u-label">Investment</span>
+            <span class="spec-u-val">$2,450,000</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="info-action">
-      <a href="#" class="btn-minimal">View Project ↗</a>
+    <!-- BOX 2: THE OBSIDIAN PAVILION -->
+    <div class="house-box inactive" id="box2" onclick="setActiveHouse(1)">
+      <div class="house-media">
+        <img class="media-mobile" src="slide2-cel.jpg" onerror="this.src='https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1000&q=80'" alt="Obsidian Pavilion">
+        <video class="media-desktop" id="vid2" src="slide2-video.mp4" poster="slide2-pc.jpg" muted loop playsinline></video>
+      </div>
+
+      <div class="house-badge">02 — Project</div>
+      <div class="house-status-pill">Click to expand ↗</div>
+
+      <div class="house-info">
+        <div class="house-name">Obsidian Pavilion</div>
+        <div class="house-loc">Kyoto Outskirts, Japan</div>
+        <p class="house-desc">Brutalist concrete geometry floating over reflective water gardens. Built with monolithic basalt, acoustic wood slat ceilings, and private interior courtyards.</p>
+        <div class="house-specs">
+          <div class="spec-unit">
+            <span class="spec-u-label">Living Area</span>
+            <span class="spec-u-val">680 m²</span>
+          </div>
+          <div class="spec-unit">
+            <span class="spec-u-label">Bedrooms</span>
+            <span class="spec-u-val">5 En-Suite</span>
+          </div>
+          <div class="spec-unit">
+            <span class="spec-u-label">Investment</span>
+            <span class="spec-u-val">$3,100,000</span>
+          </div>
+        </div>
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -985,100 +1004,73 @@
     }
   });
 
-  // ============ CAROUSEL CONTROLLER ============
-  const slideData = [
-    {
-      title: "01 — Villa Nordic",
-      location: "Aspen Mountains, Colorado",
-      area: "520 m²",
-      type: "Alpine Sanctuary",
-      delivery: "Turnkey (4 Months)"
-    },
-    {
-      title: "02 — The Obsidian Pavilion",
-      location: "Kyoto Outskirts, Japan",
-      area: "680 m²",
-      type: "Monolithic Residence",
-      delivery: "Turnkey (6 Months)"
-    }
-  ];
-
-  const slides = document.querySelectorAll('.carousel-slide');
+  // ============ DUAL STAGE INTERACTION SCRIPT ============
+  const dualStage = document.getElementById('dualStage');
+  const box1 = document.getElementById('box1');
+  const box2 = document.getElementById('box2');
+  const vid1 = document.getElementById('vid1');
+  const vid2 = document.getElementById('vid2');
   const progressBar = document.getElementById('carouselProgressBar');
-  const infoTitle = document.getElementById('infoTitle');
-  const infoLoc = document.getElementById('infoLoc');
-  const infoArea = document.getElementById('infoArea');
-  const infoType = document.getElementById('infoType');
-  const infoDelivery = document.getElementById('infoDelivery');
-  const viewport = document.getElementById('carouselViewport');
 
-  let currentSlide = 0;
-  const slideDuration = 6000; // 6 seconds per slide
+  let activeIndex = 0; // 0 = Villa Nordic, 1 = Obsidian Pavilion
+  const switchDuration = 6500; // 6.5s auto transition
   let progressStart = Date.now();
-  let timerId = null;
   let isPaused = false;
 
-  function updateSlide(index) {
-    slides.forEach((s, i) => {
-      s.classList.toggle('active', i === index);
-      const vid = s.querySelector('video');
-      if (vid) {
-        if (i === index) { vid.play().catch(() => {}); }
-        else { vid.pause(); }
-      }
-    });
+  function setActiveHouse(index) {
+    activeIndex = index;
 
-    // Update Meta text smoothly
-    const d = slideData[index];
-    infoTitle.innerText = d.title;
-    infoLoc.innerText = d.location;
-    infoArea.innerText = d.area;
-    infoType.innerText = d.type;
-    infoDelivery.innerText = d.delivery;
+    if (activeIndex === 0) {
+      dualStage.classList.remove('reverse');
+      box1.classList.add('active');
+      box1.classList.remove('inactive');
+      box2.classList.add('inactive');
+      box2.classList.remove('active');
 
-    // Reset Progress
+      if (vid1) vid1.play().catch(() => {});
+      if (vid2) vid2.pause();
+    } else {
+      dualStage.classList.add('reverse');
+      box2.classList.add('active');
+      box2.classList.remove('inactive');
+      box1.classList.add('inactive');
+      box1.classList.remove('active');
+
+      if (vid2) vid2.play().catch(() => {});
+      if (vid1) vid1.pause();
+    }
+
     progressStart = Date.now();
   }
 
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    updateSlide(currentSlide);
+  function toggleHouse() {
+    setActiveHouse(activeIndex === 0 ? 1 : 0);
   }
 
-  function prevSlide() {
-    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-    updateSlide(currentSlide);
-  }
+  document.getElementById('nextBoxBtn').addEventListener('click', toggleHouse);
+  document.getElementById('prevBoxBtn').addEventListener('click', toggleHouse);
 
-  document.getElementById('nextSlideBtn').addEventListener('click', () => {
-    nextSlide();
-  });
-
-  document.getElementById('prevSlideBtn').addEventListener('click', () => {
-    prevSlide();
-  });
-
-  // Hover to pause
-  viewport.addEventListener('mouseenter', () => { isPaused = true; });
-  viewport.addEventListener('mouseleave', () => { 
+  // Pause on hover
+  dualStage.addEventListener('mouseenter', () => { isPaused = true; });
+  dualStage.addEventListener('mouseleave', () => { 
     isPaused = false; 
-    progressStart = Date.now() - (parseFloat(progressBar.style.width || 0) / 100 * slideDuration);
+    progressStart = Date.now() - (parseFloat(progressBar.style.width || 0) / 100 * switchDuration);
   });
 
-  // Progress ticker loop
-  function loop() {
+  // Smooth progress loop
+  function timerLoop() {
     if (!isPaused) {
       const elapsed = Date.now() - progressStart;
-      const pct = Math.min((elapsed / slideDuration) * 100, 100);
+      const pct = Math.min((elapsed / switchDuration) * 100, 100);
       progressBar.style.width = pct + '%';
 
-      if (elapsed >= slideDuration) {
-        nextSlide();
+      if (elapsed >= switchDuration) {
+        toggleHouse();
       }
     }
-    requestAnimationFrame(loop);
+    requestAnimationFrame(timerLoop);
   }
-  requestAnimationFrame(loop);
+  requestAnimationFrame(timerLoop);
 </script>
 </body>
 </html>
