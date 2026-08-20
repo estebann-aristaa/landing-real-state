@@ -159,8 +159,8 @@
     position:relative;
     background:rgba(244,242,236,0.05);
     border:1px solid rgba(244,242,236,0.22);
-    backdrop-filter:blur(40px) saturate(240%) brightness(1.08);
-    -webkit-backdrop-filter:blur(40px) saturate(240%) brightness(1.08);
+    backdrop-filter:blur(50px) saturate(280%) brightness(1.12);
+    -webkit-backdrop-filter:blur(50px) saturate(280%) brightness(1.12);
     border-radius:100px;
     padding:6px;
     box-shadow:
@@ -199,6 +199,21 @@
     font-size:13px;
     font-weight:600;
     letter-spacing:0.02em;
+  }
+  .nav-burger{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    background:none;
+    border:none;
+    padding:8px;
+    cursor:pointer;
+  }
+  .nav-burger span{
+    width:20px;
+    height:1.5px;
+    background:var(--ink);
+    display:block;
   }
 
   /* HERO COPY (top-left, overlays giant text area) */
@@ -258,8 +273,8 @@
     position:relative;
     background:rgba(244,242,236,0.05);
     border:1px solid rgba(244,242,236,0.22);
-    backdrop-filter:blur(40px) saturate(240%) brightness(1.08);
-    -webkit-backdrop-filter:blur(40px) saturate(240%) brightness(1.08);
+    backdrop-filter:blur(50px) saturate(280%) brightness(1.12);
+    -webkit-backdrop-filter:blur(50px) saturate(280%) brightness(1.12);
     border-radius:14px;
     padding:16px 20px;
     min-width:190px;
@@ -367,90 +382,143 @@
 
   /* ============ RESPONSIVE ============ */
   @media (max-width: 860px){
-    .stage{ padding:0 5vw; min-height:100svh; }
+    .stage{
+      flex-direction:column;
+      align-items:stretch;
+      padding:0 5vw;
+      padding-top:110px;
+      padding-bottom:40px;
+      height:auto;
+      min-height:100svh;
+      justify-content:flex-start;
+    }
     .nav-links{ display:none; }
+    .nav-phone{ display:none; }
+    .nav-burger{ display:flex; }
     nav{ padding:20px 5vw; }
     .frame{ aspect-ratio:9/13; max-width:400px; }
-    .hero-copy{ top:90px; left:5vw; max-width:80%; }
+
+    .hero-copy{
+      position:relative;
+      top:auto; left:auto;
+      max-width:100%;
+      order:1;
+      align-self:flex-start;
+    }
     .hero-tagline{ display:none; }
+
     .stats{
       position:relative;
       bottom:auto; right:auto;
-      margin-top:24px;
+      align-self:stretch;
+      margin-top:28px;
       flex-direction:column;
       align-items:stretch;
       z-index:4;
+      order:2;
     }
-    .stage{ flex-direction:column; padding-top:120px; padding-bottom:40px; height:auto; min-height:100svh; justify-content:flex-start; }
-    .stage-cta{ position:relative; bottom:auto; left:auto; margin-top:20px; }
+
+    .stage-cta{
+      position:relative;
+      bottom:auto; left:auto;
+      align-self:center;
+      margin-top:28px;
+      order:3;
+    }
+
     .intro{ grid-template-columns:1fr; padding:80px 6vw; gap:24px; }
   }
-  /* ============ INTRO COVER (stage 1) ============ */
-  .cover-caption{
-    position:absolute;
-    z-index:6;
-    font-size:11px;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:rgba(244,242,236,0.55);
-    line-height:1.4;
-    opacity:1;
-    transition:opacity 1s ease;
-  }
-  .cover-caption.tl{ top:26px; left:4vw; }
-  .cover-caption.tc{ top:26px; left:50%; transform:translateX(-50%); text-align:center; }
-  .cover-caption.tr{ top:26px; right:4vw; }
-  .cover-caption.bl{
-    top:auto; bottom:auto;
-    left:4vw;
-    max-width:340px;
-    font-size:16px;
-    text-transform:none;
-    letter-spacing:0;
-    color:rgba(244,242,236,0.8);
-  }
-
-  .stage.revealed .cover-caption{ opacity:0; pointer-events:none; }
-
-  /* dim overlay that darkens the giant text + frame during transition */
-  .dim-overlay{
-    position:absolute;
-    inset:0;
-    z-index:3;
-    background:#0d1013;
-    opacity:0;
-    transition:opacity 1.1s ease;
-    pointer-events:none;
-  }
-  .stage.transitioning .dim-overlay{ opacity:0.35; }
-
   /* giant text dims from bold white to faint grey on reveal */
   .giant span{ transition:color 1.2s ease, opacity 1.2s ease; }
   .stage.revealed .giant span{ color:rgba(244,242,236,0.5); }
 
-  /* hero UI (nav, copy, stats, cta) hidden until revealed */
-  nav, .hero-copy, .hero-tagline, .stats, .stage-cta{
+  /* subtle settle-zoom on the background as the hero opens */
+  .frame{ transform:scale(1.07); transition:transform 1.8s cubic-bezier(.16,1,.3,1); }
+  .stage.revealed .frame{ transform:scale(1); }
+  .cutout{ transform:scale(1.07); transition:transform 1.8s cubic-bezier(.16,1,.3,1); }
+  .stage.revealed .cutout{ transform:scale(1); }
+
+  /* hero UI (nav, copy, stats, cta) hidden until revealed.
+     .stats itself is NOT animated — only its children (.stat-card) are,
+     so cards don't get a double/nested fade that makes them feel delayed. */
+  nav, .hero-copy, .hero-tagline, .stage-cta{
     opacity:0;
-    transform:translateY(14px);
-    transition:opacity 0.9s ease, transform 0.9s ease;
+    transform:translateY(18px) scale(0.98);
+    transition:opacity 0.9s cubic-bezier(.16,1,.3,1), transform 0.9s cubic-bezier(.16,1,.3,1);
     transition-delay:0.15s;
   }
-  .stage.revealed nav{ opacity:1; transform:none; transition-delay:0.25s; }
-  .stage.revealed .hero-copy{ opacity:1; transform:none; transition-delay:0.4s; }
-  .stage.revealed .hero-tagline{ opacity:1; transform:none; transition-delay:0.45s; }
-  .stage.revealed .stats > *{ transition-delay:0.55s; }
-  .stage.revealed .stats{ opacity:1; transform:none; }
-  .stage.revealed .stage-cta{ opacity:1; transform:none; transition-delay:0.6s; }
+  .stat-card{
+    opacity:0;
+    transform:translateY(14px) scale(0.97);
+    transition:opacity 0.7s cubic-bezier(.16,1,.3,1), transform 0.7s cubic-bezier(.16,1,.3,1);
+  }
+  .stage.revealed nav{ opacity:1; transform:none; transition-delay:0.2s; }
+  .stage.revealed .hero-copy{ opacity:1; transform:none; transition-delay:0.32s; }
+  .stage.revealed .hero-tagline{ opacity:1; transform:none; transition-delay:0.4s; }
+  .stage.revealed .stat-card{ opacity:1; transform:none; }
+  .stage.revealed .stat-card:nth-child(1){ transition-delay:0.46s; }
+  .stage.revealed .stat-card:nth-child(2){ transition-delay:0.56s; }
+  .stage.revealed .stage-cta{ opacity:1; transform:none; transition-delay:0.5s; }
+  /* ============ LOADING SCREEN ============ */
+  .loader{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    pointer-events:none;
+  }
+  .loader-panel{
+    position:absolute;
+    top:0;
+    width:50%;
+    height:100%;
+    background:#f4f2ec;
+    pointer-events:auto;
+    transition:transform 1.1s cubic-bezier(.76,0,.24,1);
+  }
+  .loader-panel.left{ left:0; }
+  .loader-panel.right{ right:0; }
+  .loader.done .loader-panel.left{ transform:translateX(-100%); }
+  .loader.done .loader-panel.right{ transform:translateX(100%); }
+
+  .loader-bar-wrap{
+    position:absolute;
+    inset:0;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:opacity .35s ease;
+  }
+  .loader.done .loader-bar-wrap{ opacity:0; }
+
+  .loader-bar{
+    width:180px;
+    height:1.5px;
+    background:rgba(13,16,19,0.12);
+    position:relative;
+    overflow:hidden;
+  }
+  .loader-fill{
+    position:absolute;
+    left:0; top:0;
+    height:100%;
+    width:0%;
+    background:#0d1013;
+    transition:width 1.4s cubic-bezier(.4,0,.2,1);
+  }
 </style>
 </head>
 <body>
 
-<section class="stage" id="stage">
-  <div class="cover-caption tl">Designed by<br>Esteban A</div>
-  <div class="cover-caption tc">UI/UX & Web<br>Landing Page</div>
-  <div class="cover-caption tr">2026</div>
+<div class="loader" id="loader">
+  <div class="loader-panel left"></div>
+  <div class="loader-panel right"></div>
+  <div class="loader-bar-wrap">
+    <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
+  </div>
+</div>
 
-  <div class="dim-overlay"></div>
+<section class="stage" id="stage">
 
   <div class="giant">
     <span class="line1">Arlo</span>
@@ -470,6 +538,9 @@
       <a href="#">Contact</a>
     </div>
     <div class="nav-phone">+1 (555) 010-2030</div>
+    <button class="nav-burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <div class="hero-copy">
@@ -518,8 +589,22 @@
 
 <script>
   const stage = document.getElementById('stage');
-  setTimeout(() => stage.classList.add('transitioning'), 1600);
-  setTimeout(() => stage.classList.add('revealed'), 2000);
+  const loader = document.getElementById('loader');
+  const loaderFill = document.getElementById('loaderFill');
+
+  // start the bar filling almost immediately
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => { loaderFill.style.width = '100%'; });
+  });
+
+  // once the bar finishes, open the two panels like doors and reveal the hero
+  setTimeout(() => {
+    loader.classList.add('done');
+    stage.classList.add('revealed');
+  }, 1500);
+
+  // fully remove the loader from the flow once the panels are off-screen
+  setTimeout(() => { loader.style.display = 'none'; }, 2700);
 </script>
 </body>
 </html>
