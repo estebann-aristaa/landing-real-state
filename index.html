@@ -8,13 +8,15 @@
   @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Expanded:wght@700;800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
 
   :root{
-    --bg: #0d1013;
+    --bg: #090c0f;
+    --card-bg: #101418;
     --ink: #f4f2ec;
     --dim: rgba(244,242,236,0.65);
     --dim2: rgba(244,242,236,0.4);
-    --glass: rgba(244,242,236,0.06);
-    --glass-border: rgba(244,242,236,0.22);
-    --glass-highlight: rgba(255,255,255,0.6);
+    --line: rgba(244,242,236,0.08);
+    --glass: rgba(13, 17, 21, 0.65);
+    --glass-border: rgba(244,242,236,0.16);
+    --accent: #3b82f6;
   }
 
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -24,85 +26,6 @@
     color:var(--ink);
     font-family:'Inter',sans-serif;
     overflow-x:hidden;
-    position:relative;
-  }
-
-  /* ============ CINEMATIC BACKGROUND SYSTEM ============ */
-  .cinematic-bg{
-    position:fixed;
-    inset:0;
-    z-index:-1;
-    pointer-events:none;
-    overflow:hidden;
-    background: radial-gradient(circle at 50% 0%, #151c23 0%, #0d1013 80%);
-  }
-
-  .bg-grid{
-    position:absolute;
-    inset:0;
-    background-size: 80px 80px;
-    background-image: 
-      linear-gradient(to right, rgba(244, 242, 236, 0.025) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(244, 242, 236, 0.025) 1px, transparent 1px);
-    mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%);
-    -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 20%, transparent 80%);
-  }
-
-  .aurora-orb{
-    position:absolute;
-    border-radius:50%;
-    filter: blur(140px);
-    opacity:0.45;
-    mix-blend-mode: screen;
-    pointer-events:none;
-    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .aurora-1{
-    top:10%;
-    left:15%;
-    width:600px;
-    height:600px;
-    background: radial-gradient(circle, rgba(76, 107, 122, 0.75) 0%, rgba(30, 45, 55, 0) 70%);
-    animation: driftOrb1 18s ease-in-out infinite alternate;
-  }
-  .aurora-2{
-    bottom:5%;
-    right:10%;
-    width:650px;
-    height:650px;
-    background: radial-gradient(circle, rgba(212, 143, 56, 0.25) 0%, rgba(30, 20, 10, 0) 70%);
-    animation: driftOrb2 22s ease-in-out infinite alternate;
-  }
-
-  .cursor-spotlight{
-    position:absolute;
-    top:0; left:0;
-    width:450px; height:450px;
-    border-radius:50%;
-    background: radial-gradient(circle, rgba(244, 242, 236, 0.05) 0%, transparent 70%);
-    transform: translate(-50%, -50%);
-    pointer-events:none;
-    filter: blur(50px);
-  }
-
-  .film-grain{
-    position:fixed;
-    inset:0;
-    z-index:9998;
-    pointer-events:none;
-    opacity:0.035;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  }
-
-  @keyframes driftOrb1{
-    0%{ transform: translate(0, 0) scale(1); }
-    50%{ transform: translate(60px, 80px) scale(1.1); }
-    100%{ transform: translate(-40px, 120px) scale(0.95); }
-  }
-  @keyframes driftOrb2{
-    0%{ transform: translate(0, 0) scale(1); }
-    50%{ transform: translate(-80px, -60px) scale(1.15); }
-    100%{ transform: translate(50px, -100px) scale(0.9); }
   }
 
   /* ============ HERO STAGE ============ */
@@ -218,7 +141,7 @@
     align-items:center;
     justify-content:space-between;
     padding:26px 4vw;
-    background:linear-gradient(180deg, rgba(13,16,19,0.6) 0%, rgba(13,16,19,0) 100%);
+    background:linear-gradient(180deg, rgba(9,12,15,0.7) 0%, rgba(9,12,15,0) 100%);
   }
   .logo{
     font-family:'Archivo',sans-serif;
@@ -240,17 +163,7 @@
     box-shadow:
       inset 0 1.5px 0 rgba(255,255,255,0.65),
       inset 0 -1px 0 rgba(255,255,255,0.06),
-      inset 0 0 20px rgba(255,255,255,0.04),
       0 10px 34px rgba(0,0,0,0.3);
-    overflow:hidden;
-  }
-  .nav-links::before{
-    content:'';
-    position:absolute;
-    inset:0;
-    z-index:0;
-    background:linear-gradient(120deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0) 35%);
-    pointer-events:none;
   }
   .nav-links a{
     position:relative;
@@ -266,7 +179,6 @@
   .nav-links a.active{
     background:rgba(244,242,236,0.92);
     color:#0d1013;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,0.8);
   }
   .nav-links a:hover:not(.active){ color:var(--ink); }
   .nav-phone{
@@ -299,38 +211,29 @@
 
   .mobile-menu{
     position:fixed;
-    top:78px;
-    right:4vw;
-    left:4vw;
+    top:78px; right:4vw; left:4vw;
     z-index:55;
     display:none;
     flex-direction:column;
     gap:2px;
-    background:rgba(244,242,236,0.05);
-    border:1px solid rgba(244,242,236,0.22);
-    backdrop-filter:blur(50px) saturate(280%) brightness(1.12);
-    -webkit-backdrop-filter:blur(50px) saturate(280%) brightness(1.12);
+    background:rgba(16,20,24,0.9);
+    border:1px solid rgba(244,242,236,0.2);
+    backdrop-filter:blur(40px);
+    -webkit-backdrop-filter:blur(40px);
     border-radius:22px;
     padding:8px;
-    box-shadow:
-      inset 0 1.5px 0 rgba(255,255,255,0.65),
-      inset 0 -1px 0 rgba(255,255,255,0.06),
-      inset 0 0 20px rgba(255,255,255,0.04),
-      0 20px 40px rgba(0,0,0,0.4);
     opacity:0;
     transform:translateY(-10px);
     pointer-events:none;
     transition:opacity 0.3s ease, transform 0.3s ease;
   }
   .mobile-menu a{
-    position:relative;
     color:var(--dim);
     text-decoration:none;
     font-size:15px;
     font-weight:500;
     padding:14px 18px;
     border-radius:16px;
-    transition:background 0.2s ease, color 0.2s ease;
   }
   .mobile-menu a.active{
     background:rgba(244,242,236,0.92);
@@ -348,8 +251,7 @@
   /* HERO COPY */
   .hero-copy{
     position:absolute;
-    top:110px;
-    left:4vw;
+    top:110px; left:4vw;
     z-index:4;
     max-width:360px;
   }
@@ -377,8 +279,7 @@
 
   .hero-tagline{
     position:absolute;
-    top:185px;
-    right:4vw;
+    top:185px; right:4vw;
     z-index:4;
     text-align:right;
     font-size:13px;
@@ -390,8 +291,7 @@
   /* STAT CARDS */
   .stats{
     position:absolute;
-    bottom:60px;
-    right:4vw;
+    bottom:60px; right:4vw;
     z-index:4;
     display:flex;
     flex-direction:column;
@@ -410,21 +310,7 @@
     box-shadow:
       inset 0 1.5px 0 rgba(255,255,255,0.65),
       inset 0 -1px 0 rgba(255,255,255,0.06),
-      inset 0 0 20px rgba(255,255,255,0.04),
       0 10px 34px rgba(0,0,0,0.3);
-    overflow:hidden;
-  }
-  .stat-card::before{
-    content:'';
-    position:absolute;
-    inset:0;
-    z-index:0;
-    background:linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 45%);
-    pointer-events:none;
-  }
-  .stat-card .num, .stat-card .label{
-    position:relative;
-    z-index:1;
   }
   .stat-card .num{
     font-family:'Archivo',sans-serif;
@@ -438,11 +324,9 @@
     line-height:1.4;
   }
 
-  /* CTA pill */
   .stage-cta{
     position:absolute;
-    bottom:60px;
-    left:4vw;
+    bottom:60px; left:4vw;
     z-index:4;
   }
   .btn-pill{
@@ -459,14 +343,11 @@
     border-radius:100px;
     text-decoration:none;
     box-shadow:0 14px 34px rgba(0,0,0,0.35);
-    transition:transform 0.35s cubic-bezier(.16,1,.3,1), box-shadow 0.35s ease;
+    transition:transform 0.35s cubic-bezier(.16,1,.3,1);
   }
-  .btn-pill:hover{
-    transform:translateY(-2px);
-    box-shadow:0 18px 40px rgba(0,0,0,0.4);
-  }
+  .btn-pill:hover{ transform:translateY(-2px); }
   .btn-pill .arrow{
-    width:38px;height:38px;
+    width:38px; height:38px;
     background:#0d1013;
     color:var(--ink);
     border-radius:50%;
@@ -474,97 +355,99 @@
     align-items:center;
     justify-content:center;
     font-size:15px;
-    flex-shrink:0;
-    transition:transform 0.35s cubic-bezier(.16,1,.3,1);
-  }
-  .btn-pill:hover .arrow{
-    transform:rotate(45deg);
   }
 
   /* ========================================================
-     SECTION 02: DUAL FRAME RESIDENCES SHOWCASE (WITH CENTERED TITLE)
+     SECTION 02: LUXURY REAL ESTATE SHOWCASE (EDITORIAL CAROUSEL)
      ======================================================== */
-  .showcase-section{
-    padding:130px 4vw 150px;
-    max-width:1200px;
+  .collection-section{
+    padding:120px 4vw 140px;
+    max-width:1400px;
     margin:0 auto;
-    position:relative;
-    z-index:2;
+    background:var(--bg);
   }
 
-  /* Giant Centered Header */
-  .showcase-centered-header{
-    text-align:center;
-    max-width:880px;
-    margin:0 auto 36px;
+  /* Header with Left Accent Line and Right Controls */
+  .collection-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-bottom:46px;
+    gap:40px;
   }
-  .showcase-eyebrow{
-    display:inline-flex;
+  .collection-header-left{
+    display:flex;
+    gap:24px;
+    max-width:760px;
+  }
+  .accent-line-wrap{
+    display:flex;
+    flex-direction:column;
     align-items:center;
-    gap:10px;
+    padding-top:4px;
+  }
+  .accent-vertical-line{
+    width:2px;
+    height:100%;
+    min-height:70px;
+    background:linear-gradient(180deg, #3b82f6 0%, rgba(59,130,246,0.1) 100%);
+    border-radius:2px;
+    position:relative;
+  }
+  .accent-vertical-line::after{
+    content:'';
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform:translate(-50%, 50%);
+    width:6px; height:6px;
+    border-radius:50%;
+    background:#60a5fa;
+    box-shadow:0 0 10px #60a5fa;
+  }
+
+  .header-content .tag-label{
     font-family:'Space Mono', monospace;
     font-size:11px;
     letter-spacing:0.18em;
     text-transform:uppercase;
-    color:var(--dim2);
-    margin-bottom:16px;
-    background:rgba(244,242,236,0.04);
-    border:1px solid rgba(244,242,236,0.14);
-    padding:6px 16px;
-    border-radius:100px;
+    color:#60a5fa;
+    margin-bottom:10px;
+    display:block;
   }
-  .showcase-eyebrow .pulse-dot{
-    width:6px; height:6px;
-    background:#4cd964;
-    border-radius:50%;
-    box-shadow:0 0 10px #4cd964;
-  }
-  .showcase-title{
+  .header-content h2{
     font-family:'Archivo Expanded', sans-serif;
     font-weight:800;
-    font-size:clamp(30px, 4.8vw, 62px);
+    font-size:clamp(28px, 3.8vw, 48px);
     text-transform:uppercase;
-    line-height:0.95;
-    letter-spacing:-0.02em;
+    line-height:1.05;
+    letter-spacing:-0.015em;
     color:var(--ink);
+    margin-bottom:14px;
   }
-  .showcase-title .stroke-text{
-    display:block;
-    color:transparent;
-    -webkit-text-stroke: 1.2px rgba(244,242,236,0.45);
+  .header-content p{
+    font-size:14px;
+    color:var(--dim);
+    line-height:1.6;
+    max-width:520px;
   }
 
-  /* Control bar */
-  .showcase-controls-bar{
+  /* Header Right Controls */
+  .collection-header-right{
     display:flex;
-    justify-content:flex-end;
-    align-items:center;
-    gap:14px;
-    margin-bottom:20px;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:18px;
   }
-  .showcase-progress{
-    width:80px;
-    height:2px;
-    background:rgba(244,242,236,0.15);
-    border-radius:2px;
-    overflow:hidden;
-    position:relative;
+  .carousel-arrows{
+    display:flex;
+    gap:12px;
   }
-  .showcase-progress-bar{
-    position:absolute;
-    top:0;left:0;
-    height:100%;
-    width:0%;
-    background:var(--ink);
-  }
-  .showcase-nav-btn{
-    width:38px;
-    height:38px;
+  .carousel-btn{
+    width:46px; height:46px;
     border-radius:50%;
-    background:rgba(244,242,236,0.05);
-    border:1px solid rgba(244,242,236,0.22);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
+    background:rgba(244,242,236,0.04);
+    border:1px solid rgba(244,242,236,0.15);
     color:var(--ink);
     display:flex;
     align-items:center;
@@ -572,186 +455,296 @@
     cursor:pointer;
     transition:all 0.25s ease;
   }
-  .showcase-nav-btn:hover{
+  .carousel-btn:hover{
     background:var(--ink);
-    color:var(--bg);
-    transform:scale(1.05);
+    color:#090c0f;
+    border-color:var(--ink);
+    transform:scale(1.04);
   }
 
-  /* Dual Card Grid - Compact and Controlled */
-  .dual-stage{
-    display:grid;
-    grid-template-columns: 1.75fr 1fr;
-    gap:20px;
-    transition:all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Progress Segments Indicator */
+  .carousel-indicator-wrap{
+    display:flex;
+    align-items:center;
+    gap:14px;
   }
-  .dual-stage.reverse{
-    grid-template-columns: 1fr 1.75fr;
+  .progress-segments{
+    display:flex;
+    gap:6px;
   }
-
-  /* Each House Frame Card */
-  .house-box{
+  .segment{
+    width:36px;
+    height:2.5px;
+    background:rgba(244,242,236,0.15);
+    border-radius:2px;
     position:relative;
-    height:460px;
-    border-radius:22px;
     overflow:hidden;
-    border:1px solid var(--glass-border);
-    background:#12161a;
+  }
+  .segment.active{
+    background:#3b82f6;
+    box-shadow:0 0 8px rgba(59,130,246,0.6);
+  }
+  .segment-counter{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    color:var(--dim2);
+    letter-spacing:0.05em;
+  }
+  .segment-counter b{
+    color:var(--ink);
+  }
+
+  /* ============ CARDS GRID ============ */
+  .collection-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+    margin-bottom:40px;
+  }
+
+  .estate-card{
+    position:relative;
+    border-radius:24px;
+    overflow:hidden;
+    background:var(--card-bg);
+    border:1px solid var(--line);
+    height:560px;
     display:flex;
     flex-direction:column;
     justify-content:flex-end;
-    padding:24px;
-    cursor:pointer;
-    transition:border-color 0.4s ease, box-shadow 0.4s ease;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,0.3), 0 20px 45px rgba(0,0,0,0.45);
+    box-shadow:0 24px 60px rgba(0,0,0,0.5);
+    transition:transform 0.4s ease, border-color 0.4s ease;
+  }
+  .estate-card:hover{
+    border-color:rgba(244,242,236,0.25);
   }
 
-  .house-media{
+  /* Visual Media (Video / Fallback Image) */
+  .estate-media{
     position:absolute;
     inset:0;
     z-index:0;
-    overflow:hidden;
   }
-  .house-media img, .house-media video{
+  .estate-media img, .estate-media video{
     width:100%;
     height:100%;
     object-fit:cover;
     display:block;
-    transition:transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+    transition:transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .house-media .media-mobile{ display:none; }
-  .house-media .media-desktop{ display:block; }
-
-  .house-box.inactive .house-media img,
-  .house-box.inactive .house-media video{
-    filter:brightness(0.55) grayscale(20%);
-    transform:scale(1.03);
-  }
-  .house-box.active .house-media img,
-  .house-box.active .house-media video{
-    filter:brightness(0.92);
-    transform:scale(1);
+  .estate-media .media-mobile{ display:none; }
+  .estate-media .media-desktop{ display:block; }
+  .estate-card:hover .estate-media img,
+  .estate-card:hover .estate-media video{
+    transform:scale(1.035);
   }
 
-  .house-box::before{
+  /* Top Badges */
+  .card-top-bar{
+    position:absolute;
+    top:20px; left:20px; right:20px;
+    z-index:2;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .badge-cluster{
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .num-tag{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    font-weight:700;
+    background:rgba(9, 12, 15, 0.7);
+    border:1px solid rgba(244,242,236,0.2);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    padding:6px 12px;
+    border-radius:100px;
+    color:var(--ink);
+  }
+  .featured-tag{
+    font-family:'Inter', sans-serif;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    background:rgba(59, 130, 246, 0.2);
+    border:1px solid rgba(96, 165, 250, 0.5);
+    color:#93c5fd;
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    padding:6px 14px;
+    border-radius:100px;
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+  }
+  .fav-btn{
+    width:38px; height:38px;
+    border-radius:50%;
+    background:rgba(9, 12, 15, 0.7);
+    border:1px solid rgba(244,242,236,0.2);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    color:var(--ink);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:background 0.2s ease, transform 0.2s ease;
+  }
+  .fav-btn:hover{
+    background:rgba(244,242,236,0.9);
+    color:#090c0f;
+    transform:scale(1.08);
+  }
+
+  /* ============ LIQUID GLASS CARD FOOTER ============ */
+  .estate-glass-footer{
+    position:relative;
+    z-index:2;
+    margin:14px;
+    background:rgba(9, 12, 15, 0.78);
+    border:1px solid rgba(244,242,236,0.18);
+    backdrop-filter:blur(40px) saturate(220%);
+    -webkit-backdrop-filter:blur(40px) saturate(220%);
+    border-radius:18px;
+    padding:22px 24px;
+    box-shadow:
+      inset 0 1.5px 0 rgba(255,255,255,0.45),
+      0 10px 30px rgba(0,0,0,0.5);
+  }
+
+  .estate-glass-footer::before{
     content:'';
     position:absolute;
     inset:0;
-    z-index:1;
-    background:linear-gradient(180deg, rgba(13,16,19,0.08) 0%, rgba(13,16,19,0.38) 40%, rgba(13,16,19,0.92) 100%);
+    border-radius:18px;
+    background:linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 40%);
     pointer-events:none;
   }
 
-  .house-badge{
-    position:absolute;
-    top:18px;
-    left:18px;
-    z-index:2;
-    background:rgba(13,16,19,0.65);
-    border:1px solid rgba(244,242,236,0.2);
-    backdrop-filter:blur(24px);
-    -webkit-backdrop-filter:blur(24px);
-    color:var(--ink);
-    font-size:10px;
-    font-weight:600;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    padding:6px 14px;
-    border-radius:100px;
-  }
-
-  .house-status-pill{
-    position:absolute;
-    top:18px;
-    right:18px;
-    z-index:2;
-    font-size:10px;
-    font-weight:600;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--dim2);
-    opacity:0;
-    transition:opacity 0.3s ease;
-  }
-  .house-box.inactive .house-status-pill{
-    opacity:1;
-  }
-
-  .house-info{
-    position:relative;
-    z-index:2;
+  .estate-title-row{
     display:flex;
-    flex-direction:column;
-    gap:10px;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:6px;
+    gap:16px;
   }
-
-  .house-name{
-    font-family:'Archivo',sans-serif;
+  .estate-title-row h3{
+    font-family:'Archivo', sans-serif;
     font-weight:700;
-    font-size:20px;
+    font-size:18px;
     text-transform:uppercase;
     letter-spacing:0.02em;
     color:var(--ink);
   }
-  .house-loc{
+  .estate-price{
+    font-family:'Archivo', sans-serif;
+    font-weight:700;
+    font-size:18px;
+    color:#ffffff;
+    letter-spacing:0.01em;
+    white-space:nowrap;
+  }
+
+  .estate-location{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:13px;
+    color:var(--dim2);
+    margin-bottom:16px;
+  }
+  .estate-location svg{
+    color:#60a5fa;
+  }
+
+  .estate-specs-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:14px;
+    border-top:1px solid rgba(244,242,236,0.1);
+  }
+  .estate-features{
+    display:flex;
+    gap:18px;
+  }
+  .spec-item{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:12px;
+    color:var(--dim);
+    font-weight:500;
+  }
+  .spec-item svg{
+    color:var(--dim2);
+  }
+
+  .view-details-link{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    color:#93c5fd;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    transition:gap 0.25s ease, color 0.25s ease;
+  }
+  .view-details-link:hover{
+    color:#ffffff;
+    gap:10px;
+  }
+
+  /* ============ BOTTOM 4-COLUMN VALUE STRIP ============ */
+  .trust-strip{
+    background:rgba(16, 20, 24, 0.6);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:28px 36px;
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:30px;
+  }
+  .trust-item{
+    display:flex;
+    gap:16px;
+    align-items:flex-start;
+  }
+  .trust-icon{
+    width:42px; height:42px;
+    border-radius:12px;
+    background:rgba(59, 130, 246, 0.1);
+    border:1px solid rgba(96, 165, 250, 0.2);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#60a5fa;
+    flex-shrink:0;
+  }
+  .trust-text h4{
+    font-family:'Archivo', sans-serif;
+    font-size:13px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--ink);
+    margin-bottom:4px;
+  }
+  .trust-text p{
     font-size:12px;
     color:var(--dim2);
-    margin-top:-6px;
-  }
-
-  .house-desc{
-    font-size:13px;
-    color:var(--dim);
-    line-height:1.55;
-    max-width:92%;
-    opacity:1;
-    max-height:80px;
-    transition:all 0.5s ease;
-    overflow:hidden;
-  }
-
-  .house-specs{
-    display:flex;
-    gap:20px;
-    padding-top:10px;
-    border-top:1px solid rgba(244,242,236,0.12);
-    margin-top:4px;
-    transition:all 0.4s ease;
-  }
-  .spec-unit{
-    display:flex;
-    flex-direction:column;
-    gap:2px;
-  }
-  .spec-u-label{
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:0.08em;
-    color:var(--dim2);
-  }
-  .spec-u-val{
-    font-family:'Archivo',sans-serif;
-    font-size:13px;
-    font-weight:600;
-    color:var(--ink);
-  }
-
-  .house-box.inactive .house-desc{
-    opacity:0;
-    max-height:0;
-    margin:0;
-  }
-  .house-box.inactive .house-specs{
-    opacity:0;
-    max-height:0;
-    padding:0;
-    margin:0;
-    border-top:none;
+    line-height:1.5;
   }
 
   footer{
-    position:relative;
-    z-index:2;
     border-top:1px solid rgba(244,242,236,0.1);
     padding:28px 4vw;
     display:flex;
@@ -761,65 +754,22 @@
   }
 
   /* ============ RESPONSIVE ============ */
-  @media (max-width: 860px){
-    .stage{
-      flex-direction:column;
-      align-items:stretch;
-      padding:0 5vw;
-      padding-top:110px;
-      padding-bottom:40px;
-      height:auto;
-      min-height:100svh;
-      justify-content:flex-start;
-    }
-    .nav-links{ display:none; }
-    .nav-phone{ display:none; }
-    .nav-burger{ display:flex; }
-    nav{ padding:20px 5vw; }
-    .frame{ inset:0; }
+  @media (max-width: 960px){
+    .collection-header{ flex-direction:column; align-items:flex-start; gap:24px; }
+    .collection-header-right{ align-self:stretch; flex-direction:row; justify-content:space-between; align-items:center; }
+    .collection-grid{ grid-template-columns:1fr; }
+    .estate-card{ height:500px; }
+    .trust-strip{ grid-template-columns:1fr 1fr; gap:24px; padding:24px; }
+    .estate-media .media-desktop{ display:none; }
+    .estate-media .media-mobile{ display:block; }
+  }
 
-    .hero-copy{
-      position:relative;
-      top:auto; left:auto;
-      max-width:100%;
-      order:1;
-      align-self:flex-start;
-    }
-    .hero-tagline{ display:none; }
-    .giant{ display:none; }
-
-    .stats{
-      position:relative;
-      bottom:auto; right:auto;
-      align-self:stretch;
-      margin-top:28px;
-      flex-direction:column;
-      align-items:stretch;
-      z-index:4;
-      order:2;
-    }
-
-    .stage-cta{
-      position:relative;
-      bottom:auto; left:auto;
-      align-self:center;
-      margin-top:28px;
-      order:3;
-    }
-
-    /* Showcase Mobile */
-    .showcase-section{ padding:60px 5vw 80px; }
-    
-    .dual-stage, .dual-stage.reverse{
-      grid-template-columns: 1fr;
-      gap:16px;
-    }
-    .house-box{ height:380px; }
-    .house-media .media-desktop{ display:none; }
-    .house-media .media-mobile{ display:block; }
-    
-    .house-box.inactive .house-desc{ opacity:1; max-height:80px; margin:4px 0 0; }
-    .house-box.inactive .house-specs{ opacity:1; max-height:100px; padding-top:10px; border-top:1px solid rgba(244,242,236,0.12); }
+  @media (max-width: 600px){
+    .trust-strip{ grid-template-columns:1fr; }
+    .estate-card{ height:440px; }
+    .estate-glass-footer{ padding:16px; margin:10px; }
+    .estate-title-row{ flex-direction:column; gap:4px; }
+    .estate-specs-row{ flex-direction:column; align-items:flex-start; gap:12px; }
   }
 
   /* Reveal animations */
@@ -900,17 +850,6 @@
 </head>
 <body>
 
-<!-- 35MM FILM GRAIN OVERLAY -->
-<div class="film-grain"></div>
-
-<!-- CINEMATIC BACKGROUND SYSTEM -->
-<div class="cinematic-bg">
-  <div class="bg-grid"></div>
-  <div class="aurora-orb aurora-1" id="aurora1"></div>
-  <div class="aurora-orb aurora-2" id="aurora2"></div>
-  <div class="cursor-spotlight" id="cursorSpotlight"></div>
-</div>
-
 <!-- LOADING SCREEN -->
 <div class="loader" id="loader">
   <div class="loader-panel left"></div>
@@ -935,7 +874,7 @@
     <div class="logo">ARLO ESTATE</div>
     <div class="nav-links">
       <a href="#" class="active">Home</a>
-      <a href="#residences">Residences</a>
+      <a href="#collection">Collection</a>
       <a href="#">Services</a>
       <a href="#">Contact</a>
     </div>
@@ -947,7 +886,7 @@
 
   <div class="mobile-menu" id="mobileMenu">
     <a href="#" class="active">Home</a>
-    <a href="#residences">Residences</a>
+    <a href="#collection">Collection</a>
     <a href="#">Services</a>
     <a href="#">Contact</a>
   </div>
@@ -966,7 +905,7 @@
   </div>
 
   <div class="stage-cta">
-    <a href="#residences" class="btn-pill">Explore Projects <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    <a href="#collection" class="btn-pill">Explore Collection <span class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
   </div>
 
   <div class="stats">
@@ -982,97 +921,184 @@
 </section>
 
 <!-- ========================================================
-     SECTION 02: DUAL FRAME RESIDENCES SHOWCASE
+     SECTION 02: EXCLUSIVE COLLECTION CAROUSEL
      ======================================================== -->
-<section class="showcase-section" id="residences">
+<section class="collection-section" id="collection">
   
-  <!-- Massive Centered Header -->
-  <div class="showcase-centered-header">
-    <div class="showcase-eyebrow">
-      <span class="pulse-dot"></span>
-      01 — SELECTED RESIDENCES
-    </div>
-    <h2 class="showcase-title">
-      Iconic Living
-      <span class="stroke-text">Sanctuaries</span>
-    </h2>
-  </div>
-
-  <!-- Progress Bar & Arrow Controls -->
-  <div class="showcase-controls-bar">
-    <div class="showcase-progress">
-      <div class="showcase-progress-bar" id="carouselProgressBar"></div>
-    </div>
-    <button class="showcase-nav-btn" id="prevBoxBtn" aria-label="Toggle house">←</button>
-    <button class="showcase-nav-btn" id="nextBoxBtn" aria-label="Toggle house">→</button>
-  </div>
-
-  <!-- Dual Stage: 2 Separate Frames -->
-  <div class="dual-stage" id="dualStage">
-    
-    <!-- BOX 1: VILLA NORDIC -->
-    <div class="house-box active" id="box1" onclick="setActiveHouse(0)">
-      <div class="house-media">
-        <img class="media-mobile" src="slide1-cel.jpg" onerror="this.src='https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80'" alt="Villa Nordic">
-        <video class="media-desktop" id="vid1" src="slide1-video.mp4" poster="slide1-pc.jpg" autoplay muted loop playsinline></video>
+  <!-- Header with Accent Line and Carousel Controls -->
+  <div class="collection-header">
+    <div class="collection-header-left">
+      <div class="accent-line-wrap">
+        <div class="accent-vertical-line"></div>
       </div>
-      
-      <div class="house-badge">01 — Project</div>
-      <div class="house-status-pill">Click to expand ↗</div>
+      <div class="header-content">
+        <span class="tag-label">Exclusive Collection</span>
+        <h2>Extraordinary Homes For Extraordinary Lives</h2>
+        <p>Explore our curated collection of architectural masterpieces. Each home is selected for its unique vision and uncompromising quality.</p>
+      </div>
+    </div>
 
-      <div class="house-info">
-        <div class="house-name">Villa Nordic</div>
-        <div class="house-loc">Aspen Mountains, Colorado</div>
-        <p class="house-desc">A low-slung sanctuary carved into alpine rock. Characterized by blackened cedar timber, oversized thermal glass, and sunken fire pits framed by morning mist.</p>
-        <div class="house-specs">
-          <div class="spec-unit">
-            <span class="spec-u-label">Living Area</span>
-            <span class="spec-u-val">520 m²</span>
+    <!-- Right Controls -->
+    <div class="collection-header-right">
+      <div class="carousel-arrows">
+        <button class="carousel-btn" id="prevSlide" aria-label="Previous">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <button class="carousel-btn" id="nextSlide" aria-label="Next">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+      <div class="carousel-indicator-wrap">
+        <div class="progress-segments">
+          <div class="segment active" id="seg0"></div>
+          <div class="segment" id="seg1"></div>
+        </div>
+        <div class="segment-counter"><b id="currIdx">01</b> / 02</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cards Grid (2 Houses Visible) -->
+  <div class="collection-grid" id="estateDeck">
+
+    <!-- CARD 1 -->
+    <div class="estate-card" id="card1">
+      <div class="estate-media">
+        <img class="media-mobile" id="c1-img-mob" src="slide1-cel.jpg" onerror="this.src='https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80'" alt="The Summit Residence">
+        <video class="media-desktop" id="c1-video" src="slide1-video.mp4" poster="slide1-pc.jpg" autoplay muted loop playsinline></video>
+      </div>
+
+      <div class="card-top-bar">
+        <div class="badge-cluster">
+          <span class="num-tag" id="c1-tag">01</span>
+          <span class="featured-tag">★ Featured</span>
+        </div>
+        <button class="fav-btn" aria-label="Save to favorites">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+        </button>
+      </div>
+
+      <!-- Liquid Glass Description Footer -->
+      <div class="estate-glass-footer">
+        <div class="estate-title-row">
+          <h3 id="c1-title">The Summit Residence</h3>
+          <div class="estate-price" id="c1-price">$18,750,000</div>
+        </div>
+        <div class="estate-location">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <span id="c1-loc">Aspen, Colorado</span>
+        </div>
+        <div class="estate-specs-row">
+          <div class="estate-features">
+            <div class="spec-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4v16M2 8h20M2 17h20M22 4v16"/></svg>
+              <span id="c1-beds">5 Beds</span>
+            </div>
+            <div class="spec-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6h6M9 10h6M5 14h14a2 2 0 0 1 2 2v4H3v-4a2 2 0 0 1 2-2z"/></svg>
+              <span id="c1-baths">6 Baths</span>
+            </div>
+            <div class="spec-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              <span id="c1-sqft">7,200 sqft</span>
+            </div>
           </div>
-          <div class="spec-unit">
-            <span class="spec-u-label">Bedrooms</span>
-            <span class="spec-u-val">4 En-Suite</span>
-          </div>
-          <div class="spec-unit">
-            <span class="spec-u-label">Investment</span>
-            <span class="spec-u-val">$2,450,000</span>
-          </div>
+          <a href="#" class="view-details-link">View Details →</a>
         </div>
       </div>
     </div>
 
-    <!-- BOX 2: THE OBSIDIAN PAVILION -->
-    <div class="house-box inactive" id="box2" onclick="setActiveHouse(1)">
-      <div class="house-media">
-        <img class="media-mobile" src="slide2-cel.jpg" onerror="this.src='https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1000&q=80'" alt="Obsidian Pavilion">
-        <video class="media-desktop" id="vid2" src="slide2-video.mp4" poster="slide2-pc.jpg" muted loop playsinline></video>
+    <!-- CARD 2 -->
+    <div class="estate-card" id="card2">
+      <div class="estate-media">
+        <img class="media-mobile" id="c2-img-mob" src="slide2-cel.jpg" onerror="this.src='https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1000&q=80'" alt="Lakeview Pavilion">
+        <video class="media-desktop" id="c2-video" src="slide2-video.mp4" poster="slide2-pc.jpg" autoplay muted loop playsinline></video>
       </div>
 
-      <div class="house-badge">02 — Project</div>
-      <div class="house-status-pill">Click to expand ↗</div>
+      <div class="card-top-bar">
+        <div class="badge-cluster">
+          <span class="num-tag" id="c2-tag">02</span>
+        </div>
+        <button class="fav-btn" aria-label="Save to favorites">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+        </button>
+      </div>
 
-      <div class="house-info">
-        <div class="house-name">Obsidian Pavilion</div>
-        <div class="house-loc">Kyoto Outskirts, Japan</div>
-        <p class="house-desc">Brutalist concrete geometry floating over reflective water gardens. Built with monolithic basalt, acoustic wood slat ceilings, and private interior courtyards.</p>
-        <div class="house-specs">
-          <div class="spec-unit">
-            <span class="spec-u-label">Living Area</span>
-            <span class="spec-u-val">680 m²</span>
+      <!-- Liquid Glass Description Footer -->
+      <div class="estate-glass-footer">
+        <div class="estate-title-row">
+          <h3 id="c2-title">Lakeview Pavilion</h3>
+          <div class="estate-price" id="c2-price">$12,490,000</div>
+        </div>
+        <div class="estate-location">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <span id="c2-loc">Queenstown, New Zealand</span>
+        </div>
+        <div class="estate-specs-row">
+          <div class="estate-features">
+            <div class="spec-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4v16M2 8h20M2 17h20M22 4v16"/></svg>
+              <span id="c2-beds">4 Beds</span>
+            </div>
+            <div class="spec-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6h6M9 10h6M5 14h14a2 2 0 0 1 2 2v4H3v-4a2 2 0 0 1 2-2z"/></svg>
+              <span id="c2-baths">5 Baths</span>
+            </div>
+            <div class="spec-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              <span id="c2-sqft">5,600 sqft</span>
+            </div>
           </div>
-          <div class="spec-unit">
-            <span class="spec-u-label">Bedrooms</span>
-            <span class="spec-u-val">5 En-Suite</span>
-          </div>
-          <div class="spec-unit">
-            <span class="spec-u-label">Investment</span>
-            <span class="spec-u-val">$3,100,000</span>
-          </div>
+          <a href="#" class="view-details-link">View Details →</a>
         </div>
       </div>
     </div>
 
   </div>
+
+  <!-- Bottom 4-Column Pillars Strip -->
+  <div class="trust-strip">
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="trust-text">
+        <h4>Exclusive Listings</h4>
+        <p>Access properties not found anywhere else on the market.</p>
+      </div>
+    </div>
+
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      </div>
+      <div class="trust-text">
+        <h4>Architectural Curation</h4>
+        <p>Handpicked by our studio for vision and timeless engineering.</p>
+      </div>
+    </div>
+
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div class="trust-text">
+        <h4>White Glove Service</h4>
+        <p>Discreet, bespoke client management from start to delivery.</p>
+      </div>
+    </div>
+
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <div class="trust-text">
+        <h4>Global Perspective</h4>
+        <p>Extraordinary sanctuaries across the world's finest locations.</p>
+      </div>
+    </div>
+  </div>
+
 </section>
 
 <!-- FOOTER -->
@@ -1124,91 +1150,104 @@
     }
   });
 
-  // ============ DUAL STAGE INTERACTION SCRIPT ============
-  const dualStage = document.getElementById('dualStage');
-  const box1 = document.getElementById('box1');
-  const box2 = document.getElementById('box2');
-  const vid1 = document.getElementById('vid1');
-  const vid2 = document.getElementById('vid2');
-  const progressBar = document.getElementById('carouselProgressBar');
+  // ============ COLLECTION CAROUSEL DATA & SWITCHER ============
+  const deckPages = [
+    [
+      {
+        tag: "01",
+        title: "The Summit Residence",
+        price: "$18,750,000",
+        loc: "Aspen, Colorado",
+        beds: "5 Beds",
+        baths: "6 Baths",
+        sqft: "7,200 sqft",
+        video: "slide1-video.mp4",
+        poster: "slide1-pc.jpg",
+        mobImg: "slide1-cel.jpg"
+      },
+      {
+        tag: "02",
+        title: "Lakeview Pavilion",
+        price: "$12,490,000",
+        loc: "Queenstown, New Zealand",
+        beds: "4 Beds",
+        baths: "5 Baths",
+        sqft: "5,600 sqft",
+        video: "slide2-video.mp4",
+        poster: "slide2-pc.jpg",
+        mobImg: "slide2-cel.jpg"
+      }
+    ],
+    [
+      {
+        tag: "03",
+        title: "The Obsidian Oasis",
+        price: "$24,100,000",
+        loc: "Kyoto Outskirts, Japan",
+        beds: "6 Beds",
+        baths: "7 Baths",
+        sqft: "8,900 sqft",
+        video: "slide2-video.mp4",
+        poster: "slide2-pc.jpg",
+        mobImg: "slide2-cel.jpg"
+      },
+      {
+        tag: "04",
+        title: "Azure Cliff Villa",
+        price: "$15,800,000",
+        loc: "Amalfi Coast, Italy",
+        beds: "4 Beds",
+        baths: "5 Baths",
+        sqft: "6,100 sqft",
+        video: "slide1-video.mp4",
+        poster: "slide1-pc.jpg",
+        mobImg: "slide1-cel.jpg"
+      }
+    ]
+  ];
 
-  let activeIndex = 0;
-  const switchDuration = 6500;
-  let progressStart = Date.now();
-  let isPaused = false;
+  let currentDeck = 0;
 
-  function setActiveHouse(index) {
-    activeIndex = index;
+  function updateDeck(pageIndex) {
+    currentDeck = pageIndex;
+    const page = deckPages[currentDeck];
 
-    if (activeIndex === 0) {
-      dualStage.classList.remove('reverse');
-      box1.classList.add('active');
-      box1.classList.remove('inactive');
-      box2.classList.add('inactive');
-      box2.classList.remove('active');
+    // Update Segment indicators
+    document.getElementById('seg0').classList.toggle('active', currentDeck === 0);
+    document.getElementById('seg1').classList.toggle('active', currentDeck === 1);
+    document.getElementById('currIdx').innerText = currentDeck === 0 ? "01" : "02";
 
-      if (vid1) vid1.play().catch(() => {});
-      if (vid2) vid2.pause();
-    } else {
-      dualStage.classList.add('reverse');
-      box2.classList.add('active');
-      box2.classList.remove('inactive');
-      box1.classList.add('inactive');
-      box1.classList.remove('active');
+    // Update Card 1
+    const p1 = page[0];
+    document.getElementById('c1-tag').innerText = p1.tag;
+    document.getElementById('c1-title').innerText = p1.title;
+    document.getElementById('c1-price').innerText = p1.price;
+    document.getElementById('c1-loc').innerText = p1.loc;
+    document.getElementById('c1-beds').innerText = p1.beds;
+    document.getElementById('c1-baths').innerText = p1.baths;
+    document.getElementById('c1-sqft').innerText = p1.sqft;
+    const v1 = document.getElementById('c1-video');
+    if (v1 && p1.video) { v1.src = p1.video; v1.poster = p1.poster; v1.play().catch(()=>{}); }
 
-      if (vid2) vid2.play().catch(() => {});
-      if (vid1) vid1.pause();
-    }
-
-    progressStart = Date.now();
+    // Update Card 2
+    const p2 = page[1];
+    document.getElementById('c2-tag').innerText = p2.tag;
+    document.getElementById('c2-title').innerText = p2.title;
+    document.getElementById('c2-price').innerText = p2.price;
+    document.getElementById('c2-loc').innerText = p2.loc;
+    document.getElementById('c2-beds').innerText = p2.beds;
+    document.getElementById('c2-baths').innerText = p2.baths;
+    document.getElementById('c2-sqft').innerText = p2.sqft;
+    const v2 = document.getElementById('c2-video');
+    if (v2 && p2.video) { v2.src = p2.video; v2.poster = p2.poster; v2.play().catch(()=>{}); }
   }
 
-  function toggleHouse() {
-    setActiveHouse(activeIndex === 0 ? 1 : 0);
-  }
-
-  document.getElementById('nextBoxBtn').addEventListener('click', toggleHouse);
-  document.getElementById('prevBoxBtn').addEventListener('click', toggleHouse);
-
-  dualStage.addEventListener('mouseenter', () => { isPaused = true; });
-  dualStage.addEventListener('mouseleave', () => { 
-    isPaused = false; 
-    progressStart = Date.now() - (parseFloat(progressBar.style.width || 0) / 100 * switchDuration);
+  document.getElementById('nextSlide').addEventListener('click', () => {
+    updateDeck((currentDeck + 1) % deckPages.length);
   });
 
-  function timerLoop() {
-    if (!isPaused) {
-      const elapsed = Date.now() - progressStart;
-      const pct = Math.min((elapsed / switchDuration) * 100, 100);
-      progressBar.style.width = pct + '%';
-
-      if (elapsed >= switchDuration) {
-        toggleHouse();
-      }
-    }
-    requestAnimationFrame(timerLoop);
-  }
-  requestAnimationFrame(timerLoop);
-
-  // ============ INTERACTIVE AMBIENT MOUSE SPOTLIGHT ============
-  const spotlight = document.getElementById('cursorSpotlight');
-  const orb1 = document.getElementById('aurora1');
-  const orb2 = document.getElementById('aurora2');
-
-  window.addEventListener('mousemove', (e) => {
-    const { clientX: x, clientY: y } = e;
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
-
-    if (spotlight) {
-      spotlight.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
-    }
-    if (orb1 && orb2) {
-      const moveX = (x - centerX) * 0.025;
-      const moveY = (y - centerY) * 0.025;
-      orb1.style.transform = `translate(${moveX}px, ${moveY}px)`;
-      orb2.style.transform = `translate(${-moveX}px, ${-moveY}px)`;
-    }
+  document.getElementById('prevSlide').addEventListener('click', () => {
+    updateDeck((currentDeck - 1 + deckPages.length) % deckPages.length);
   });
 </script>
 </body>
