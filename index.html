@@ -224,29 +224,32 @@
     z-index:55;
     display:none;
     flex-direction:column;
-    gap:2px;
-    background:rgba(18, 24, 30, 0.88);
+    gap:4px;
+    background:var(--liquid-bg);
     border:var(--liquid-border);
-    backdrop-filter:blur(40px);
-    -webkit-backdrop-filter:blur(40px);
-    border-radius:22px;
-    padding:8px;
+    backdrop-filter:var(--liquid-blur);
+    -webkit-backdrop-filter:var(--liquid-blur);
+    box-shadow:var(--liquid-shadow);
+    border-radius:24px;
+    padding:10px;
     opacity:0;
     transform:translateY(-10px);
     pointer-events:none;
-    transition:opacity 0.3s ease, transform 0.3s ease;
+    transition:opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .mobile-menu a{
-    color:var(--dim);
+    color:var(--ink);
     text-decoration:none;
-    font-size:15px;
+    font-size:14px;
     font-weight:500;
-    padding:14px 18px;
-    border-radius:16px;
+    padding:12px 18px;
+    border-radius:14px;
+    transition:background 0.2s ease, color 0.2s ease;
   }
   .mobile-menu a.active{
     background:rgba(255,255,255,0.92);
     color:#0d1013;
+    font-weight:600;
   }
   .mobile-menu.open{
     opacity:1;
@@ -841,7 +844,7 @@
   }
 
   /* ========================================================
-     SECTION 05: SERVICES (EDITORIAL 3-COLUMN & MOBILE)
+     SECTION 05: SERVICES (EDITORIAL 3-COL & SMOOTH MOBILE ACCORDION)
      ======================================================== */
   .services-section{
     max-width: 1380px;
@@ -910,35 +913,23 @@
 
   .service-row-item{
     display: flex;
-    align-items: center;
-    gap: 22px;
+    flex-direction: column;
+    justify-content: center;
     padding: 28px 0;
     border-top: 1px solid rgba(244, 242, 236, 0.14);
     min-height: 110px;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease;
   }
 
   .service-row-item:last-child{
     border-bottom: 1px solid rgba(244, 242, 236, 0.14);
   }
 
-  .service-row-desc{
+  .service-row-header{
     display: flex;
     align-items: center;
-    padding: 28px 0;
-    border-top: 1px solid rgba(244, 242, 236, 0.14);
-    min-height: 110px;
-  }
-
-  .service-row-desc:last-child{
-    border-bottom: 1px solid rgba(244, 242, 236, 0.14);
-  }
-
-  .service-row-desc p{
-    font-size: 13.5px;
-    color: var(--dim);
-    line-height: 1.6;
-    max-width: 90%;
+    gap: 22px;
+    width: 100%;
   }
 
   .s-num{
@@ -956,6 +947,32 @@
     text-transform: uppercase;
     letter-spacing: 0.02em;
     color: var(--ink);
+    flex: 1;
+  }
+
+  .s-chevron-mobile{
+    display: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--dim2);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+    user-select: none;
+  }
+
+  /* MOBILE COLLAPSIBLE DESCRIPTION */
+  .service-desc-collapse{
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, margin-top 0.35s ease;
+  }
+
+  .service-desc-collapse p{
+    font-size: 13.5px;
+    color: var(--dim);
+    line-height: 1.6;
+    padding-left: 46px;
   }
 
   .services-col-center{
@@ -985,6 +1002,25 @@
 
   .services-center-card:hover img{
     transform: scale(1.05);
+  }
+
+  .service-row-desc{
+    display: flex;
+    align-items: center;
+    padding: 28px 0;
+    border-top: 1px solid rgba(244, 242, 236, 0.14);
+    min-height: 110px;
+  }
+
+  .service-row-desc:last-child{
+    border-bottom: 1px solid rgba(244, 242, 236, 0.14);
+  }
+
+  .service-row-desc p{
+    font-size: 13.5px;
+    color: var(--dim);
+    line-height: 1.6;
+    max-width: 90%;
   }
 
   /* FOOTER */
@@ -1073,7 +1109,7 @@
     .process-card-right{ height: 280px; margin-top: 20px; }
     .process-step-item{ grid-template-columns: 60px 1fr; gap: 16px; padding: 26px 0; }
 
-    /* SERVICES RESPONSIVE (EXACT MOBILE IPHONE LAYOUT) */
+    /* SERVICES MOBILE ACCORDION (EXACT IPHONE VIEWPORT) */
     .services-section{ padding: 50px 5vw 80px; }
     .services-header{
       grid-template-columns: 1fr;
@@ -1110,17 +1146,34 @@
     }
 
     .services-col-descs{
-      display: none; /* Hidden on mobile to match exact minimal list from screenshot */
+      display: none; /* In mobile it opens seamlessly under the item */
     }
 
     .service-row-item{
       min-height: auto;
       padding: 22px 0;
-      gap: 18px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .service-row-header{
+      gap: 16px;
     }
 
     .s-num{ font-size: 20px; }
     .s-title{ font-size: 15px; }
+    .s-chevron-mobile{ display: block; }
+
+    /* OPEN ACCORDION STATE */
+    .service-row-item.open .s-chevron-mobile{
+      transform: rotate(45deg);
+      color: #ffffff;
+    }
+    .service-row-item.open .service-desc-collapse{
+      max-height: 120px;
+      opacity: 1;
+      margin-top: 12px;
+    }
   }
 
   /* Reveal animations */
@@ -1225,10 +1278,8 @@
     <div class="logo">ARLO ESTATE</div>
     <div class="nav-links">
       <a href="#" class="active">Home</a>
-      <a href="#residences">Residences</a>
-      <a href="#manifesto">Manifesto</a>
-      <a href="#explore-360">360° Villa</a>
-      <a href="#process">Process</a>
+      <a href="#residences">Projects</a>
+      <a href="#explore-360">Explore in 360</a>
       <a href="#services">Services</a>
       <a href="#contact">Contact</a>
     </div>
@@ -1240,10 +1291,8 @@
 
   <div class="mobile-menu" id="mobileMenu">
     <a href="#" class="active">Home</a>
-    <a href="#residences">Residences</a>
-    <a href="#manifesto">Manifesto</a>
-    <a href="#explore-360">360° Villa</a>
-    <a href="#process">Process</a>
+    <a href="#residences">Projects</a>
+    <a href="#explore-360">Explore in 360</a>
     <a href="#services">Services</a>
     <a href="#contact">Contact</a>
   </div>
@@ -1509,7 +1558,7 @@
 </section>
 
 <!-- ========================================================
-     SECTION 05: SERVICES
+     SECTION 05: SERVICES (EDITORIAL 3-COL & SMOOTH MOBILE ACCORDION)
      ======================================================== -->
 <section class="services-section" id="services">
   
@@ -1527,24 +1576,53 @@
   <!-- 3-COLUMN BODY -->
   <div class="services-grid-wrap">
     
-    <!-- LEFT: TITLES -->
+    <!-- LEFT: TITLES & ACCORDION (FOR MOBILE & DESKTOP) -->
     <div class="services-col-titles">
-      <div class="service-row-item">
-        <span class="s-num">01</span>
-        <span class="s-title">ARCHITECTURAL PLANNING</span>
+      
+      <div class="service-row-item" onclick="toggleServiceMobile(this)">
+        <div class="service-row-header">
+          <span class="s-num">01</span>
+          <span class="s-title">ARCHITECTURAL PLANNING</span>
+          <span class="s-chevron-mobile">+</span>
+        </div>
+        <div class="service-desc-collapse">
+          <p>Tailor-made concepts that combine functionality, light, and comfort — every project begins with your lifestyle.</p>
+        </div>
       </div>
-      <div class="service-row-item">
-        <span class="s-num">02</span>
-        <span class="s-title">INTERIOR DESIGN</span>
+
+      <div class="service-row-item" onclick="toggleServiceMobile(this)">
+        <div class="service-row-header">
+          <span class="s-num">02</span>
+          <span class="s-title">INTERIOR DESIGN</span>
+          <span class="s-chevron-mobile">+</span>
+        </div>
+        <div class="service-desc-collapse">
+          <p>Natural materials, balanced color palettes, and modern aesthetics that bring warmth and serenity to each space.</p>
+        </div>
       </div>
-      <div class="service-row-item">
-        <span class="s-num">03</span>
-        <span class="s-title">PROJECT VISUALIZATION</span>
+
+      <div class="service-row-item" onclick="toggleServiceMobile(this)">
+        <div class="service-row-header">
+          <span class="s-num">03</span>
+          <span class="s-title">PROJECT VISUALIZATION</span>
+          <span class="s-chevron-mobile">+</span>
+        </div>
+        <div class="service-desc-collapse">
+          <p>Photorealistic 3D renders that allow you to see and feel the project before construction begins.</p>
+        </div>
       </div>
-      <div class="service-row-item">
-        <span class="s-num">04</span>
-        <span class="s-title">SITE DEVELOPMENT</span>
+
+      <div class="service-row-item" onclick="toggleServiceMobile(this)">
+        <div class="service-row-header">
+          <span class="s-num">04</span>
+          <span class="s-title">SITE DEVELOPMENT</span>
+          <span class="s-chevron-mobile">+</span>
+        </div>
+        <div class="service-desc-collapse">
+          <p>From landscape design to lighting we create an environment that complements your home and enhances daily living.</p>
+        </div>
       </div>
+
     </div>
 
     <!-- CENTER: IMAGE CARD -->
@@ -1554,7 +1632,7 @@
       </div>
     </div>
 
-    <!-- RIGHT: DESCRIPTIONS -->
+    <!-- RIGHT: DESCRIPTIONS (DESKTOP) -->
     <div class="services-col-descs">
       <div class="service-row-desc">
         <p>Tailor-made concepts that combine functionality, light, and comfort — every project begins with your lifestyle.</p>
@@ -1700,6 +1778,18 @@
     requestAnimationFrame(timerLoop);
   }
   requestAnimationFrame(timerLoop);
+
+  // SERVICES ACCORDION MOBILE SCRIPT
+  function toggleServiceMobile(el) {
+    if (window.innerWidth > 860) return;
+    const isCurrentlyOpen = el.classList.contains('open');
+    document.querySelectorAll('.service-row-item').forEach(item => {
+      item.classList.remove('open');
+    });
+    if (!isCurrentlyOpen) {
+      el.classList.add('open');
+    }
+  }
 </script>
 </body>
 </html>
