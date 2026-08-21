@@ -367,11 +367,14 @@
      SECTION 02: DUAL FRAME SHOWCASE
      ======================================================== */
   .showcase-section{
-    padding:120px 4vw 40px;
-    max-width:1240px;
+    padding:130px 4vw 70px;
+    max-width:1380px; /* Hacemos la sección más ancha en pantalla */
     margin:0 auto;
     position:relative;
     z-index:2;
+    /* Fondo azul oscuro atmosférico tomado del hero */
+    background: radial-gradient(ellipse at 50% 20%, rgba(43, 58, 69, 0.4) 0%, rgba(14, 21, 27, 0.25) 50%, rgba(9, 12, 15, 0) 80%);
+    border-radius:40px;
   }
 
   /* Header Centrado Arriba de los Videos */
@@ -457,18 +460,18 @@
   /* Each Card Frame */
   .house-box{
     position:relative;
-    height:510px;
-    border-radius:28px;
+    height:640px; /* Más altos y monumentales */
+    border-radius:32px;
     overflow:hidden;
     border:var(--liquid-border);
-    background:#101418;
+    background:#0d141b; /* Azul noche oscuro idéntico al hero */
     display:flex;
     flex-direction:column;
     justify-content:flex-end;
-    padding:20px;
+    padding:24px;
     cursor:pointer;
-    box-shadow:var(--liquid-shadow);
-    transition:border-color 0.4s ease, box-shadow 0.4s ease;
+    box-shadow:0 30px 60px -12px rgba(0, 0, 0, 0.65), var(--liquid-shadow);
+    transition:border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
   }
 
   .house-media{
