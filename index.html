@@ -1299,7 +1299,7 @@
   }
 
   /* ========================================================
-     SECTION 07: CONTACT (EDITORIAL SENTENCE-STYLE FORM)
+     SECTION 07: CONTACT (SENTENCE-STYLE EDITORIAL FORM)
      ======================================================== */
   .contact-section{
     max-width: 1380px;
@@ -1433,16 +1433,108 @@
     margin-top: 14px;
   }
 
-  /* FOOTER */
-  footer{
-    position:relative;
-    z-index:2;
-    border-top:1px solid rgba(244,242,236,0.1);
-    padding:32px 4vw;
-    display:flex;
-    justify-content:space-between;
-    font-size:12px;
-    color:var(--dim2);
+  /* ========================================================
+     MONUMENTAL AWWWARDS FOOTER
+     ======================================================== */
+  .monumental-footer{
+    max-width: 1380px;
+    margin: 0 auto;
+    padding: 90px 4vw 50px;
+    position: relative;
+    z-index: 2;
+    border-top: 1px solid rgba(244, 242, 236, 0.14);
+  }
+
+  .footer-top-brand{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 70px;
+    overflow: hidden;
+  }
+
+  .footer-giant-title{
+    font-family: 'Archivo Expanded', sans-serif;
+    font-weight: 900;
+    font-size: clamp(44px, 11vw, 156px);
+    line-height: 0.88;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .footer-bottom-grid{
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+    border-top: 1px solid rgba(244, 242, 236, 0.14);
+    padding-top: 60px;
+    margin-bottom: 70px;
+  }
+
+  .footer-col-left{
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    align-items: flex-start;
+  }
+
+  .footer-tagline{
+    font-family: 'Archivo', sans-serif;
+    font-weight: 600;
+    font-size: clamp(20px, 2.2vw, 30px);
+    line-height: 1.25;
+    color: var(--ink);
+    max-width: 440px;
+    letter-spacing: -0.01em;
+  }
+
+  .footer-col-title{
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dim2);
+    margin-bottom: 18px;
+    display: block;
+  }
+
+  .footer-col-mid, .footer-col-right{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-col-mid a, .footer-col-right a{
+    color: var(--dim);
+    text-decoration: none;
+    font-size: 14.5px;
+    font-weight: 500;
+    transition: color 0.25s ease, transform 0.25s ease;
+    display: inline-block;
+  }
+
+  .footer-col-mid a:hover, .footer-col-right a:hover{
+    color: #ffffff;
+    transform: translateX(3px);
+  }
+
+  .footer-address{
+    font-size: 14.5px;
+    color: var(--dim);
+    line-height: 1.6;
+    margin-bottom: 4px;
+  }
+
+  .footer-copyright-bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(244, 242, 236, 0.08);
+    padding-top: 28px;
+    font-size: 12px;
+    color: var(--dim2);
   }
 
   /* ============ RESPONSIVE ============ */
@@ -1650,6 +1742,23 @@
     .input-wrap{ min-width: 100%; }
     .c-giant-text{ font-size: clamp(26px, 7.5vw, 38px); }
     .c-input{ padding: 8px 0; }
+
+    /* FOOTER RESPONSIVE */
+    .monumental-footer{ padding: 60px 5vw 40px; }
+    .footer-top-brand{ margin-bottom: 40px; }
+    .footer-giant-title{ font-size: clamp(34px, 12vw, 56px); }
+    .footer-bottom-grid{
+      grid-template-columns: 1fr;
+      gap: 36px;
+      padding-top: 40px;
+      margin-bottom: 40px;
+    }
+    .footer-tagline{ font-size: 20px; max-width: 100%; }
+    .footer-copyright-bar{
+      flex-direction: column;
+      gap: 8px;
+      text-align: center;
+    }
   }
 
   /* Reveal animations */
@@ -2325,10 +2434,54 @@
 
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <span>Arlo Estate © 2026</span>
-  <span>Architecture & Private Estates</span>
+<!-- ========================================================
+     MONUMENTAL AWWWARDS FOOTER
+     ======================================================== -->
+<footer class="monumental-footer">
+  
+  <div class="footer-top-brand">
+    <h2 class="footer-giant-title">ARLO ESTATE</h2>
+  </div>
+
+  <div class="footer-bottom-grid">
+    
+    <!-- LEFT COLUMN: MANIFESTO & CTA -->
+    <div class="footer-col-left">
+      <p class="footer-tagline">Building modern homes that embody precision, comfort, and timeless design.</p>
+      <a href="#contact" class="btn-pill">
+        GET IN TOUCH
+        <span class="arrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 17L17 7M17 7H9M17 7V15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
+    </div>
+
+    <!-- MIDDLE COLUMN: SOCIAL NETWORKS -->
+    <div class="footer-col-mid">
+      <span class="footer-col-title">CONNECT</span>
+      <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#" target="_blank" rel="noopener">Behance</a>
+      <a href="#" target="_blank" rel="noopener">Instagram</a>
+      <a href="#" target="_blank" rel="noopener">YouTube</a>
+    </div>
+
+    <!-- RIGHT COLUMN: LOCATIONS & DIRECT CONTACT -->
+    <div class="footer-col-right">
+      <span class="footer-col-title">LOCATIONS & INQUIRIES</span>
+      <p class="footer-address">Aspen · Zurich · Queenstown</p>
+      <a href="tel:+15550102030">+1 (555) 010-2030</a>
+      <a href="mailto:concierge@arlo-estate.com">concierge@arlo-estate.com</a>
+    </div>
+
+  </div>
+
+  <div class="footer-copyright-bar">
+    <span>© 2026 ARLO ESTATE. All Rights Reserved.</span>
+    <span>Architectural Excellence & Private Estates</span>
+  </div>
+
 </footer>
 
 <!-- SCRIPTS -->
