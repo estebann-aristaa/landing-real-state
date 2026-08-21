@@ -1268,8 +1268,8 @@
   }
   requestAnimationFrame(timerLoop);
 
-  // ========================================================
-  // 360° VIDEO INTERACTIVE DRAG + ZOOM ENGINE (SECTION 03)
+// ========================================================
+  // 360° VIDEO INTERACTIVE DRAG + ZOOM ENGINE (ULTRA-FLUID)
   // ========================================================
   const scrubStage = document.getElementById('scrubStage');
   const video360 = document.getElementById('video360');
@@ -1281,15 +1281,36 @@
   let startX = 0;
   let startProgress = 0;
   let currentProgress = 0;
+  let pendingTime = null;
+  let isSeeking = false;
   let currentZoom = 1;
   const minZoom = 1;
   const maxZoom = 2.4;
 
-  function updateVideo() {
-    if (video360.duration) {
-      video360.currentTime = currentProgress * video360.duration;
+  // Renderizado no bloqueante (evita que el navegador se ahogue al arrastrar)
+  function renderFrame() {
+    if (!video360.duration) return;
+    const targetTime = currentProgress * video360.duration;
+
+    if (typeof video360.fastSeek === 'function') {
+      video360.fastSeek(targetTime);
+    } else if (!isSeeking) {
+      isSeeking = true;
+      video360.currentTime = targetTime;
+    } else {
+      pendingTime = targetTime;
     }
   }
+
+  video360.addEventListener('seeked', () => {
+    isSeeking = false;
+    if (pendingTime !== null) {
+      const nextTime = pendingTime;
+      pendingTime = null;
+      isSeeking = true;
+      video360.currentTime = nextTime;
+    }
+  });
 
   function setZoom(newZoom) {
     currentZoom = Math.min(Math.max(newZoom, minZoom), maxZoom);
@@ -1312,11 +1333,11 @@
   window.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
     const deltaX = e.clientX - startX;
-    const sensitivity = 650;
+    const sensitivity = 550;
     let newProgress = startProgress + (deltaX / sensitivity);
     newProgress = newProgress - Math.floor(newProgress);
     currentProgress = newProgress;
-    requestAnimationFrame(updateVideo);
+    renderFrame();
   });
 
   window.addEventListener('mouseup', () => { isDragging = false; });
@@ -1362,10 +1383,10 @@
   window.addEventListener('touchmove', (e) => {
     if (e.touches.length === 1 && isDragging) {
       const deltaX = e.touches[0].clientX - startX;
-      let newProgress = startProgress + (deltaX / 500);
+      let newProgress = startProgress + (deltaX / 450);
       newProgress = newProgress - Math.floor(newProgress);
       currentProgress = newProgress;
-      requestAnimationFrame(updateVideo);
+      renderFrame();
     } else if (e.touches.length === 2 && initialPinchDistance) {
       const currentDistance = Math.hypot(
         e.touches[0].clientX - e.touches[1].clientX,
