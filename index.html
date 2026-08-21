@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ARLO ESTATE — Architectural Excellence</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Archivo+Expanded:wght@700;800;900&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Archivo+Expanded:wght@700;800;900&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 
   :root{
     --bg: #090c0f;
@@ -14,26 +14,34 @@
     --dim2: rgba(244,242,236,0.48);
     --line: rgba(244,242,236,0.14);
     --accent-blue: #6da5db;
+    --accent-glow: rgba(109, 165, 219, 0.35);
 
-    /* ============ REAL FROSTED LIQUID GLASS (APPLE STYLE) ============ */
+    /* ============ REAL FROSTED LIQUID GLASS (APPLE LUXURY STYLE) ============ */
     --liquid-bg: linear-gradient(
       135deg, 
-      rgba(255, 255, 255, 0.22) 0%, 
-      rgba(255, 255, 255, 0.08) 50%, 
-      rgba(255, 255, 255, 0.04) 100%
+      rgba(255, 255, 255, 0.16) 0%, 
+      rgba(255, 255, 255, 0.05) 50%, 
+      rgba(255, 255, 255, 0.02) 100%
     );
-    --liquid-border: 1px solid rgba(255, 255, 255, 0.38);
+    --liquid-border: 1px solid rgba(255, 255, 255, 0.28);
+    --liquid-border-hover: 1px solid rgba(255, 255, 255, 0.55);
     --liquid-shadow: 
-      inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.75),
-      inset 0 -1px 1px 0 rgba(255, 255, 255, 0.15),
-      0 20px 45px -8px rgba(0, 0, 0, 0.45);
-    --liquid-blur: blur(28px) saturate(190%) brightness(1.06);
+      inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.65),
+      inset 0 -1px 1px 0 rgba(255, 255, 255, 0.12),
+      0 24px 50px -10px rgba(0, 0, 0, 0.55);
+    --liquid-blur: blur(28px) saturate(190%) brightness(1.04);
   }
 
   *{margin:0;padding:0;box-sizing:border-box;}
 
   html{
     scroll-behavior: smooth;
+    background-color: var(--bg);
+  }
+
+  html.is-locked, body.is-locked{
+    overflow: hidden !important;
+    height: 100% !important;
   }
 
   body{
@@ -41,6 +49,100 @@
     color:var(--ink);
     font-family:'Inter',sans-serif;
     overflow-x:hidden;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  body.ready{
+    opacity: 1;
+  }
+
+  /* ========================================================
+     AWWWARDS SCREEN LOADER (MONUMENTAL SPLIT)
+     ======================================================== */
+  .loader{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    pointer-events:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .loader-curtain{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    z-index:1;
+  }
+  .loader-panel{
+    width:100%;
+    height:50%;
+    background:#07090b;
+    position:relative;
+    transition:transform 1.25s cubic-bezier(0.85, 0, 0.15, 1);
+  }
+  .loader-panel.top{ transform-origin: top center; }
+  .loader-panel.bottom{ transform-origin: bottom center; }
+
+  .loader.done .loader-panel.top{ transform: translateY(-100%); }
+  .loader.done .loader-panel.bottom{ transform: translateY(100%); }
+
+  .loader-center-content{
+    position:relative;
+    z-index:2;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
+    transition:opacity 0.5s cubic-bezier(0.85, 0, 0.15, 1), transform 0.5s cubic-bezier(0.85, 0, 0.15, 1);
+  }
+  .loader.done .loader-center-content{
+    opacity:0;
+    transform:scale(0.95) translateY(-10px);
+  }
+
+  .loader-brand{
+    font-family:'Archivo Expanded', sans-serif;
+    font-size:clamp(16px, 2.2vw, 24px);
+    font-weight:900;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:var(--ink);
+    text-shadow: 0 0 20px rgba(255,255,255,0.2);
+  }
+
+  .loader-bar-wrap{
+    display:flex;
+    align-items:center;
+    gap:18px;
+  }
+
+  .loader-bar{
+    width:220px;
+    height:2px;
+    background:rgba(255,255,255,0.08);
+    position:relative;
+    overflow:hidden;
+    border-radius:2px;
+  }
+  .loader-fill{
+    position:absolute;
+    left:0; top:0;
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg, #6da5db, #ffffff);
+    box-shadow:0 0 14px var(--accent-glow);
+    transition:width 1.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .loader-counter{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    color:var(--dim2);
+    letter-spacing:0.1em;
+    min-width:42px;
   }
 
   /* ============ HERO STAGE ============ */
@@ -64,15 +166,22 @@
     pointer-events:none;
     user-select:none;
   }
+  .giant-line-mask{
+    overflow:hidden;
+    display:block;
+  }
   .giant span{
     display:block;
     font-family:'Archivo Expanded', sans-serif;
-    font-weight:700;
+    font-weight:900;
     text-transform:uppercase;
     font-size:clamp(38px,15vw,64px);
     line-height:0.95;
     color:var(--ink);
     letter-spacing:-0.01em;
+    transform: translateY(115%);
+    transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.4s ease, color 1.2s ease;
+    opacity: 0;
   }
   .giant span.line1{ margin-bottom:clamp(90px, 30vw, 140px); }
 
@@ -115,6 +224,9 @@
     background:
       linear-gradient(180deg, rgba(60,90,110,0.35) 0%, rgba(20,28,35,0.15) 40%, rgba(8,10,13,0.55) 100%),
       radial-gradient(ellipse at 30% 20%, #4c6b7a 0%, #2b3a45 35%, #141c22 70%, #0a0e11 100%);
+    transform: scale(1.12);
+    filter: brightness(0.65);
+    transition: transform 2.2s cubic-bezier(0.16, 1, 0.3, 1), filter 1.8s ease;
   }
   .frame img, .frame video{
     width:100%;
@@ -135,6 +247,8 @@
     z-index:2;
     pointer-events:none;
     user-select:none;
+    transform: scale(1.12);
+    transition: transform 2.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .cutout img{
     width:100%;
@@ -186,14 +300,17 @@
     font-weight:500;
     padding:9px 18px;
     border-radius:100px;
-    transition:all 0.25s ease;
+    transition:all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .nav-links a.active{
     background:rgba(255,255,255,0.92);
     color:#090c0f;
     font-weight:600;
   }
-  .nav-links a:hover:not(.active){ color:#ffffff; }
+  .nav-links a:hover:not(.active){
+    color:#ffffff;
+    background:rgba(255, 255, 255, 0.08);
+  }
   .nav-phone{
     font-size:13px;
     font-weight:600;
@@ -324,6 +441,12 @@
     padding:18px 22px;
     min-width:200px;
     box-shadow:var(--liquid-shadow);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .stat-card:hover{
+    transform: translateY(-4px);
+    border: var(--liquid-border-hover);
+    box-shadow: 0 28px 60px -10px rgba(0,0,0,0.65), 0 0 25px rgba(255,255,255,0.06);
   }
   .stat-card .num{
     font-family:'Archivo',sans-serif;
@@ -357,14 +480,15 @@
     border-radius:100px;
     text-decoration:none;
     box-shadow:0 14px 34px rgba(0,0,0,0.35);
-    transition:transform 0.35s cubic-bezier(.16,1,.3,1), background 0.3s ease;
+    transition:transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, box-shadow 0.3s ease;
     border:none;
     cursor:pointer;
     font-family:'Inter', sans-serif;
   }
   .btn-pill:hover{ 
-    transform:translateY(-2px); 
+    transform:translateY(-3px) scale(1.02); 
     background:#ffffff;
+    box-shadow:0 20px 45px rgba(0,0,0,0.45);
   }
   .btn-pill .arrow{
     width:38px; height:38px;
@@ -381,16 +505,40 @@
     transition:transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .btn-pill:hover .arrow svg{
-    transform:translate(2.5px, -2.5px);
+    transform:translate(3px, -3px);
   }
 
   /* ========================================================
-     SECTION: ABOUT US (PLACED DIRECTLY BELOW HERO)
+     GLOBAL SCROLL REVEAL UTILITIES
+     ======================================================== */
+  .reveal{
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.active{
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-scale{
+    opacity: 0;
+    transform: scale(0.96) translateY(25px);
+    transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  .reveal-scale.active{
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  /* ========================================================
+     SECTION: ABOUT US
      ======================================================== */
   .about-section{
     max-width: 1380px;
     margin: 0 auto;
-    padding: 110px 4vw 90px;
+    padding: 120px 4vw 100px;
     position: relative;
     z-index: 2;
   }
@@ -459,6 +607,10 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    transition: transform 0.35s ease;
+  }
+  .about-stat-item:hover{
+    transform: translateY(-4px);
   }
 
   .about-stat-item:first-child{
@@ -544,8 +696,8 @@
     background:#ffffff;
   }
   .showcase-nav-btn{
-    width:42px;
-    height:42px;
+    width:44px;
+    height:44px;
     border-radius:50%;
     background:var(--liquid-bg);
     border:var(--liquid-border);
@@ -557,19 +709,20 @@
     align-items:center;
     justify-content:center;
     cursor:pointer;
-    transition:all 0.3s ease;
+    transition:all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .showcase-nav-btn:hover{
     background:#ffffff;
     color:#090c0f;
-    transform:scale(1.06);
+    transform:scale(1.1);
+    box-shadow:0 0 20px rgba(255,255,255,0.4);
   }
 
   .dual-stage{
     display:grid;
     grid-template-columns: 1.8fr 1fr;
     gap:24px;
-    transition:all 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    transition:grid-template-columns 0.85s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .dual-stage.reverse{
     grid-template-columns: 1fr 1.8fr;
@@ -588,7 +741,10 @@
     padding:24px;
     cursor:pointer;
     box-shadow:0 30px 60px -12px rgba(0, 0, 0, 0.65), var(--liquid-shadow);
-    transition:border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+    transition:border-color 0.4s ease, box-shadow 0.4s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .house-box:hover{
+    border-color: rgba(255, 255, 255, 0.45);
   }
 
   .house-media{
@@ -602,15 +758,15 @@
     height:100%;
     object-fit:cover;
     display:block;
-    transition:transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+    transition:transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
   }
   .house-media .media-mobile{ display:none; }
   .house-media .media-desktop{ display:block; }
 
   .house-box.inactive .house-media img,
   .house-box.inactive .house-media video{
-    filter:brightness(0.38) grayscale(25%);
-    transform:scale(1.04);
+    filter:brightness(0.35) grayscale(25%);
+    transform:scale(1.05);
   }
   .house-box.active .house-media img,
   .house-box.active .house-media video{
@@ -665,6 +821,10 @@
     box-shadow:var(--liquid-shadow);
     border-radius:24px;
     padding:24px 26px;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .house-box:hover .house-info{
+    transform: translateY(-2px);
   }
 
   .house-name{
@@ -809,6 +969,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+  }
+  .stage-360:hover{
+    transform: scale(1.008);
+    box-shadow: 0 35px 70px -10px rgba(0, 0, 0, 0.8), var(--liquid-shadow);
   }
 
   .video-360{
@@ -885,6 +1050,10 @@
     border: var(--liquid-border);
     background: #0d141b;
     box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.55), var(--liquid-shadow);
+    transition: border-color 0.4s ease;
+  }
+  .process-card:hover{
+    border-color: rgba(255, 255, 255, 0.45);
   }
 
   .process-card img{
@@ -892,11 +1061,11 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .process-card:hover img{
-    transform: scale(1.04);
+    transform: scale(1.05);
   }
 
   .process-card-left{
@@ -921,7 +1090,10 @@
     gap: 24px;
     padding: 34px 0;
     border-top: 1px solid rgba(244, 242, 236, 0.12);
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, transform 0.35s ease;
+  }
+  .process-step-item:hover{
+    transform: translateX(6px);
   }
 
   .process-step-item:first-child{
@@ -962,7 +1134,7 @@
   }
 
   /* ========================================================
-     SECTION 05: SERVICES (EDITORIAL 3-COL & SMOOTH MOBILE ACCORDION)
+     SECTION 05: SERVICES
      ======================================================== */
   .services-section{
     max-width: 1380px;
@@ -1036,7 +1208,10 @@
     padding: 28px 0;
     border-top: 1px solid rgba(244, 242, 236, 0.14);
     min-height: 110px;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, transform 0.35s ease;
+  }
+  .service-row-item:hover{
+    transform: translateX(4px);
   }
 
   .service-row-item:last-child{
@@ -1078,7 +1253,6 @@
     user-select: none;
   }
 
-  /* MOBILE COLLAPSIBLE DESCRIPTION */
   .service-desc-collapse{
     max-height: 0;
     opacity: 0;
@@ -1108,6 +1282,11 @@
     border: var(--liquid-border);
     background: #0d141b;
     box-shadow: 0 28px 60px -12px rgba(0, 0, 0, 0.65), var(--liquid-shadow);
+    transition: border-color 0.4s ease, transform 0.5s ease;
+  }
+  .services-center-card:hover{
+    border-color: rgba(255, 255, 255, 0.45);
+    transform: scale(1.02);
   }
 
   .services-center-card img{
@@ -1119,7 +1298,7 @@
   }
 
   .services-center-card:hover img{
-    transform: scale(1.05);
+    transform: scale(1.06);
   }
 
   .service-row-desc{
@@ -1142,7 +1321,7 @@
   }
 
   /* ========================================================
-     SECTION 06: FAQ (FREQUENTLY ASKED QUESTIONS)
+     SECTION 06: FAQ
      ======================================================== */
   .faq-section{
     max-width: 1380px;
@@ -1232,6 +1411,7 @@
     height: 6px;
     border-radius: 50%;
     background: var(--accent-blue);
+    box-shadow: 0 0 10px var(--accent-glow);
     flex-shrink: 0;
   }
 
@@ -1290,6 +1470,7 @@
     background: #ffffff;
     color: #090c0f;
     border-color: #ffffff;
+    box-shadow: 0 0 16px rgba(255,255,255,0.3);
   }
 
   .faq-item.active .faq-btn-circle svg{
@@ -1303,7 +1484,7 @@
   }
 
   /* ========================================================
-     SECTION 07: CONTACT (SENTENCE-STYLE EDITORIAL FORM)
+     SECTION 07: CONTACT
      ======================================================== */
   .contact-section{
     max-width: 1380px;
@@ -1359,6 +1540,11 @@
     border: var(--liquid-border);
     background: #0d141b;
     box-shadow: 0 28px 60px -12px rgba(0, 0, 0, 0.65), var(--liquid-shadow);
+    transition: border-color 0.4s ease, transform 0.5s ease;
+  }
+  .contact-image-card:hover{
+    border-color: rgba(255, 255, 255, 0.45);
+    transform: scale(1.015);
   }
 
   .contact-image-card img{
@@ -1370,7 +1556,7 @@
   }
 
   .contact-image-card:hover img{
-    transform: scale(1.04);
+    transform: scale(1.05);
   }
 
   .contact-form{
@@ -1420,7 +1606,7 @@
     color: #ffffff;
     padding: 10px 0;
     outline: none;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
 
   .c-input::placeholder{
@@ -1431,6 +1617,7 @@
 
   .c-input:focus{
     border-bottom-color: var(--accent-blue);
+    box-shadow: 0 1px 0 0 var(--accent-blue);
   }
 
   .contact-btn-wrap{
@@ -1465,6 +1652,10 @@
     text-transform: uppercase;
     color: var(--ink);
     white-space: nowrap;
+    transition: letter-spacing 0.8s ease;
+  }
+  .footer-giant-title:hover{
+    letter-spacing: -0.01em;
   }
 
   .footer-bottom-grid{
@@ -1521,7 +1712,7 @@
 
   .footer-col-mid a:hover, .footer-col-right a:hover{
     color: #ffffff;
-    transform: translateX(3px);
+    transform: translateX(4px);
   }
 
   .footer-address{
@@ -1540,6 +1731,35 @@
     font-size: 12px;
     color: var(--dim2);
   }
+
+  /* ============ STAGE REVEAL TIMINGS ============ */
+  nav, .hero-copy, .hero-tagline, .stage-cta{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .stat-card{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .stage.revealed .frame{ transform:scale(1); filter:brightness(1); }
+  .stage.revealed .cutout{ transform:scale(1); }
+
+  .stage.revealed .giant span{
+    transform: translateY(0);
+    opacity: 0.55;
+  }
+  .stage.revealed .giant span.line1{ transition-delay: 0.25s; }
+  .stage.revealed .giant span.line2{ transition-delay: 0.38s; }
+
+  .stage.revealed nav{ opacity:1; transform:none; transition-delay:0.35s; }
+  .stage.revealed .hero-copy{ opacity:1; transform:none; transition-delay:0.5s; }
+  .stage.revealed .hero-tagline{ opacity:1; transform:none; transition-delay:0.6s; }
+  .stage.revealed .stat-card:nth-child(1){ opacity:1; transform:none; transition-delay:0.65s; }
+  .stage.revealed .stat-card:nth-child(2){ opacity:1; transform:none; transition-delay:0.78s; }
+  .stage.revealed .stage-cta{ opacity:1; transform:none; transition-delay:0.7s; }
 
   /* ============ RESPONSIVE ============ */
   @media (max-width: 860px){
@@ -1638,7 +1858,7 @@
     .process-card-right{ height: 280px; margin-top: 20px; }
     .process-step-item{ grid-template-columns: 60px 1fr; gap: 16px; padding: 26px 0; }
 
-    /* SERVICES MOBILE ACCORDION (EXACT IPHONE VIEWPORT) */
+    /* SERVICES MOBILE ACCORDION */
     .services-section{ padding: 50px 5vw 80px; }
     .services-header{
       grid-template-columns: 1fr;
@@ -1693,7 +1913,6 @@
     .s-title{ font-size: 15px; }
     .s-chevron-mobile{ display: block; }
 
-    /* OPEN ACCORDION STATE */
     .service-row-item.open .s-chevron-mobile{
       transform: rotate(45deg);
       color: #ffffff;
@@ -1718,7 +1937,7 @@
     .faq-btn-circle{ width: 38px; height: 38px; }
     .faq-answer p{ padding-left: 0; font-size: 13px; }
 
-    /* CONTACT RESPONSIVE (EXACT IPHONE VIEWPORT) */
+    /* CONTACT RESPONSIVE */
     .contact-section{ padding: 50px 5vw 90px; }
     .contact-header{
       grid-template-columns: 1fr;
@@ -1764,99 +1983,34 @@
       text-align: center;
     }
   }
-
-  /* Reveal animations */
-  .giant span{ transition:color 1.2s ease, opacity 1.2s ease; }
-  .stage.revealed .giant span{ color:rgba(244,242,236,0.5); }
-  .frame{ transform:scale(1.07); transition:transform 1.8s cubic-bezier(.16,1,.3,1); }
-  .stage.revealed .frame{ transform:scale(1); }
-  .cutout{ transform:scale(1.07); transition:transform 1.8s cubic-bezier(.16,1,.3,1); }
-  .stage.revealed .cutout{ transform:scale(1); }
-
-  nav, .hero-copy, .hero-tagline, .stage-cta{
-    opacity:0;
-    transform:translateY(18px) scale(0.98);
-    transition:opacity 0.9s cubic-bezier(.16,1,.3,1), transform 0.9s cubic-bezier(.16,1,.3,1);
-    transition-delay:0.15s;
-  }
-  .stat-card{
-    opacity:0;
-    transform:translateY(14px) scale(0.97);
-    transition:opacity 0.7s cubic-bezier(.16,1,.3,1), transform 0.7s cubic-bezier(.16,1,.3,1);
-  }
-  .stage.revealed nav{ opacity:1; transform:none; transition-delay:0.2s; }
-  .stage.revealed .hero-copy{ opacity:1; transform:none; transition-delay:0.32s; }
-  .stage.revealed .hero-tagline{ opacity:1; transform:none; transition-delay:0.4s; }
-  .stage.revealed .stat-card{ opacity:1; transform:none; }
-  .stage.revealed .stat-card:nth-child(1){ transition-delay:0.46s; }
-  .stage.revealed .stat-card:nth-child(2){ transition-delay:0.56s; }
-  .stage.revealed .stage-cta{ opacity:1; transform:none; transition-delay:0.5s; }
-
-  /* Loader */
-  .loader{
-    position:fixed;
-    inset:0;
-    z-index:9999;
-    pointer-events:none;
-  }
-  .loader-panel{
-    position:absolute;
-    top:0;
-    width:50%;
-    height:100%;
-    background:#f4f2ec;
-    pointer-events:auto;
-    transition:transform 1.1s cubic-bezier(.76,0,.24,1);
-  }
-  .loader-panel.left{ left:0; }
-  .loader-panel.right{ right:0; }
-  .loader.done .loader-panel.left{ transform:translateX(-100%); }
-  .loader.done .loader-panel.right{ transform:translateX(100%); }
-
-  .loader-bar-wrap{
-    position:absolute;
-    inset:0;
-    z-index:2;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:opacity .35s ease;
-  }
-  .loader.done .loader-bar-wrap{ opacity:0; }
-
-  .loader-bar{
-    width:180px;
-    height:1.5px;
-    background:rgba(13,16,19,0.12);
-    position:relative;
-    overflow:hidden;
-  }
-  .loader-fill{
-    position:absolute;
-    left:0; top:0;
-    height:100%;
-    width:0%;
-    background:#0d1013;
-    transition:width 1.4s cubic-bezier(.4,0,.2,1);
-  }
 </style>
 </head>
-<body>
+<body class="is-locked">
 
-<!-- LOADING SCREEN -->
+<!-- ========================================================
+     AWWWARDS SCREEN LOADER (MONUMENTAL SPLIT)
+     ======================================================== -->
 <div class="loader" id="loader">
-  <div class="loader-panel left"></div>
-  <div class="loader-panel right"></div>
-  <div class="loader-bar-wrap">
-    <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
+  <div class="loader-curtain">
+    <div class="loader-panel top"></div>
+    <div class="loader-panel bottom"></div>
+  </div>
+  <div class="loader-center-content">
+    <div class="loader-brand">ARLO ESTATE</div>
+    <div class="loader-bar-wrap">
+      <div class="loader-bar">
+        <div class="loader-fill" id="loaderFill"></div>
+      </div>
+      <div class="loader-counter" id="loaderCounter">00%</div>
+    </div>
   </div>
 </div>
 
 <!-- ============ HERO STAGE ============ -->
 <section class="stage" id="stage">
   <div class="giant">
-    <span class="line1">Arlo</span>
-    <span class="line2">Estate</span>
+    <div class="giant-line-mask"><span class="line1">Arlo</span></div>
+    <div class="giant-line-mask"><span class="line2">Estate</span></div>
   </div>
 
   <div class="cutout">
@@ -1926,7 +2080,7 @@
      SECTION: ABOUT US (MONUMENTAL STATS & MANIFESTO)
      ======================================================== -->
 <section class="about-section" id="about">
-  <div class="about-top-grid">
+  <div class="about-top-grid reveal">
     <div class="about-eyebrow-wrap">
       <span class="about-eyebrow">ABOUT US</span>
     </div>
@@ -1940,7 +2094,7 @@
     </div>
   </div>
 
-  <div class="about-stats-grid">
+  <div class="about-stats-grid reveal">
     <div class="about-stat-item">
       <div class="about-num">120+</div>
       <div class="about-label">PROJECTS ACROSS EUROPE</div>
@@ -1963,7 +2117,7 @@
 <!-- ========================================================
      SECTION 02: DUAL FRAME SHOWCASE (SELECTED RESIDENCES)
      ======================================================== -->
-<section class="showcase-section" id="residences">
+<section class="showcase-section reveal-scale" id="residences">
   
   <div class="showcase-top-header">
     <div class="showcase-eyebrow">02 — Selected Works</div>
@@ -2046,9 +2200,9 @@
 </section>
 
 <!-- ========================================================
-     EDITORIAL MANIFESTO BLOCK (ARRIBA DEL 360)
+     EDITORIAL MANIFESTO BLOCK
      ======================================================== -->
-<section class="manifesto-monumental" id="manifesto">
+<section class="manifesto-monumental reveal" id="manifesto">
   <h2 class="manifesto-big-title">From Private<br>Residences to Modern<br>Estates</h2>
   <p class="manifesto-quote-sub">
     Arlo Estate focuses on creating architecture where precision meets raw emotion. Every project combines clean monolithic geometry, tactile balance, and a sense of timeless calm.
@@ -2056,9 +2210,9 @@
 </section>
 
 <!-- ========================================================
-     SECTION 03: 360° CINEMATIC SHOWCASE (AUTOPLAY)
+     SECTION 03: 360° CINEMATIC SHOWCASE
      ======================================================== -->
-<section class="section-360" id="explore-360">
+<section class="section-360 reveal" id="explore-360">
   <div class="header-360">
     <div class="badge-360">EXPLORE IN 360°</div>
     <div class="copy-360">
@@ -2089,7 +2243,7 @@
 <!-- ========================================================
      SECTION 04: ARCHITECTURAL PROCESS
      ======================================================== -->
-<section class="process-section" id="process">
+<section class="process-section reveal" id="process">
   <div class="process-grid">
     
     <!-- LEFT COLUMN: TITLE & FLOATING IMAGE 1 -->
@@ -2103,7 +2257,6 @@
     <!-- RIGHT COLUMN: 6 PROCESS STEPS & FLOATING IMAGE 2 -->
     <div class="process-steps-list">
       
-      <!-- STEP 01 -->
       <div class="process-step-item">
         <div class="process-num">01</div>
         <div class="process-content">
@@ -2116,7 +2269,6 @@
         </div>
       </div>
 
-      <!-- STEP 02 -->
       <div class="process-step-item">
         <div class="process-num">02</div>
         <div class="process-content">
@@ -2129,7 +2281,6 @@
         </div>
       </div>
 
-      <!-- STEP 03 -->
       <div class="process-step-item">
         <div class="process-num">03</div>
         <div class="process-content">
@@ -2142,7 +2293,6 @@
         </div>
       </div>
 
-      <!-- STEP 04 -->
       <div class="process-step-item">
         <div class="process-num">04</div>
         <div class="process-content">
@@ -2155,7 +2305,6 @@
         </div>
       </div>
 
-      <!-- STEP 05 -->
       <div class="process-step-item">
         <div class="process-num">05</div>
         <div class="process-content">
@@ -2168,7 +2317,6 @@
         </div>
       </div>
 
-      <!-- STEP 06 -->
       <div class="process-step-item">
         <div class="process-num">06</div>
         <div class="process-content">
@@ -2181,7 +2329,6 @@
         </div>
       </div>
 
-      <!-- FLOATING IMAGE 2 -->
       <div class="process-card process-card-right">
         <img src="process-2.jpg" onerror="this.src='https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80'" alt="Luxury modern estate completion">
       </div>
@@ -2192,11 +2339,10 @@
 </section>
 
 <!-- ========================================================
-     SECTION 05: SERVICES (EDITORIAL 3-COL & SMOOTH MOBILE ACCORDION)
+     SECTION 05: SERVICES
      ======================================================== -->
-<section class="services-section" id="services">
+<section class="services-section reveal" id="services">
   
-  <!-- HEADER -->
   <div class="services-header">
     <div class="services-eyebrow-block">
       <span class="services-eyebrow-tag">SERVICES</span>
@@ -2207,10 +2353,8 @@
     </div>
   </div>
 
-  <!-- 3-COLUMN BODY -->
   <div class="services-grid-wrap">
     
-    <!-- LEFT: TITLES & ACCORDION (FOR MOBILE & DESKTOP) -->
     <div class="services-col-titles">
       
       <div class="service-row-item" onclick="toggleServiceMobile(this)">
@@ -2259,14 +2403,12 @@
 
     </div>
 
-    <!-- CENTER: IMAGE CARD -->
     <div class="services-col-center">
       <div class="services-center-card">
         <img src="service-interior.jpg" onerror="this.src='https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1000&q=80'" alt="Arlo Estate Interior Craft">
       </div>
     </div>
 
-    <!-- RIGHT: DESCRIPTIONS (DESKTOP) -->
     <div class="services-col-descs">
       <div class="service-row-desc">
         <p>Tailor-made concepts that combine functionality, light, and comfort — every project begins with your lifestyle.</p>
@@ -2287,9 +2429,9 @@
 </section>
 
 <!-- ========================================================
-     SECTION 06: FAQ (FREQUENTLY ASKED QUESTIONS)
+     SECTION 06: FAQ
      ======================================================== -->
-<section class="faq-section" id="faq">
+<section class="faq-section reveal" id="faq">
   <div class="faq-header">
     <div class="faq-title-wrap-top">
       <span class="faq-eyebrow-tag">FAQ</span>
@@ -2302,7 +2444,6 @@
 
   <div class="faq-list">
     
-    <!-- ITEM 1 (OPEN BY DEFAULT) -->
     <div class="faq-item active" onclick="toggleFaq(this)">
       <div class="faq-row-head">
         <div class="faq-question-left">
@@ -2321,7 +2462,6 @@
       </div>
     </div>
 
-    <!-- ITEM 2 -->
     <div class="faq-item" onclick="toggleFaq(this)">
       <div class="faq-row-head">
         <div class="faq-question-left">
@@ -2340,7 +2480,6 @@
       </div>
     </div>
 
-    <!-- ITEM 3 -->
     <div class="faq-item" onclick="toggleFaq(this)">
       <div class="faq-row-head">
         <div class="faq-question-left">
@@ -2359,7 +2498,6 @@
       </div>
     </div>
 
-    <!-- ITEM 4 -->
     <div class="faq-item" onclick="toggleFaq(this)">
       <div class="faq-row-head">
         <div class="faq-question-left">
@@ -2382,9 +2520,9 @@
 </section>
 
 <!-- ========================================================
-     SECTION 07: CONTACT (SENTENCE-STYLE EDITORIAL FORM)
+     SECTION 07: CONTACT
      ======================================================== -->
-<section class="contact-section" id="contact">
+<section class="contact-section reveal" id="contact">
   
   <div class="contact-header">
     <span class="contact-eyebrow">GET IN TOUCH WITH US</span>
@@ -2395,12 +2533,10 @@
 
   <div class="contact-grid">
     
-    <!-- LEFT: IMAGE CARD -->
     <div class="contact-image-card">
       <img src="contact-estate.jpg" onerror="this.src='https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1000&q=80'" alt="Arlo Estate Luxury Villa">
     </div>
 
-    <!-- RIGHT: EDITORIAL CONVERSATIONAL FORM -->
     <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you. An Arlo Estate private consultant will reach out to you shortly.');">
       
       <div class="contact-form-line">
@@ -2441,7 +2577,7 @@
 <!-- ========================================================
      MONUMENTAL AWWWARDS FOOTER
      ======================================================== -->
-<footer class="monumental-footer">
+<footer class="monumental-footer reveal">
   
   <div class="footer-top-brand">
     <h2 class="footer-giant-title">ARLO ESTATE</h2>
@@ -2449,7 +2585,6 @@
 
   <div class="footer-bottom-grid">
     
-    <!-- LEFT COLUMN: MANIFESTO & CTA -->
     <div class="footer-col-left">
       <p class="footer-tagline">Building modern homes that embody precision, comfort, and timeless design.</p>
       <a href="#contact" class="btn-pill">
@@ -2462,7 +2597,6 @@
       </a>
     </div>
 
-    <!-- MIDDLE COLUMN: SOCIAL NETWORKS -->
     <div class="footer-col-mid">
       <span class="footer-col-title">CONNECT</span>
       <a href="#" target="_blank" rel="noopener">LinkedIn</a>
@@ -2471,7 +2605,6 @@
       <a href="#" target="_blank" rel="noopener">YouTube</a>
     </div>
 
-    <!-- RIGHT COLUMN: LOCATIONS & DIRECT CONTACT -->
     <div class="footer-col-right">
       <span class="footer-col-title">LOCATIONS & INQUIRIES</span>
       <p class="footer-address">Aspen · Zurich · Queenstown</p>
@@ -2488,9 +2621,11 @@
 
 </footer>
 
-<!-- SCRIPTS -->
+<!-- ========================================================
+     VANILLA JAVASCRIPT ENGINE
+     ======================================================== -->
 <script>
-  // FORZAR RETORNO AL INICIO EN RELOAD / REINICIO (PC & MÓVIL)
+  // FORZAR RETORNO AL INICIO INMEDIATO SIN JITTER NI PARPADEO
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
   }
@@ -2499,25 +2634,64 @@
   window.addEventListener('beforeunload', () => {
     window.scrollTo(0, 0);
   });
-  window.addEventListener('pageshow', () => {
+
+  document.addEventListener("DOMContentLoaded", () => {
     window.scrollTo(0, 0);
+    document.body.classList.add('ready');
   });
 
-  // LOADER SCRIPT
+  // PRELOADER SECUENCIA Y CONTADOR DINÁMICO
   const stage = document.getElementById('stage');
   const loader = document.getElementById('loader');
   const loaderFill = document.getElementById('loaderFill');
+  const loaderCounter = document.getElementById('loaderCounter');
 
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => { loaderFill.style.width = '100%'; });
+  let currentProgress = 0;
+  const loadDuration = 1200; // ms
+  const startTime = performance.now();
+
+  function updateLoader(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min((elapsed / loadDuration) * 100, 100);
+    currentProgress = progress;
+
+    loaderFill.style.width = `${progress}%`;
+    const formatted = Math.floor(progress).toString().padStart(2, '0');
+    loaderCounter.textContent = `${formatted}%`;
+
+    if (progress < 100) {
+      requestAnimationFrame(updateLoader);
+    } else {
+      setTimeout(() => {
+        loader.classList.add('done');
+        stage.classList.add('revealed');
+        document.documentElement.classList.remove('is-locked');
+        document.body.classList.remove('is-locked');
+      }, 250);
+
+      setTimeout(() => {
+        loader.style.display = 'none';
+      }, 1600);
+    }
+  }
+  requestAnimationFrame(updateLoader);
+
+  // SCROLL INTERSECTION OBSERVER (REVEAL PROGRESIVO DE SECCIONES)
+  const revealElements = document.querySelectorAll('.reveal, .reveal-scale');
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    root: null,
+    threshold: 0.12,
+    rootMargin: '0px 0px -50px 0px'
   });
 
-  setTimeout(() => {
-    loader.classList.add('done');
-    stage.classList.add('revealed');
-  }, 1500);
-
-  setTimeout(() => { loader.style.display = 'none'; }, 2700);
+  revealElements.forEach(el => revealObserver.observe(el));
 
   // MOBILE HAMBURGER MENU
   const navBurger = document.getElementById('navBurger');
@@ -2536,6 +2710,7 @@
       navBurger.setAttribute('aria-expanded', 'false');
     });
   });
+
   document.addEventListener('click', (e) => {
     if (!mobileMenu.contains(e.target) && !navBurger.contains(e.target)){
       mobileMenu.classList.remove('open');
