@@ -368,10 +368,111 @@
   }
 
   /* ========================================================
+     SECTION: ABOUT US (PLACED DIRECTLY BELOW HERO)
+     ======================================================== */
+  .about-section{
+    max-width: 1380px;
+    margin: 0 auto;
+    padding: 110px 4vw 90px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .about-top-grid{
+    display: grid;
+    grid-template-columns: 1fr 1.75fr;
+    gap: 60px;
+    align-items: start;
+    margin-bottom: 90px;
+  }
+
+  .about-eyebrow-wrap{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-eyebrow{
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dim2);
+  }
+
+  .about-statement-wrap{
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .about-statement{
+    font-family: 'Archivo Expanded', sans-serif;
+    font-weight: 800;
+    font-size: clamp(26px, 3.2vw, 44px);
+    line-height: 1.12;
+    text-transform: uppercase;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+
+  .about-statement .highlight{
+    color: var(--accent-blue);
+    font-weight: 800;
+  }
+
+  .about-subtext{
+    font-size: 14.5px;
+    color: var(--dim);
+    line-height: 1.7;
+    max-width: 640px;
+  }
+
+  .about-stats-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    align-items: start;
+    border-top: 1px solid rgba(244, 242, 236, 0.12);
+    padding-top: 50px;
+  }
+
+  .about-stat-item{
+    padding: 0 28px;
+    border-left: 1px solid rgba(244, 242, 236, 0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .about-stat-item:first-child{
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .about-num{
+    font-family: 'Archivo', sans-serif;
+    font-size: clamp(42px, 4.8vw, 68px);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .about-label{
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--dim2);
+    line-height: 1.45;
+  }
+
+  /* ========================================================
      SECTION 02: DUAL FRAME SHOWCASE
      ======================================================== */
   .showcase-section{
-    padding:130px 4vw 70px;
+    padding:110px 4vw 70px;
     max-width:1380px;
     margin:0 auto;
     position:relative;
@@ -1082,6 +1183,29 @@
       order:3;
     }
 
+    /* ABOUT US RESPONSIVE */
+    .about-section{ padding: 70px 5vw 50px; }
+    .about-top-grid{
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-bottom: 45px;
+    }
+    .about-statement{
+      font-size: clamp(21px, 6.2vw, 32px);
+      line-height: 1.18;
+    }
+    .about-stats-grid{
+      grid-template-columns: 1fr 1fr;
+      gap: 32px 20px;
+      padding-top: 32px;
+    }
+    .about-stat-item{
+      border-left: none;
+      padding: 0;
+    }
+    .about-num{ font-size: 38px; }
+    .about-label{ font-size: 10px; }
+
     .showcase-section{ padding:70px 5vw 30px; }
     .dual-stage, .dual-stage.reverse{
       grid-template-columns: 1fr;
@@ -1146,7 +1270,7 @@
     }
 
     .services-col-descs{
-      display: none; /* In mobile it opens seamlessly under the item */
+      display: none;
     }
 
     .service-row-item{
@@ -1322,6 +1446,44 @@
     <div class="stat-card">
       <div class="num">12K+</div>
       <div class="label">Happy clients enjoying their new homes</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================
+     SECTION: ABOUT US (MONUMENTAL STATS & MANIFESTO)
+     ======================================================== -->
+<section class="about-section" id="about">
+  <div class="about-top-grid">
+    <div class="about-eyebrow-wrap">
+      <span class="about-eyebrow">ABOUT US</span>
+    </div>
+    <div class="about-statement-wrap">
+      <h2 class="about-statement">
+        WE DON'T JUST DESIGN HOUSES. WE <span class="highlight">CREATE SPACES</span> THAT REFLECT YOUR ESSENCE — MODERN, BALANCED, <span class="highlight">AND BUILT TO LAST.</span>
+      </h2>
+      <p class="about-subtext">
+        Each home we craft is more than a project — it's a dialogue between nature, architecture, and human comfort. At Arlo Estate, we combine timeless aesthetics, innovative materials, and a personalized approach to build spaces that feel truly yours.
+      </p>
+    </div>
+  </div>
+
+  <div class="about-stats-grid">
+    <div class="about-stat-item">
+      <div class="about-num">120+</div>
+      <div class="about-label">PROJECTS ACROSS EUROPE</div>
+    </div>
+    <div class="about-stat-item">
+      <div class="about-num">80+</div>
+      <div class="about-label">CUSTOM LAYOUTS CREATED</div>
+    </div>
+    <div class="about-stat-item">
+      <div class="about-num">50+</div>
+      <div class="about-label">PREMIUM MATERIALS USED</div>
+    </div>
+    <div class="about-stat-item">
+      <div class="about-num">30+</div>
+      <div class="about-label">FAMILIES LIVING IN OUR HOMES</div>
     </div>
   </div>
 </section>
