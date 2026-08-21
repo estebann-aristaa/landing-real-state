@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ARLO ESTATE — Architectural Excellence</title>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Archivo+Expanded:wght@700;800;900&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
 
@@ -727,6 +728,104 @@
     .manifesto-big-title, .showcase-main-title{ font-size:clamp(30px, 9.2vw, 46px); }
   }
 
+  /* ========================================================
+     SECTION 03: 3D MODEL VIEWER STYLES
+     ======================================================== */
+  .section-360{
+    max-width: 1380px;
+    margin: 0 auto;
+    padding: 100px 4vw 120px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .header-360{
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+  }
+
+  .badge-360{
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--dim2);
+    padding-top: 6px;
+  }
+
+  .copy-360 h2{
+    font-family: 'Archivo Expanded', sans-serif;
+    font-weight: 800;
+    font-size: clamp(22px, 3.2vw, 44px);
+    text-transform: uppercase;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    max-width: 840px;
+  }
+
+  .copy-360 h2 .highlight{
+    color: #5ea4ff;
+    font-weight: 900;
+  }
+
+  .stage-360{
+    position: relative;
+    width: 100%;
+    height: 640px;
+    border-radius: 36px;
+    border: var(--liquid-border);
+    background: radial-gradient(ellipse at 50% 40%, rgba(35, 52, 65, 0.45) 0%, rgba(13, 20, 26, 0.8) 60%, rgba(9, 12, 15, 0.95) 100%);
+    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.65), var(--liquid-shadow);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  model-viewer{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    cursor: grab;
+    --poster-color: transparent;
+  }
+  model-viewer:active{
+    cursor: grabbing;
+  }
+
+  .hint-360{
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--liquid-bg);
+    border: var(--liquid-border);
+    backdrop-filter: var(--liquid-blur);
+    -webkit-backdrop-filter: var(--liquid-blur);
+    box-shadow: var(--liquid-shadow);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 22px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  @media (max-width: 860px){
+    .header-360{ grid-template-columns: 1fr; gap: 16px; margin-bottom: 28px; }
+    .stage-360{ height: 450px; }
+  }
+
   /* Reveal animations */
   .giant span{ transition:color 1.2s ease, opacity 1.2s ease; }
   .stage.revealed .giant span{ color:rgba(244,242,236,0.5); }
@@ -973,6 +1072,41 @@
   <p class="manifesto-quote-sub">
     Arlo Estate focuses on creating architecture where precision meets raw emotion. Every project combines clean monolithic geometry, tactile balance, and a sense of timeless calm.
   </p>
+</section>
+
+  <section class="section-360" id="explore-360">
+  <div class="header-360">
+    <div class="badge-360">EXPLORE IN 360°</div>
+    <div class="copy-360">
+      <h2>
+        Rotate the model to explore every detail of the architecture.<br>
+        <span class="highlight">Discover</span> the design from every angle — as <span class="highlight">if you were standing there.</span>
+      </h2>
+    </div>
+  </div>
+
+  <div class="stage-360">
+    <model-viewer 
+      src="casa-3d.glb" 
+      poster="foto1pc.jpeg"
+      alt="Arlo Estate 3D Architectural Villa" 
+      auto-rotate 
+      auto-rotate-delay="800"
+      rotation-per-second="14deg"
+      camera-controls 
+      touch-action="pan-y"
+      shadow-intensity="1.5"
+      shadow-softness="0.9"
+      exposure="1.1"
+      camera-orbit="45deg 75deg 105%"
+      interaction-prompt="none">
+    </model-viewer>
+
+    <div class="hint-360">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+      <span>Drag to rotate in 360°</span>
+    </div>
+  </div>
 </section>
 
 <!-- FOOTER -->
