@@ -600,7 +600,7 @@
   .house-box.inactive .house-specs{ opacity:0; max-height:0; padding:0; margin:0; border-top:none; }
 
   /* ========================================================
-     SECTION 03: 360° INTERACTIVE HOUSE + ZOOM
+     SECTION 03: 360° CINEMATIC SHOWCASE STYLES
      ======================================================== */
   .section-360{
     max-width: 1380px;
@@ -652,41 +652,23 @@
     background: #090c0f;
     box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.65), var(--liquid-shadow);
     overflow: hidden;
-    cursor: grab;
-    user-select: none;
-    touch-action: none;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .stage-360:active{
-    cursor: grabbing;
   }
 
   .video-360{
     width: 100%;
     height: 100%;
     object-fit: cover;
-    pointer-events: none;
     display: block;
-    transform-origin: center center;
-    transition: transform 0.08s ease-out;
   }
 
-  .controls-360{
+  .hint-360{
     position: absolute;
     bottom: 24px;
     left: 50%;
     transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    pointer-events: auto;
-    z-index: 5;
-  }
-
-  .hint-360{
     background: var(--liquid-bg);
     border: var(--liquid-border);
     backdrop-filter: var(--liquid-blur);
@@ -697,54 +679,18 @@
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 10px 20px;
+    padding: 10px 22px;
     border-radius: 100px;
     display: flex;
     align-items: center;
     gap: 8px;
-    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
   }
 
-  .zoom-controls{
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    background: var(--liquid-bg);
-    border: var(--liquid-border);
-    backdrop-filter: var(--liquid-blur);
-    -webkit-backdrop-filter: var(--liquid-blur);
-    box-shadow: var(--liquid-shadow);
-    padding: 4px;
-    border-radius: 100px;
-  }
-
-  .zoom-btn{
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: transparent;
-    border: none;
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s ease;
-  }
-
-  .zoom-btn:hover{
-    background: rgba(255, 255, 255, 0.2);
-  }
-
-  .zoom-val{
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.8);
-    padding: 0 8px;
-    min-width: 45px;
-    text-align: center;
+  @media (max-width: 860px){
+    .header-360{ grid-template-columns: 1fr; gap: 14px; margin-bottom: 24px; }
+    .stage-360{ height: 440px; }
   }
 
   /* ========================================================
@@ -1093,40 +1039,33 @@
 </section>
 
 <!-- ========================================================
-     SECTION 03: 360° INTERACTIVE HOUSE + ZOOM
+     SECTION 03: 360° CINEMATIC SHOWCASE (AUTOPLAY)
      ======================================================== -->
 <section class="section-360" id="explore-360">
   <div class="header-360">
     <div class="badge-360">EXPLORE IN 360°</div>
     <div class="copy-360">
       <h2>
-        ROTATE THE MODEL TO EXPLORE EVERY DETAIL OF THE ARCHITECTURE.<br>
+        A MONUMENTAL ARCHITECTURAL PRESENCE.<br>
         <span class="highlight">DISCOVER</span> THE DESIGN FROM EVERY ANGLE — AS <span class="highlight">IF YOU WERE STANDING THERE.</span>
       </h2>
     </div>
   </div>
 
-  <div class="stage-360" id="scrubStage">
+  <div class="stage-360">
     <video 
-      id="video360" 
       class="video-360" 
       src="casa-360.mp4" 
+      autoplay 
       muted 
-      playsinline 
-      preload="auto">
+      loop 
+      playsinline>
     </video>
 
-    <div class="controls-360">
-      <div class="hint-360">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
-        <span>Drag to rotate</span>
-      </div>
-
-      <div class="zoom-controls">
-        <button class="zoom-btn" id="zoomOutBtn" aria-label="Zoom out">−</button>
-        <span class="zoom-val" id="zoomVal">1.0x</span>
-        <button class="zoom-btn" id="zoomInBtn" aria-label="Zoom in">+</button>
-      </div>
+    <!-- Badge estético Liquid Glass -->
+    <div class="hint-360">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+      <span>360° Architectural Orbit</span>
     </div>
   </div>
 </section>
@@ -1267,140 +1206,6 @@
     requestAnimationFrame(timerLoop);
   }
   requestAnimationFrame(timerLoop);
-
-// ========================================================
-  // 360° VIDEO INTERACTIVE DRAG + ZOOM ENGINE (ULTRA-FLUID)
-  // ========================================================
-  const scrubStage = document.getElementById('scrubStage');
-  const video360 = document.getElementById('video360');
-  const zoomVal = document.getElementById('zoomVal');
-  const zoomInBtn = document.getElementById('zoomInBtn');
-  const zoomOutBtn = document.getElementById('zoomOutBtn');
-
-  let isDragging = false;
-  let startX = 0;
-  let startProgress = 0;
-  let currentProgress = 0;
-  let pendingTime = null;
-  let isSeeking = false;
-  let currentZoom = 1;
-  const minZoom = 1;
-  const maxZoom = 2.4;
-
-  // Renderizado no bloqueante (evita que el navegador se ahogue al arrastrar)
-  function renderFrame() {
-    if (!video360.duration) return;
-    const targetTime = currentProgress * video360.duration;
-
-    if (typeof video360.fastSeek === 'function') {
-      video360.fastSeek(targetTime);
-    } else if (!isSeeking) {
-      isSeeking = true;
-      video360.currentTime = targetTime;
-    } else {
-      pendingTime = targetTime;
-    }
-  }
-
-  video360.addEventListener('seeked', () => {
-    isSeeking = false;
-    if (pendingTime !== null) {
-      const nextTime = pendingTime;
-      pendingTime = null;
-      isSeeking = true;
-      video360.currentTime = nextTime;
-    }
-  });
-
-  function setZoom(newZoom) {
-    currentZoom = Math.min(Math.max(newZoom, minZoom), maxZoom);
-    video360.style.transform = `scale(${currentZoom.toFixed(2)})`;
-    if (zoomVal) zoomVal.textContent = `${currentZoom.toFixed(1)}x`;
-  }
-
-  video360.addEventListener('loadedmetadata', () => {
-    video360.currentTime = 0.01;
-  });
-
-  // Mouse Drag (Rotación 360°)
-  scrubStage.addEventListener('mousedown', (e) => {
-    if (e.target.closest('.controls-360')) return;
-    isDragging = true;
-    startX = e.clientX;
-    startProgress = currentProgress;
-  });
-
-  window.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
-    const deltaX = e.clientX - startX;
-    const sensitivity = 550;
-    let newProgress = startProgress + (deltaX / sensitivity);
-    newProgress = newProgress - Math.floor(newProgress);
-    currentProgress = newProgress;
-    renderFrame();
-  });
-
-  window.addEventListener('mouseup', () => { isDragging = false; });
-
-  // Zoom con Rueda del Mouse
-  scrubStage.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    const zoomStep = e.deltaY * -0.0015;
-    setZoom(currentZoom + zoomStep);
-  }, { passive: false });
-
-  // Botones de Zoom
-  zoomInBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    setZoom(currentZoom + 0.3);
-  });
-
-  zoomOutBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    setZoom(currentZoom - 0.3);
-  });
-
-  // Soporte Táctil (Móvil)
-  let initialPinchDistance = null;
-  let initialZoom = 1;
-
-  scrubStage.addEventListener('touchstart', (e) => {
-    if (e.target.closest('.controls-360')) return;
-    if (e.touches.length === 1) {
-      isDragging = true;
-      startX = e.touches[0].clientX;
-      startProgress = currentProgress;
-    } else if (e.touches.length === 2) {
-      isDragging = false;
-      initialPinchDistance = Math.hypot(
-        e.touches[0].clientX - e.touches[1].clientX,
-        e.touches[0].clientY - e.touches[1].clientY
-      );
-      initialZoom = currentZoom;
-    }
-  }, { passive: true });
-
-  window.addEventListener('touchmove', (e) => {
-    if (e.touches.length === 1 && isDragging) {
-      const deltaX = e.touches[0].clientX - startX;
-      let newProgress = startProgress + (deltaX / 450);
-      newProgress = newProgress - Math.floor(newProgress);
-      currentProgress = newProgress;
-      renderFrame();
-    } else if (e.touches.length === 2 && initialPinchDistance) {
-      const currentDistance = Math.hypot(
-        e.touches[0].clientX - e.touches[1].clientX,
-        e.touches[0].clientY - e.touches[1].clientY
-      );
-      const factor = currentDistance / initialPinchDistance;
-      setZoom(initialZoom * factor);
-    }
-  }, { passive: true });
-
-  window.addEventListener('touchend', () => {
-    isDragging = false;
-    initialPinchDistance = null;
-  });
 </script>
 </body>
 </html>
