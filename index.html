@@ -600,22 +600,55 @@
   .house-box.inactive .house-specs{ opacity:0; max-height:0; padding:0; margin:0; border-top:none; }
 
   /* ========================================================
+     EDITORIAL MANIFESTO BLOCK
+     ======================================================== */
+  .manifesto-monumental{
+    padding:110px 4vw 120px;
+    max-width:1200px;
+    margin:0 auto;
+    text-align:center;
+    position:relative;
+    z-index:2;
+  }
+  .manifesto-big-title{
+    font-family:'Archivo Expanded', sans-serif;
+    font-weight:900;
+    font-size:clamp(32px, 6.4vw, 82px);
+    text-transform:uppercase;
+    line-height:0.96;
+    letter-spacing:-0.02em;
+    color:var(--ink);
+    margin-bottom:28px;
+    max-width:1050px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .manifesto-quote-sub{
+    font-size:clamp(13px, 1.2vw, 15px);
+    color:var(--dim);
+    max-width:560px;
+    margin:0 auto;
+    line-height:1.75;
+    letter-spacing:0.01em;
+  }
+
+  /* ========================================================
      SECTION 03: 360° CINEMATIC SHOWCASE STYLES
      ======================================================== */
   .section-360{
     max-width: 1380px;
     margin: 0 auto;
-    padding: 110px 4vw 120px;
+    padding: 60px 4vw 120px;
     position: relative;
     z-index: 2;
   }
 
   .header-360{
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: 40px;
+    display: flex;
+    flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 36px;
+    gap: 16px;
+    margin-bottom: 40px;
   }
 
   .badge-360{
@@ -624,23 +657,22 @@
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--dim2);
-    padding-top: 6px;
   }
 
   .copy-360 h2{
-    font-family: 'Archivo', sans-serif;
-    font-weight: 600;
-    font-size: clamp(18px, 2.2vw, 32px);
+    font-family: 'Archivo Expanded', sans-serif;
+    font-weight: 900;
+    font-size: clamp(32px, 6.4vw, 82px);
     text-transform: uppercase;
-    line-height: 1.35;
-    letter-spacing: 0.02em;
+    line-height: 0.96;
+    letter-spacing: -0.02em;
     color: var(--ink);
-    max-width: 780px;
+    max-width: 1100px;
   }
 
   .copy-360 h2 .highlight{
     color: #6da5db;
-    font-weight: 700;
+    font-weight: 900;
   }
 
   .stage-360{
@@ -686,44 +718,6 @@
     gap: 8px;
     pointer-events: none;
     user-select: none;
-  }
-
-  @media (max-width: 860px){
-    .header-360{ grid-template-columns: 1fr; gap: 14px; margin-bottom: 24px; }
-    .stage-360{ height: 440px; }
-  }
-
-  /* ========================================================
-     EDITORIAL MANIFESTO BLOCK
-     ======================================================== */
-  .manifesto-monumental{
-    padding:110px 4vw 140px;
-    max-width:1200px;
-    margin:0 auto;
-    text-align:center;
-    position:relative;
-    z-index:2;
-  }
-  .manifesto-big-title{
-    font-family:'Archivo Expanded', sans-serif;
-    font-weight:900;
-    font-size:clamp(32px, 6.4vw, 82px);
-    text-transform:uppercase;
-    line-height:0.96;
-    letter-spacing:-0.02em;
-    color:var(--ink);
-    margin-bottom:28px;
-    max-width:1050px;
-    margin-left:auto;
-    margin-right:auto;
-  }
-  .manifesto-quote-sub{
-    font-size:clamp(13px, 1.2vw, 15px);
-    color:var(--dim);
-    max-width:560px;
-    margin:0 auto;
-    line-height:1.75;
-    letter-spacing:0.01em;
   }
 
   /* FOOTER */
@@ -797,12 +791,12 @@
     .house-box.inactive .house-desc{ opacity:1; max-height:80px; margin:4px 0 0; }
     .house-box.inactive .house-specs{ opacity:1; max-height:100px; padding-top:10px; border-top:1px solid rgba(255, 255, 255, 0.2); }
 
-    .header-360{ grid-template-columns: 1fr; gap: 14px; margin-bottom: 24px; }
+    .manifesto-monumental{ padding:80px 5vw 60px; }
+    .manifesto-big-title, .showcase-main-title, .copy-360 h2{ font-size:clamp(30px, 9.2vw, 46px); }
+
+    .section-360{ padding:40px 5vw 100px; }
     .stage-360{ height: 440px; }
     .hint-360 span{ display: none; }
-
-    .manifesto-monumental{ padding:80px 5vw 100px; }
-    .manifesto-big-title, .showcase-main-title{ font-size:clamp(30px, 9.2vw, 46px); }
   }
 
   /* Reveal animations */
@@ -908,8 +902,9 @@
     <div class="nav-links">
       <a href="#" class="active">Home</a>
       <a href="#residences">Residences</a>
-      <a href="#explore-360">360° Villa</a>
       <a href="#manifesto">Manifesto</a>
+      <a href="#explore-360">360° Villa</a>
+      <a href="#contact">Contact</a>
     </div>
     <div class="nav-phone">+1 (555) 010-2030</div>
     <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false">
@@ -920,8 +915,9 @@
   <div class="mobile-menu" id="mobileMenu">
     <a href="#" class="active">Home</a>
     <a href="#residences">Residences</a>
-    <a href="#explore-360">360° Villa</a>
     <a href="#manifesto">Manifesto</a>
+    <a href="#explore-360">360° Villa</a>
+    <a href="#contact">Contact</a>
   </div>
 
   <div class="hero-copy">
@@ -1039,6 +1035,16 @@
 </section>
 
 <!-- ========================================================
+     EDITORIAL MANIFESTO BLOCK (ARRIBA DEL 360)
+     ======================================================== -->
+<section class="manifesto-monumental" id="manifesto">
+  <h2 class="manifesto-big-title">From Private<br>Residences to Modern<br>Estates</h2>
+  <p class="manifesto-quote-sub">
+    Arlo Estate focuses on creating architecture where precision meets raw emotion. Every project combines clean monolithic geometry, tactile balance, and a sense of timeless calm.
+  </p>
+</section>
+
+<!-- ========================================================
      SECTION 03: 360° CINEMATIC SHOWCASE (AUTOPLAY)
      ======================================================== -->
 <section class="section-360" id="explore-360">
@@ -1062,22 +1068,11 @@
       playsinline>
     </video>
 
-    <!-- Badge estético Liquid Glass -->
     <div class="hint-360">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
       <span>360° Architectural Orbit</span>
     </div>
   </div>
-</section>
-
-<!-- ========================================================
-     EDITORIAL MANIFESTO BLOCK
-     ======================================================== -->
-<section class="manifesto-monumental" id="manifesto">
-  <h2 class="manifesto-big-title">From Private<br>Residences to Modern<br>Estates</h2>
-  <p class="manifesto-quote-sub">
-    Arlo Estate focuses on creating architecture where precision meets raw emotion. Every project combines clean monolithic geometry, tactile balance, and a sense of timeless calm.
-  </p>
 </section>
 
 <!-- FOOTER -->
