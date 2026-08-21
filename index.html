@@ -4,9 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ARLO ESTATE — Architectural Excellence</title>
-<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Archivo+Expanded:wght@700;800;900&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Archivo+Expanded:wght@700;800;900&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
 
   :root{
     --bg: #090c0f;
@@ -297,7 +296,7 @@
     max-width:200px;
   }
 
-  /* STAT CARDS - TRUE FROSTED GLASS */
+  /* STAT CARDS */
   .stats{
     position:absolute;
     bottom:60px; right:4vw;
@@ -369,16 +368,14 @@
      ======================================================== */
   .showcase-section{
     padding:130px 4vw 70px;
-    max-width:1380px; /* Hacemos la sección más ancha en pantalla */
+    max-width:1380px;
     margin:0 auto;
     position:relative;
     z-index:2;
-    /* Fondo azul oscuro atmosférico tomado del hero */
     background: radial-gradient(ellipse at 50% 20%, rgba(43, 58, 69, 0.4) 0%, rgba(14, 21, 27, 0.25) 50%, rgba(9, 12, 15, 0) 80%);
     border-radius:40px;
   }
 
-  /* Header Centrado Arriba de los Videos */
   .showcase-top-header{
     text-align:center;
     max-width:1050px;
@@ -402,7 +399,6 @@
     color:var(--ink);
   }
 
-  /* Controles & Progreso */
   .showcase-controls-bar{
     display:flex;
     justify-content:flex-end;
@@ -447,7 +443,6 @@
     transform:scale(1.06);
   }
 
-  /* Dual Card Stage */
   .dual-stage{
     display:grid;
     grid-template-columns: 1.8fr 1fr;
@@ -458,14 +453,13 @@
     grid-template-columns: 1fr 1.8fr;
   }
 
-  /* Each Card Frame */
   .house-box{
     position:relative;
-    height:640px; /* Más altos y monumentales */
+    height:640px;
     border-radius:32px;
     overflow:hidden;
     border:var(--liquid-border);
-    background:#0d141b; /* Azul noche oscuro idéntico al hero */
+    background:#0d141b;
     display:flex;
     flex-direction:column;
     justify-content:flex-end;
@@ -502,7 +496,6 @@
     transform:scale(1);
   }
 
-  /* Top Badges - Liquid Glass */
   .house-badge{
     position:absolute;
     top:20px;
@@ -535,11 +528,8 @@
     opacity:0;
     transition:opacity 0.3s ease;
   }
-  .house-box.inactive .house-status-pill{
-    opacity:1;
-  }
+  .house-box.inactive .house-status-pill{ opacity:1; }
 
-  /* ============ PURE FROSTED LIQUID GLASS CARD FOOTER ============ */
   .house-info{
     position:relative;
     z-index:2;
@@ -606,22 +596,159 @@
     color:#ffffff;
   }
 
-  /* Inactive State Clean Collapse */
-  .house-box.inactive .house-desc{
-    opacity:0;
-    max-height:0;
-    margin:0;
+  .house-box.inactive .house-desc{ opacity:0; max-height:0; margin:0; }
+  .house-box.inactive .house-specs{ opacity:0; max-height:0; padding:0; margin:0; border-top:none; }
+
+  /* ========================================================
+     SECTION 03: 360° INTERACTIVE HOUSE + ZOOM
+     ======================================================== */
+  .section-360{
+    max-width: 1380px;
+    margin: 0 auto;
+    padding: 110px 4vw 120px;
+    position: relative;
+    z-index: 2;
   }
-  .house-box.inactive .house-specs{
-    opacity:0;
-    max-height:0;
-    padding:0;
-    margin:0;
-    border-top:none;
+
+  .header-360{
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 36px;
+  }
+
+  .badge-360{
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--dim2);
+    padding-top: 6px;
+  }
+
+  .copy-360 h2{
+    font-family: 'Archivo', sans-serif;
+    font-weight: 600;
+    font-size: clamp(18px, 2.2vw, 32px);
+    text-transform: uppercase;
+    line-height: 1.35;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    max-width: 780px;
+  }
+
+  .copy-360 h2 .highlight{
+    color: #6da5db;
+    font-weight: 700;
+  }
+
+  .stage-360{
+    position: relative;
+    width: 100%;
+    height: 640px;
+    border-radius: 36px;
+    border: var(--liquid-border);
+    background: #090c0f;
+    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.65), var(--liquid-shadow);
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stage-360:active{
+    cursor: grabbing;
+  }
+
+  .video-360{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    display: block;
+    transform-origin: center center;
+    transition: transform 0.08s ease-out;
+  }
+
+  .controls-360{
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    pointer-events: auto;
+    z-index: 5;
+  }
+
+  .hint-360{
+    background: var(--liquid-bg);
+    border: var(--liquid-border);
+    backdrop-filter: var(--liquid-blur);
+    -webkit-backdrop-filter: var(--liquid-blur);
+    box-shadow: var(--liquid-shadow);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+
+  .zoom-controls{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--liquid-bg);
+    border: var(--liquid-border);
+    backdrop-filter: var(--liquid-blur);
+    -webkit-backdrop-filter: var(--liquid-blur);
+    box-shadow: var(--liquid-shadow);
+    padding: 4px;
+    border-radius: 100px;
+  }
+
+  .zoom-btn{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+  }
+
+  .zoom-btn:hover{
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .zoom-val{
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0 8px;
+    min-width: 45px;
+    text-align: center;
   }
 
   /* ========================================================
-     EDITORIAL MANIFESTO BLOCK (DEBAJO DE LOS VIDEOS)
+     EDITORIAL MANIFESTO BLOCK
      ======================================================== */
   .manifesto-monumental{
     padding:110px 4vw 140px;
@@ -717,113 +844,19 @@
       grid-template-columns: 1fr;
       gap:16px;
     }
-    .house-box{ height:410px; }
+    .house-box{ height:480px; }
     .house-media .media-desktop{ display:none; }
     .house-media .media-mobile{ display:block; }
     
     .house-box.inactive .house-desc{ opacity:1; max-height:80px; margin:4px 0 0; }
     .house-box.inactive .house-specs{ opacity:1; max-height:100px; padding-top:10px; border-top:1px solid rgba(255, 255, 255, 0.2); }
 
+    .header-360{ grid-template-columns: 1fr; gap: 14px; margin-bottom: 24px; }
+    .stage-360{ height: 440px; }
+    .hint-360 span{ display: none; }
+
     .manifesto-monumental{ padding:80px 5vw 100px; }
     .manifesto-big-title, .showcase-main-title{ font-size:clamp(30px, 9.2vw, 46px); }
-  }
-
-  /* ========================================================
-     SECTION 03: 3D MODEL VIEWER STYLES
-     ======================================================== */
-  .section-360{
-    max-width: 1380px;
-    margin: 0 auto;
-    padding: 100px 4vw 120px;
-    position: relative;
-    z-index: 2;
-  }
-
-  .header-360{
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 40px;
-    align-items: flex-start;
-    margin-bottom: 40px;
-  }
-
-  .badge-360{
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--dim2);
-    padding-top: 4px;
-  }
-
-  .copy-360 h2{
-    font-family: 'Archivo', sans-serif;
-    font-weight: 600;
-    font-size: clamp(18px, 2.2vw, 32px);
-    text-transform: uppercase;
-    line-height: 1.35;
-    letter-spacing: 0.02em;
-    color: var(--ink);
-    max-width: 780px;
-  }
-
-  .copy-360 h2 .highlight{
-    color: #6da5db; /* Azul suave y elegante de la referencia */
-    font-weight: 700;
-  }
-
-  .stage-360{
-    position: relative;
-    width: 100%;
-    height: 640px;
-    border-radius: 36px;
-    border: var(--liquid-border);
-    background: radial-gradient(ellipse at 50% 40%, rgba(35, 52, 65, 0.45) 0%, rgba(13, 20, 26, 0.8) 60%, rgba(9, 12, 15, 0.95) 100%);
-    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.65), var(--liquid-shadow);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  model-viewer{
-    width: 100%;
-    height: 100%;
-    outline: none;
-    cursor: grab;
-    --poster-color: transparent;
-  }
-  model-viewer:active{
-    cursor: grabbing;
-  }
-
-  .hint-360{
-    position: absolute;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--liquid-bg);
-    border: var(--liquid-border);
-    backdrop-filter: var(--liquid-blur);
-    -webkit-backdrop-filter: var(--liquid-blur);
-    box-shadow: var(--liquid-shadow);
-    color: #ffffff;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 10px 22px;
-    border-radius: 100px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    pointer-events: none;
-    user-select: none;
-  }
-
-  @media (max-width: 860px){
-    .header-360{ grid-template-columns: 1fr; gap: 16px; margin-bottom: 28px; }
-    .stage-360{ height: 450px; }
   }
 
   /* Reveal animations */
@@ -929,8 +962,8 @@
     <div class="nav-links">
       <a href="#" class="active">Home</a>
       <a href="#residences">Residences</a>
+      <a href="#explore-360">360° Villa</a>
       <a href="#manifesto">Manifesto</a>
-      <a href="#contact">Contact</a>
     </div>
     <div class="nav-phone">+1 (555) 010-2030</div>
     <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false">
@@ -941,8 +974,8 @@
   <div class="mobile-menu" id="mobileMenu">
     <a href="#" class="active">Home</a>
     <a href="#residences">Residences</a>
+    <a href="#explore-360">360° Villa</a>
     <a href="#manifesto">Manifesto</a>
-    <a href="#contact">Contact</a>
   </div>
 
   <div class="hero-copy">
@@ -979,13 +1012,11 @@
      ======================================================== -->
 <section class="showcase-section" id="residences">
   
-  <!-- MENSAJE DE ARRIBA -->
   <div class="showcase-top-header">
     <div class="showcase-eyebrow">02 — Selected Works</div>
     <h2 class="showcase-main-title">Crafting Monolithic Living Spaces</h2>
   </div>
 
-  <!-- Progress Bar & Arrow Controls -->
   <div class="showcase-controls-bar">
     <div class="showcase-progress">
       <div class="showcase-progress-bar" id="carouselProgressBar"></div>
@@ -994,7 +1025,6 @@
     <button class="showcase-nav-btn" id="nextBoxBtn" aria-label="Toggle house">→</button>
   </div>
 
-  <!-- Dual Stage: 2 Separate Frames -->
   <div class="dual-stage" id="dualStage">
     
     <!-- BOX 1: THE SUMMIT RESIDENCE -->
@@ -1007,7 +1037,6 @@
       <div class="house-badge">01 — Alpine Sanctuary</div>
       <div class="house-status-pill">Click to expand ↗</div>
 
-      <!-- Liquid Glass Footer Module -->
       <div class="house-info">
         <div class="house-name">The Summit Residence</div>
         <div class="house-loc">Aspen Mountains, Colorado</div>
@@ -1039,7 +1068,6 @@
       <div class="house-badge">02 — Monolithic Water Villa</div>
       <div class="house-status-pill">Click to expand ↗</div>
 
-      <!-- Liquid Glass Footer Module -->
       <div class="house-info">
         <div class="house-name">Lakeview Pavilion</div>
         <div class="house-loc">Queenstown, New Zealand</div>
@@ -1065,17 +1093,10 @@
 </section>
 
 <!-- ========================================================
-     EDITORIAL MANIFESTO BLOCK (DEBAJO DE LOS VIDEOS)
+     SECTION 03: 360° INTERACTIVE HOUSE + ZOOM
      ======================================================== -->
-<section class="manifesto-monumental" id="manifesto">
-  <h2 class="manifesto-big-title">From Private<br>Residences to Modern<br>Estates</h2>
-  <p class="manifesto-quote-sub">
-    Arlo Estate focuses on creating architecture where precision meets raw emotion. Every project combines clean monolithic geometry, tactile balance, and a sense of timeless calm.
-  </p>
-</section>
-
-  <section class="section-360" id="explore-360">
- <div class="header-360">
+<section class="section-360" id="explore-360">
+  <div class="header-360">
     <div class="badge-360">EXPLORE IN 360°</div>
     <div class="copy-360">
       <h2>
@@ -1085,28 +1106,40 @@
     </div>
   </div>
 
-  <div class="stage-360">
-    <model-viewer 
-      src="casa-3d.glb" 
-      poster="foto1pc.jpeg"
-      alt="Arlo Estate 3D Architectural Villa" 
-      auto-rotate 
-      auto-rotate-delay="800"
-      rotation-per-second="14deg"
-      camera-controls 
-      touch-action="pan-y"
-      shadow-intensity="1.5"
-      shadow-softness="0.9"
-      exposure="1.1"
-      camera-orbit="45deg 75deg 105%"
-      interaction-prompt="none">
-    </model-viewer>
+  <div class="stage-360" id="scrubStage">
+    <video 
+      id="video360" 
+      class="video-360" 
+      src="casa-360.mp4" 
+      poster="foto1pc.jpeg" 
+      muted 
+      playsinline 
+      preload="auto">
+    </video>
 
-    <div class="hint-360">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
-      <span>Drag to rotate in 360°</span>
+    <div class="controls-360">
+      <div class="hint-360">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+        <span>Drag to rotate</span>
+      </div>
+
+      <div class="zoom-controls">
+        <button class="zoom-btn" id="zoomOutBtn" aria-label="Zoom out">−</button>
+        <span class="zoom-val" id="zoomVal">1.0x</span>
+        <button class="zoom-btn" id="zoomInBtn" aria-label="Zoom in">+</button>
+      </div>
     </div>
   </div>
+</section>
+
+<!-- ========================================================
+     EDITORIAL MANIFESTO BLOCK
+     ======================================================== -->
+<section class="manifesto-monumental" id="manifesto">
+  <h2 class="manifesto-big-title">From Private<br>Residences to Modern<br>Estates</h2>
+  <p class="manifesto-quote-sub">
+    Arlo Estate focuses on creating architecture where precision meets raw emotion. Every project combines clean monolithic geometry, tactile balance, and a sense of timeless calm.
+  </p>
 </section>
 
 <!-- FOOTER -->
@@ -1158,7 +1191,7 @@
     }
   });
 
-  // DUAL STAGE INTERACTION SCRIPT
+  // DUAL STAGE INTERACTION SCRIPT (SECTION 02)
   const dualStage = document.getElementById('dualStage');
   const box1 = document.getElementById('box1');
   const box2 = document.getElementById('box2');
@@ -1181,12 +1214,10 @@
       box2.classList.add('inactive');
       box2.classList.remove('active');
 
-      // Video 2 pasa a segundo plano: se pausa y reinicia a 0
       if (vid2) {
         vid2.pause();
         vid2.currentTime = 0;
       }
-      // Video 1 toma el protagonismo: reinicia a 0 y reproduce
       if (vid1) {
         vid1.currentTime = 0;
         vid1.play().catch(() => {});
@@ -1198,12 +1229,10 @@
       box1.classList.add('inactive');
       box1.classList.remove('active');
 
-      // Video 1 pasa a segundo plano: se pausa y reinicia a 0
       if (vid1) {
         vid1.pause();
         vid1.currentTime = 0;
       }
-      // Video 2 toma el protagonismo: reinicia a 0 y reproduce
       if (vid2) {
         vid2.currentTime = 0;
         vid2.play().catch(() => {});
@@ -1239,6 +1268,119 @@
     requestAnimationFrame(timerLoop);
   }
   requestAnimationFrame(timerLoop);
+
+  // ========================================================
+  // 360° VIDEO INTERACTIVE DRAG + ZOOM ENGINE (SECTION 03)
+  // ========================================================
+  const scrubStage = document.getElementById('scrubStage');
+  const video360 = document.getElementById('video360');
+  const zoomVal = document.getElementById('zoomVal');
+  const zoomInBtn = document.getElementById('zoomInBtn');
+  const zoomOutBtn = document.getElementById('zoomOutBtn');
+
+  let isDragging = false;
+  let startX = 0;
+  let startProgress = 0;
+  let currentProgress = 0;
+  let currentZoom = 1;
+  const minZoom = 1;
+  const maxZoom = 2.4;
+
+  function updateVideo() {
+    if (video360.duration) {
+      video360.currentTime = currentProgress * video360.duration;
+    }
+  }
+
+  function setZoom(newZoom) {
+    currentZoom = Math.min(Math.max(newZoom, minZoom), maxZoom);
+    video360.style.transform = `scale(${currentZoom.toFixed(2)})`;
+    if (zoomVal) zoomVal.textContent = `${currentZoom.toFixed(1)}x`;
+  }
+
+  video360.addEventListener('loadedmetadata', () => {
+    video360.currentTime = 0.01;
+  });
+
+  // Mouse Drag (Rotación 360°)
+  scrubStage.addEventListener('mousedown', (e) => {
+    if (e.target.closest('.controls-360')) return;
+    isDragging = true;
+    startX = e.clientX;
+    startProgress = currentProgress;
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const deltaX = e.clientX - startX;
+    const sensitivity = 650;
+    let newProgress = startProgress + (deltaX / sensitivity);
+    newProgress = newProgress - Math.floor(newProgress);
+    currentProgress = newProgress;
+    requestAnimationFrame(updateVideo);
+  });
+
+  window.addEventListener('mouseup', () => { isDragging = false; });
+
+  // Zoom con Rueda del Mouse
+  scrubStage.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const zoomStep = e.deltaY * -0.0015;
+    setZoom(currentZoom + zoomStep);
+  }, { passive: false });
+
+  // Botones de Zoom
+  zoomInBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setZoom(currentZoom + 0.3);
+  });
+
+  zoomOutBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setZoom(currentZoom - 0.3);
+  });
+
+  // Soporte Táctil (Móvil)
+  let initialPinchDistance = null;
+  let initialZoom = 1;
+
+  scrubStage.addEventListener('touchstart', (e) => {
+    if (e.target.closest('.controls-360')) return;
+    if (e.touches.length === 1) {
+      isDragging = true;
+      startX = e.touches[0].clientX;
+      startProgress = currentProgress;
+    } else if (e.touches.length === 2) {
+      isDragging = false;
+      initialPinchDistance = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      initialZoom = currentZoom;
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 1 && isDragging) {
+      const deltaX = e.touches[0].clientX - startX;
+      let newProgress = startProgress + (deltaX / 500);
+      newProgress = newProgress - Math.floor(newProgress);
+      currentProgress = newProgress;
+      requestAnimationFrame(updateVideo);
+    } else if (e.touches.length === 2 && initialPinchDistance) {
+      const currentDistance = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      const factor = currentDistance / initialPinchDistance;
+      setZoom(initialZoom * factor);
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchend', () => {
+    isDragging = false;
+    initialPinchDistance = null;
+  });
 </script>
 </body>
 </html>
