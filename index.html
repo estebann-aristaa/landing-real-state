@@ -10,19 +10,23 @@
   :root{
     --bg: #090c0f;
     --ink: #f4f2ec;
-    --dim: rgba(244,242,236,0.68);
-    --dim2: rgba(244,242,236,0.45);
-    --line: rgba(244,242,236,0.12);
+    --dim: rgba(244,242,236,0.72);
+    --dim2: rgba(244,242,236,0.48);
+    --line: rgba(244,242,236,0.14);
 
-    /* ============ APPLE LIQUID GLASS SYSTEM ============ */
-    --liquid-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 100%);
-    --liquid-border: 1px solid rgba(255, 255, 255, 0.32);
+    /* ============ REAL FROSTED LIQUID GLASS (APPLE STYLE) ============ */
+    --liquid-bg: linear-gradient(
+      135deg, 
+      rgba(255, 255, 255, 0.22) 0%, 
+      rgba(255, 255, 255, 0.08) 50%, 
+      rgba(255, 255, 255, 0.04) 100%
+    );
+    --liquid-border: 1px solid rgba(255, 255, 255, 0.38);
     --liquid-shadow: 
       inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.75),
-      inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.4),
-      inset 0 0 20px 0 rgba(255, 255, 255, 0.08),
-      0 26px 54px -10px rgba(0, 0, 0, 0.65);
-    --liquid-blur: blur(34px) saturate(200%) brightness(1.08);
+      inset 0 -1px 1px 0 rgba(255, 255, 255, 0.15),
+      0 20px 45px -8px rgba(0, 0, 0, 0.45);
+    --liquid-blur: blur(28px) saturate(190%) brightness(1.06);
   }
 
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -171,7 +175,7 @@
   .nav-links a{
     position:relative;
     z-index:1;
-    color:var(--dim);
+    color:var(--ink);
     text-decoration:none;
     font-size:13px;
     font-weight:500;
@@ -180,10 +184,11 @@
     transition:all 0.25s ease;
   }
   .nav-links a.active{
-    background:rgba(244,242,236,0.92);
-    color:#0d1013;
+    background:rgba(255,255,255,0.92);
+    color:#090c0f;
+    font-weight:600;
   }
-  .nav-links a:hover:not(.active){ color:var(--ink); }
+  .nav-links a:hover:not(.active){ color:#ffffff; }
   .nav-phone{
     font-size:13px;
     font-weight:600;
@@ -219,7 +224,7 @@
     display:none;
     flex-direction:column;
     gap:2px;
-    background:rgba(16,20,24,0.92);
+    background:rgba(18, 24, 30, 0.88);
     border:var(--liquid-border);
     backdrop-filter:blur(40px);
     -webkit-backdrop-filter:blur(40px);
@@ -239,7 +244,7 @@
     border-radius:16px;
   }
   .mobile-menu a.active{
-    background:rgba(244,242,236,0.92);
+    background:rgba(255,255,255,0.92);
     color:#0d1013;
   }
   .mobile-menu.open{
@@ -291,7 +296,7 @@
     max-width:200px;
   }
 
-  /* STAT CARDS - APPLE LIQUID GLASS */
+  /* STAT CARDS - TRUE FROSTED GLASS */
   .stats{
     position:absolute;
     bottom:60px; right:4vw;
@@ -307,20 +312,21 @@
     border:var(--liquid-border);
     backdrop-filter:var(--liquid-blur);
     -webkit-backdrop-filter:var(--liquid-blur);
-    border-radius:18px;
-    padding:16px 20px;
-    min-width:195px;
+    border-radius:20px;
+    padding:18px 22px;
+    min-width:200px;
     box-shadow:var(--liquid-shadow);
   }
   .stat-card .num{
     font-family:'Archivo',sans-serif;
     font-weight:700;
     font-size:24px;
+    color:#ffffff;
     margin-bottom:2px;
   }
   .stat-card .label{
     font-size:12px;
-    color:var(--dim);
+    color:rgba(255, 255, 255, 0.78);
     line-height:1.4;
   }
 
@@ -368,7 +374,7 @@
     z-index:2;
   }
 
-  /* Header Centrado Arriba de los Videos (Recuperado y Rediseñado) */
+  /* Header Centrado Arriba de los Videos */
   .showcase-top-header{
     text-align:center;
     max-width:800px;
@@ -403,7 +409,7 @@
   .showcase-progress{
     width:90px;
     height:2px;
-    background:rgba(244,242,236,0.15);
+    background:rgba(255,255,255,0.18);
     border-radius:2px;
     overflow:hidden;
     position:relative;
@@ -413,7 +419,7 @@
     top:0;left:0;
     height:100%;
     width:0%;
-    background:var(--ink);
+    background:#ffffff;
   }
   .showcase-nav-btn{
     width:42px;
@@ -424,7 +430,7 @@
     backdrop-filter:var(--liquid-blur);
     -webkit-backdrop-filter:var(--liquid-blur);
     box-shadow:var(--liquid-shadow);
-    color:var(--ink);
+    color:#ffffff;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -432,7 +438,7 @@
     transition:all 0.3s ease;
   }
   .showcase-nav-btn:hover{
-    background:var(--ink);
+    background:#ffffff;
     color:#090c0f;
     transform:scale(1.06);
   }
@@ -483,7 +489,7 @@
 
   .house-box.inactive .house-media img,
   .house-box.inactive .house-media video{
-    filter:brightness(0.4) grayscale(25%);
+    filter:brightness(0.38) grayscale(25%);
     transform:scale(1.04);
   }
   .house-box.active .house-media img,
@@ -492,7 +498,7 @@
     transform:scale(1);
   }
 
-  /* Top Badges */
+  /* Top Badges - Liquid Glass */
   .house-badge{
     position:absolute;
     top:20px;
@@ -503,7 +509,7 @@
     backdrop-filter:var(--liquid-blur);
     -webkit-backdrop-filter:var(--liquid-blur);
     box-shadow:var(--liquid-shadow);
-    color:var(--ink);
+    color:#ffffff;
     font-size:11px;
     font-weight:700;
     letter-spacing:0.1em;
@@ -521,7 +527,7 @@
     font-weight:600;
     letter-spacing:0.08em;
     text-transform:uppercase;
-    color:var(--dim2);
+    color:rgba(255, 255, 255, 0.6);
     opacity:0;
     transition:opacity 0.3s ease;
   }
@@ -529,7 +535,7 @@
     opacity:1;
   }
 
-  /* ============ APPLE LIQUID GLASS CARD FOOTER ============ */
+  /* ============ PURE FROSTED LIQUID GLASS CARD FOOTER ============ */
   .house-info{
     position:relative;
     z-index:2;
@@ -541,8 +547,8 @@
     backdrop-filter:var(--liquid-blur);
     -webkit-backdrop-filter:var(--liquid-blur);
     box-shadow:var(--liquid-shadow);
-    border-radius:22px;
-    padding:22px 24px;
+    border-radius:24px;
+    padding:24px 26px;
   }
 
   .house-name{
@@ -551,17 +557,17 @@
     font-size:20px;
     text-transform:uppercase;
     letter-spacing:0.02em;
-    color:var(--ink);
+    color:#ffffff;
   }
   .house-loc{
     font-size:12px;
-    color:var(--dim2);
+    color:rgba(255, 255, 255, 0.72);
     margin-top:-6px;
   }
 
   .house-desc{
     font-size:13px;
-    color:var(--dim);
+    color:rgba(255, 255, 255, 0.88);
     line-height:1.55;
     max-width:92%;
     opacity:1;
@@ -574,7 +580,7 @@
     display:flex;
     gap:26px;
     padding-top:12px;
-    border-top:1px solid rgba(244,242,236,0.12);
+    border-top:1px solid rgba(255, 255, 255, 0.2);
     margin-top:4px;
     transition:all 0.4s ease;
   }
@@ -587,13 +593,13 @@
     font-size:10px;
     text-transform:uppercase;
     letter-spacing:0.08em;
-    color:var(--dim2);
+    color:rgba(255, 255, 255, 0.65);
   }
   .spec-u-val{
     font-family:'Archivo',sans-serif;
     font-size:13px;
     font-weight:600;
-    color:var(--ink);
+    color:#ffffff;
   }
 
   /* Inactive State Clean Collapse */
@@ -712,7 +718,7 @@
     .house-media .media-mobile{ display:block; }
     
     .house-box.inactive .house-desc{ opacity:1; max-height:80px; margin:4px 0 0; }
-    .house-box.inactive .house-specs{ opacity:1; max-height:100px; padding-top:10px; border-top:1px solid rgba(244,242,236,0.12); }
+    .house-box.inactive .house-specs{ opacity:1; max-height:100px; padding-top:10px; border-top:1px solid rgba(255, 255, 255, 0.2); }
 
     .manifesto-monumental{ padding:80px 5vw 100px; }
     .manifesto-big-title{ font-size:clamp(30px, 9.2vw, 46px); }
