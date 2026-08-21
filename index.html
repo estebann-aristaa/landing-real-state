@@ -13,6 +13,7 @@
     --dim: rgba(244,242,236,0.72);
     --dim2: rgba(244,242,236,0.48);
     --line: rgba(244,242,236,0.14);
+    --accent-blue: #6da5db;
 
     /* ============ REAL FROSTED LIQUID GLASS (APPLE STYLE) ============ */
     --liquid-bg: linear-gradient(
@@ -720,6 +721,125 @@
     user-select: none;
   }
 
+  /* ========================================================
+     SECTION 04: ARCHITECTURAL PROCESS
+     ======================================================== */
+  .process-section{
+    max-width: 1380px;
+    margin: 0 auto;
+    padding: 100px 4vw 140px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .process-grid{
+    display: grid;
+    grid-template-columns: 1fr 1.35fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .process-left-sticky{
+    position: sticky;
+    top: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .process-headline{
+    font-family: 'Archivo Expanded', sans-serif;
+    font-weight: 900;
+    font-size: clamp(38px, 6vw, 76px);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .process-card{
+    position: relative;
+    border-radius: 28px;
+    overflow: hidden;
+    border: var(--liquid-border);
+    background: #0d141b;
+    box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.55), var(--liquid-shadow);
+  }
+
+  .process-card img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .process-card:hover img{
+    transform: scale(1.04);
+  }
+
+  .process-card-left{
+    width: 90%;
+    height: 380px;
+  }
+
+  .process-card-right{
+    width: 100%;
+    height: 320px;
+    margin-top: 30px;
+  }
+
+  .process-steps-list{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .process-step-item{
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 24px;
+    padding: 34px 0;
+    border-top: 1px solid rgba(244, 242, 236, 0.12);
+    transition: border-color 0.3s ease;
+  }
+
+  .process-step-item:first-child{
+    border-top: 1px solid rgba(244, 242, 236, 0.22);
+  }
+
+  .process-num{
+    font-family: 'Archivo', sans-serif;
+    font-size: clamp(36px, 3.8vw, 48px);
+    font-weight: 700;
+    color: var(--accent-blue);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .process-content h3{
+    font-family: 'Archivo', sans-serif;
+    font-size: clamp(17px, 1.45vw, 21px);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+
+  .process-bullets{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .process-bullets li{
+    font-size: 13.5px;
+    color: var(--dim);
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+  }
+
   /* FOOTER */
   footer{
     position:relative;
@@ -792,11 +912,19 @@
     .house-box.inactive .house-specs{ opacity:1; max-height:100px; padding-top:10px; border-top:1px solid rgba(255, 255, 255, 0.2); }
 
     .manifesto-monumental{ padding:80px 5vw 60px; }
-    .manifesto-big-title, .showcase-main-title, .copy-360 h2{ font-size:clamp(30px, 9.2vw, 46px); }
+    .manifesto-big-title, .showcase-main-title, .copy-360 h2, .process-headline{ font-size:clamp(30px, 9.2vw, 46px); }
 
     .section-360{ padding:40px 5vw 100px; }
     .stage-360{ height: 440px; }
     .hint-360 span{ display: none; }
+
+    /* PROCESS RESPONSIVE */
+    .process-section{ padding: 70px 5vw 90px; }
+    .process-grid{ grid-template-columns: 1fr; gap: 40px; }
+    .process-left-sticky{ position: relative; top: auto; gap: 24px; }
+    .process-card-left{ width: 100%; height: 280px; }
+    .process-card-right{ height: 280px; margin-top: 20px; }
+    .process-step-item{ grid-template-columns: 60px 1fr; gap: 16px; padding: 26px 0; }
   }
 
   /* Reveal animations */
@@ -904,6 +1032,7 @@
       <a href="#residences">Residences</a>
       <a href="#manifesto">Manifesto</a>
       <a href="#explore-360">360° Villa</a>
+      <a href="#process">Process</a>
       <a href="#contact">Contact</a>
     </div>
     <div class="nav-phone">+1 (555) 010-2030</div>
@@ -917,6 +1046,7 @@
     <a href="#residences">Residences</a>
     <a href="#manifesto">Manifesto</a>
     <a href="#explore-360">360° Villa</a>
+    <a href="#process">Process</a>
     <a href="#contact">Contact</a>
   </div>
 
@@ -1072,6 +1202,111 @@
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
       <span>360° Architectural Orbit</span>
     </div>
+  </div>
+</section>
+
+<!-- ========================================================
+     SECTION 04: ARCHITECTURAL PROCESS
+     ======================================================== -->
+<section class="process-section" id="process">
+  <div class="process-grid">
+    
+    <!-- LEFT COLUMN: TITLE & FLOATING IMAGE 1 -->
+    <div class="process-left-sticky">
+      <h2 class="process-headline">DESIGN<br>PROCESS</h2>
+      <div class="process-card process-card-left">
+        <img src="process-1.jpg" onerror="this.src='https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80'" alt="Architectural design process concept">
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: 6 PROCESS STEPS & FLOATING IMAGE 2 -->
+    <div class="process-steps-list">
+      
+      <!-- STEP 01 -->
+      <div class="process-step-item">
+        <div class="process-num">01</div>
+        <div class="process-content">
+          <h3>VISION & GOAL SETTING</h3>
+          <ul class="process-bullets">
+            <li>Gathering client lifestyle requirements</li>
+            <li>Defining spatial and privacy goals</li>
+            <li>Understanding architectural expectations.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STEP 02 -->
+      <div class="process-step-item">
+        <div class="process-num">02</div>
+        <div class="process-content">
+          <h3>SITE & ENVIRONMENTAL ANALYSIS</h3>
+          <ul class="process-bullets">
+            <li>Topography, wind and sun path mapping</li>
+            <li>Identifying panoramic viewpoints</li>
+            <li>Integrating natural landscape harmony.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STEP 03 -->
+      <div class="process-step-item">
+        <div class="process-num">03</div>
+        <div class="process-content">
+          <h3>MOODBOARD & MATERIAL DIRECTION</h3>
+          <ul class="process-bullets">
+            <li>Selecting tactile raw stone, timber and glass</li>
+            <li>Forming the sensory visual tone</li>
+            <li>Defining the aesthetic foundation.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STEP 04 -->
+      <div class="process-step-item">
+        <div class="process-num">04</div>
+        <div class="process-content">
+          <h3>SPATIAL 3D & BIM PROTOTYPE</h3>
+          <ul class="process-bullets">
+            <li>Accurate monolithic structure and layout</li>
+            <li>Polished volumetric lighting and hierarchy</li>
+            <li>Structural logic and flow simulation.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STEP 05 -->
+      <div class="process-step-item">
+        <div class="process-num">05</div>
+        <div class="process-content">
+          <h3>ENGINEERING & CRAFTSMANSHIP</h3>
+          <ul class="process-bullets">
+            <li>Precision concrete casting & custom joinery</li>
+            <li>Hidden architectural mechanics</li>
+            <li>Seamless indoor-outdoor continuity.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- STEP 06 -->
+      <div class="process-step-item">
+        <div class="process-num">06</div>
+        <div class="process-content">
+          <h3>TESTING AND RESIDENCE DELIVERY</h3>
+          <ul class="process-bullets">
+            <li>Acoustic, light and climate balancing</li>
+            <li>Polishing tactile details & landscape touch</li>
+            <li>Preparing the final turnkey handover.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FLOATING IMAGE 2 -->
+      <div class="process-card process-card-right">
+        <img src="process-2.jpg" onerror="this.src='https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80'" alt="Luxury modern estate completion">
+      </div>
+
+    </div>
+
   </div>
 </section>
 
