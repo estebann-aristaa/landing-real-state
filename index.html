@@ -32,6 +32,10 @@
 
   *{margin:0;padding:0;box-sizing:border-box;}
 
+  html{
+    scroll-behavior: smooth;
+  }
+
   body{
     background:var(--bg);
     color:var(--ink);
@@ -2486,6 +2490,19 @@
 
 <!-- SCRIPTS -->
 <script>
+  // FORZAR RETORNO AL INICIO EN RELOAD / REINICIO (PC & MÓVIL)
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+  window.scrollTo(0, 0);
+
+  window.addEventListener('beforeunload', () => {
+    window.scrollTo(0, 0);
+  });
+  window.addEventListener('pageshow', () => {
+    window.scrollTo(0, 0);
+  });
+
   // LOADER SCRIPT
   const stage = document.getElementById('stage');
   const loader = document.getElementById('loader');
