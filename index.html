@@ -1047,8 +1047,16 @@
       box2.classList.add('inactive');
       box2.classList.remove('active');
 
-      if (vid1) vid1.play().catch(() => {});
-      if (vid2) vid2.pause();
+      // Video 2 pasa a segundo plano: se pausa y reinicia a 0
+      if (vid2) {
+        vid2.pause();
+        vid2.currentTime = 0;
+      }
+      // Video 1 toma el protagonismo: reinicia a 0 y reproduce
+      if (vid1) {
+        vid1.currentTime = 0;
+        vid1.play().catch(() => {});
+      }
     } else {
       dualStage.classList.add('reverse');
       box2.classList.add('active');
@@ -1056,8 +1064,16 @@
       box1.classList.add('inactive');
       box1.classList.remove('active');
 
-      if (vid2) vid2.play().catch(() => {});
-      if (vid1) vid1.pause();
+      // Video 1 pasa a segundo plano: se pausa y reinicia a 0
+      if (vid1) {
+        vid1.pause();
+        vid1.currentTime = 0;
+      }
+      // Video 2 toma el protagonismo: reinicia a 0 y reproduce
+      if (vid2) {
+        vid2.currentTime = 0;
+        vid2.play().catch(() => {});
+      }
     }
 
     progressStart = Date.now();
